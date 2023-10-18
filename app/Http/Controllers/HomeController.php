@@ -6,13 +6,37 @@ use App\Berkas;
 use App\Element;
 use App\Prodi;
 use App\Target;
+// use App\DataStructureServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('home.index');
+        // phpinfo();
+        // $data = DB::table('prodis as p')
+        //     ->join('fakultass as f', 'p.fakultas_id', '=', 'f.fakultas_id')
+        // ->get();
+        // $data = DataStructureServiceProvider::groupByRecursive2($data, ['fakultas_id', 'name_fakultas'], [], []);
+        // $data = Prodi::fakultas->find(1);
+        $data = Prodi::ByFakultas();
+        $data = groupByRecursive2(
+            $data,
+            ['fakultas_id'],
+            ['id'],
+            [
+                [
+                    'fakultas_id', 'name_fakultas',
+                ],
+                ['id', 'name', 'kode', 'jenjang']
+            ],
+            ['child'],
+            true
+        );
+        dd($data);
+
+        // return view('home.index');
     }
 
     public function tabel(Prodi $prodi)
@@ -80,12 +104,10 @@ class HomeController extends Controller
 
         if (isset($_POST['l3_id'])) {
             $b = Berkas::where('prodi_id', $prodi)->whereIn('l1_id', $l1_id)->whereIn('l2_id', $l2_id)->whereIn('l3_id', $l3_id)->get();
-
         }
 
         if (isset($_POST['l4_id'])) {
             $b = Berkas::where('prodi_id', $prodi)->whereIn('l1_id', $l1_id)->whereIn('l2_id', $l2_id)->whereIn('l3_id', $l3_id)->whereIn('l4_id', $l4_id)->get();
-
         }
 
         return view('home.multiSearch.hasil', [

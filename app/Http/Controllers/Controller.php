@@ -18,7 +18,7 @@ class Controller extends BaseController
         view()->share('data', [
             'j' => Jenjang::NotIn(),
             'p' => Prodi::NotIn(),
+            // 'p2' => Prodi::ByFakultas(''),
         ]);
-
     }
 }
