@@ -8,7 +8,7 @@ class L4 extends Model
 {
     protected $fillable = ['name', 'l3_id', 'jenjang_id'];
 
-    public function jenjang()
+    public function jenjangs()
     {
         return $this->belongsTo(Jenjang::class);
     }
