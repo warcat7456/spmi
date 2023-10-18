@@ -40,30 +40,30 @@ Route::get('diagram/login', function () {
 Route::get('diagram/{prodi:kode}', 'HomeController@radarDiagram');
 
 Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UPPS,Mahasiswa,Alumni'])->group(function () {
-//GET PRODI AND JENJANG
+    //GET PRODI AND JENJANG
     $j = Jenjang::get();
     $p = Prodi::get();
 
-//DASHBOARD
+    //DASHBOARD
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
-//Jenjang
+    //Jenjang
     foreach ($j as $jenjang) {
         Route::get('kriteria/' . $jenjang->kode, 'KriteriaController@index')->name($jenjang->kode);
     }
 
-//Prodi
+    //Prodi
     foreach ($p as $prodi) {
         Route::get('prodi/' . $prodi->kode, 'ProdiController@index')->name($prodi->kode);
         Route::get('prodi/{prodi:kode}/{any}', 'ProdiController@butir');
     }
 
-//C1
+    //C1
     Route::post('kriteria/store', 'KriteriaController@store');
     Route::delete('kriteria/hapus/{l1}', 'KriteriaController@hapus');
     Route::put('kriteria/put/{l1}', 'KriteriaController@put');
 
-//C1.x
+    //C1.x
     foreach ($j as $jenjang) {
         Route::get('sub-kriteria/l2/' . $jenjang->kode, 'Level2Controller@sort');
     }
@@ -72,7 +72,7 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UP
     Route::delete('sub-kriteria/l2/hapus/{l2}', 'Level2Controller@hapus');
     Route::put('sub-kriteria/l2/put/{l2}', 'Level2Controller@put');
 
-//C1.x.x
+    //C1.x.x
     foreach ($j as $jenjang) {
         Route::get('sub-kriteria/l3/' . $jenjang->kode, 'Level3Controller@sort');
     }
@@ -81,7 +81,7 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UP
     Route::delete('sub-kriteria/l3/hapus/{l3}', 'Level3Controller@hapus');
     Route::put('sub-kriteria/l3/put/{l3}', 'Level3Controller@put');
 
-//C1.x.x
+    //C1.x.x
     foreach ($j as $jenjang) {
         Route::get('sub-kriteria/l4/' . $jenjang->kode, 'Level4Controller@sort');
     }
@@ -90,7 +90,7 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UP
     Route::delete('sub-kriteria/l4/hapus/{l4}', 'Level4Controller@hapus');
     Route::put('sub-kriteria/l4/put/{l4}', 'Level4Controller@put');
 
-//Indikator
+    //Indikator
     foreach ($j as $jenjang) {
         Route::get('indikator/' . $jenjang->kode, 'IndikatorController@index')->name('indikator-' . $jenjang->kode);
     }
@@ -109,7 +109,8 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UP
     Route::get('indikator/score/edit/{score}', 'IndikatorController@editScore');
     Route::put('indikator/score/put/{score}', 'IndikatorController@putScore');
 
-//Element
+    //Element
+    // dd($p);
     foreach ($p as $prodi) {
         Route::get('element/' . $prodi->kode, 'ElementController@index')->name('element-' . $prodi->kode);
     }
@@ -136,7 +137,7 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UP
     Route::get('element/detail/{element}', 'ElementController@detailElement');
     Route::put('element/bobot/put/{element}', 'ElementController@putBobot');
 
-//DATA BERKAS
+    //DATA BERKAS
     Route::get('berkas/cari', 'BerkasController@cari')->name('berkas');
     Route::post('berkas/hasil', 'BerkasController@hasil');
     Route::get('berkas/{berkas}', 'BerkasController@detail');
@@ -145,7 +146,7 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UP
     Route::get('berkas/edit/{berkas}', 'BerkasController@edit');
     Route::put('berkas/put/{berkas}', 'BerkasController@put');
 
-//Pengaturan
+    //Pengaturan
     Route::get('jenjang-pendidkan', 'PengaturanController@jenjang')->name('jenjang');
     Route::post('jenjang-pendidikan/post', 'PengaturanController@jenjangPost');
     Route::delete('jenjang-pendidikan/hapus/{jenjang}', 'PengaturanController@jenjangDelete');
@@ -156,7 +157,7 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UP
     Route::delete('program-studi/hapus/{prodi}', 'PengaturanController@prodiDelete');
     Route::put('program-studi/put/{prodi}', 'PengaturanController@prodiPut');
 
-//DATA USER
+    //DATA USER
     Route::get('users', 'AdminController@index')->name('users');
     Route::get('users/tambah/admin', 'AdminController@tambahAdmin')->name('tambah-admin');
     Route::get('users/tambah/ketua-lpm', 'AdminController@tambahLpm')->name('tambah-lpm');
@@ -169,17 +170,16 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UP
     Route::get('users/edit/{user}', 'AdminController@edit');
     Route::put('users/put/{user}', 'AdminController@put');
 
-//DATA TARGET PENCAPAIAN
+    //DATA TARGET PENCAPAIAN
     Route::get('target', 'TargetController@index')->name('target');
     Route::get('target/{prodi:kode}', 'TargetController@detail');
     Route::get('target/create-target/{prodi:kode}', 'TargetController@createTarget');
     Route::put('target/update/{target}', 'TargetController@update');
 
-//DATA MAHASISWA
+    //DATA MAHASISWA
     Route::get('data/mahasiswa/{prodi:kode}', 'MahasiswaController@index');
     Route::get('data/mahasiswa/tambah/{prodi:kode}', 'MahasiswaController@tambah');
     Route::post('data/mahasiswa/store', 'MahasiswaController@store');
-
 });
 
 //Dropdown Ajax [Buat Element, Cari Berkas]
