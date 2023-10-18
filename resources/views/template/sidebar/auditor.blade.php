@@ -41,9 +41,7 @@
         <div id="prodi" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['p'] as $pr)
-                @if(Auth::user()->prodi_kode == $pr->kode)
                 <a class="collapse-item" href="{{ route($pr->kode) }}">{{ $pr->name }}{{ $pr->kode }}</a>
-                @endif
                 @endforeach
             </div>
         </div>
@@ -56,9 +54,7 @@
         <div id="element" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['p'] as $pr)
-                @if(Auth::user()->prodi_kode == $pr->kode)
                 <a class="collapse-item" href="{{ route('element-' . $pr->kode) }}">{{ $pr->name }}</a>
-                @endif
                 @endforeach
             </div>
         </div>

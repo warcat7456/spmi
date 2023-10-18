@@ -59,6 +59,8 @@
         @include('template.sidebar.dosen')
         @elseif(Auth::user()->role == "UPPS")
         @include('template.sidebar.upps')
+        @elseif(Auth::user()->role == "Auditor")
+        @include('template.sidebar.auditor')
         @else
         @include('template.sidebar.mhsalm')
         @endif

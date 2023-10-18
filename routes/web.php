@@ -39,7 +39,7 @@ Route::get('diagram/login', function () {
 });
 Route::get('diagram/{prodi:kode}', 'HomeController@radarDiagram');
 
-Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UPPS,Mahasiswa,Alumni'])->group(function () {
+Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UPPS,Mahasiswa,Alumni,Auditor'])->group(function () {
     //GET PRODI AND JENJANG
     $j = Jenjang::get();
     $p = Prodi::get();
