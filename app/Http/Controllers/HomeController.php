@@ -15,30 +15,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // phpinfo();
-        // $data = DB::table('prodis as p')
-        //     ->join('fakultass as f', 'p.fakultas_id', '=', 'f.fakultas_id')
-        // ->get();
-        // $data = DataStructureServiceProvider::groupByRecursive2($data, ['fakultas_id', 'name_fakultas'], [], []);
-        // $data = Prodi::fakultas->find(1);
-        // $data = Prodi::with('fakultas')->get()->toArray();
         $data = Fakultas::with('prodi')->orderBy('urutan')->get()->toArray();
-        // dd($data);
-        // $data = groupByRecursive2(
-        //     $data,
-        //     ['fakultas_id',],
-        //     ['id'],
-        //     [
-        //         [
-        //             'fakultas_id', 'nama',
-        //         ],
-        //         ['id', 'name', 'kode', 'jenjang']
-        //     ],
-        //     ['child'],
-        //     true
-        // );
-
-        // dd($data);
         return view('home.index', ['fakultas' => $data]);
     }
 
