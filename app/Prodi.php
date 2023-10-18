@@ -23,4 +23,9 @@ class Prodi extends Model
     {
         return $query->whereNotIn('id', [0])->orderBy('name', 'ASC')->get();
     }
+
+    public function fakultas()
+    {
+        return $this->belongsTo(Fakultas::class);
+    }
 }
