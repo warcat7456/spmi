@@ -34,7 +34,7 @@ class Prodi extends Model
     {
         // $data = '';
         // $users = DB::table('users')->get();
-        $data = $query->join('fakultass', 'prodis.fakultas_id', 'fakultass.fakultas_id')->orderBy('name', 'ASC')->get()->toArray();
+        $data = $query->join('fakultass', 'prodis.fakultas_id', 'fakultass.fakultas_id')->orderBy('urutan', 'ASC')->get()->toArray();
         return $data;
         dd($data);
 

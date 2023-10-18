@@ -6,6 +6,7 @@ use App\Berkas;
 use App\Element;
 use App\Prodi;
 use App\Target;
+use App\Fakultas;
 // use App\DataStructureServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,23 +21,25 @@ class HomeController extends Controller
         // ->get();
         // $data = DataStructureServiceProvider::groupByRecursive2($data, ['fakultas_id', 'name_fakultas'], [], []);
         // $data = Prodi::fakultas->find(1);
-        $data = Prodi::ByFakultas();
-        $data = groupByRecursive2(
-            $data,
-            ['fakultas_id'],
-            ['id'],
-            [
-                [
-                    'fakultas_id', 'name_fakultas',
-                ],
-                ['id', 'name', 'kode', 'jenjang']
-            ],
-            ['child'],
-            true
-        );
-        dd($data);
+        // $data = Prodi::with('fakultas')->get()->toArray();
+        $data = Fakultas::with('prodi')->orderBy('urutan')->get()->toArray();
+        // dd($data);
+        // $data = groupByRecursive2(
+        //     $data,
+        //     ['fakultas_id',],
+        //     ['id'],
+        //     [
+        //         [
+        //             'fakultas_id', 'nama',
+        //         ],
+        //         ['id', 'name', 'kode', 'jenjang']
+        //     ],
+        //     ['child'],
+        //     true
+        // );
 
-        // return view('home.index');
+        // dd($data);
+        return view('home.index', ['fakultas' => $data]);
     }
 
     public function tabel(Prodi $prodi)
