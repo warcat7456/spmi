@@ -12,6 +12,9 @@ Route::post('logout', 'AuthController@logout')->name('logout');
 //HOME
 Route::get('/', 'HomeController@index')->name('home');
 
+// ABOUT
+Route::get('/about', 'HomeController@about')->name('about');
+
 Route::get('tabel/{prodi:kode}', 'HomeController@tabel');
 Route::get('tabel/berkas/{element}', 'HomeController@berkas');
 Route::get('tabel/view/{berkas}', 'HomeController@view');
