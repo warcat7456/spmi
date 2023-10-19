@@ -68,6 +68,11 @@
                     <ul>
                         <li><a class="{{ Route::currentRouteName() == 'about' ? 'active' : '' }}"
                                 href="{{ route('about') }}">About SPMI</a></li>
+                        <li><a href="#">Galeri</a></li>
+                        <li><a href="#">Siklus</a></li>
+                        <li><a href="#">Tutorial</a></li>
+                        <li><a href="#">e-SPMI</a></li>
+                        <li><a href="#">Siklus PPEP</a></li>
                         <li><a href="{{ route('multipleSearch') }}">Multiple Search</a></li>
                         <li><a href="{{ route('singleSearch') }}">Single Search</a></li>
                     </ul>
