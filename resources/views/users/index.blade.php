@@ -48,26 +48,7 @@
             </div>
         </div>
     </div>
-    <!-- <div class="col-3">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Tambah Pengguna</h4>
-                <ul>
-                    @if (Auth::user()->role == 'Admin')
-                    <li><a href="{{ route('tambah-admin') }}">Admin</a></li>
-                    @endif
-                    <li><a href="{{ route('tambah-lpm') }}">Ketua LPM</a></li>
-                    <li><a href="{{ route('tambah-kaprodi') }}">Ketua Program Studi</a></li>
-                    <li><a href="{{ route('tambah-dosen') }}">Dosen</a></li>
-                    @if (Auth::user()->role == 'Admin')
-                    <li><a href="{{ route('tambah-upps') }}">UPPS</a></li>
-                    @endif
-                    <li><a href="{{ route('tambah-mhsalm') }}">Mahasiswa / Alumni</a></li>
-                </ul>
-                <hr>
-            </div>
-        </div>
-    </div> -->
+
 </div>
 
 @endsection

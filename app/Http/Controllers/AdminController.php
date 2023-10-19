@@ -84,8 +84,8 @@ class AdminController extends Controller
             $att = [
                 'name' => $request->name,
                 'role' => $request->role,
-                'prodi_kode' => '',
-                'prodi_name' => '',
+                'prodi_kode' => '-',
+                'prodi_name' => '-',
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ];
@@ -129,8 +129,8 @@ class AdminController extends Controller
                 'name' => $request->name,
                 'role' => $request->role,
                 'email' => $request->email,
-                'prodi_kode' => '',
-                'prodi_name' => '',
+                'prodi_kode' => '-',
+                'prodi_name' => '-',
             ];
         }
         if (!empty($request->password)) {
