@@ -15,8 +15,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $data = Fakultas::with('prodi')->orderBy('urutan')->get()->toArray();
-        return view('home.index', ['fakultas' => $data]);
+        $fakultas = Fakultas::with('prodi')->orderBy('urutan')->get();
+        return view('home.index', ['fakultas' => $fakultas]);
     }
 
     public function tabel(Prodi $prodi)
