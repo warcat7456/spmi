@@ -151,12 +151,7 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UP
 
     //DATA USER
     Route::get('users', 'AdminController@index')->name('users');
-    Route::get('users/tambah/admin', 'AdminController@tambahAdmin')->name('tambah-admin');
-    Route::get('users/tambah/ketua-lpm', 'AdminController@tambahLpm')->name('tambah-lpm');
-    Route::get('users/tambah/ketua-program-studi', 'AdminController@tambahKaprodi')->name('tambah-kaprodi');
-    Route::get('users/tambah/dosen', 'AdminController@tambahDosen')->name('tambah-dosen');
-    Route::get('users/tambah/upps', 'AdminController@tambahUpps')->name('tambah-upps');
-    Route::get('users/tambah/mahasiswa-alumni', 'AdminController@tambahMhsAlm')->name('tambah-mhsalm');
+    Route::get('users/tambah/', 'AdminController@tambahUser')->name('tambah');
     Route::post('users/store', 'AdminController@store');
     Route::delete('users/hapus/{user}', 'AdminController@hapus');
     Route::get('users/edit/{user}', 'AdminController@edit');
