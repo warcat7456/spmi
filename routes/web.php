@@ -172,6 +172,9 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UP
     Route::get('data/mahasiswa/{prodi:kode}', 'MahasiswaController@index');
     Route::get('data/mahasiswa/tambah/{prodi:kode}', 'MahasiswaController@tambah');
     Route::post('data/mahasiswa/store', 'MahasiswaController@store');
+
+    // Halaman Statis (About SPMI,dll)
+    Route::resource('halaman-statis', 'HalamanStatisController');
 });
 
 //Dropdown Ajax [Buat Element, Cari Berkas]
