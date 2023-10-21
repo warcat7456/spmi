@@ -51,16 +51,12 @@
             <span>Element & Berkas</span></a>
         @endif
         @endforeach
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#element" aria-expanded="true" aria-controls="element">
-            <i class="fa-brands fa-elementor"></i>
-            <span>Element & Berkas</span></a>
-        </a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="{{ route('berkas') }}">
             <i class="fa-solid fa-magnifying-glass"></i>
             <span>Multi Search</span></a>
-    </li>
+    </li> -->
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
