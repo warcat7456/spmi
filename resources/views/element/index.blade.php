@@ -74,7 +74,7 @@
                                     </div>
                                     <hr>
                                     <div class="dropdown open">
-                                        <button class="btn btn-info dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button {{(Auth::user()->role == 'Dosen') ? 'hidden' : ''}} class="btn btn-info dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Ketentuan
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="triggerId">
@@ -98,7 +98,7 @@
     </div>
     <div class="col-2">
         <div class="card">
-            @if(Auth::user()->role != 'Auditor')
+            @if(Auth::user()->role == 'Admin')
             <div class="card-body">
                 <h4 class="card-title">Aksi</h4>
                 <a href="{{ route('tambah-element') }}" class="btn btn-primary btn-sm float-right">

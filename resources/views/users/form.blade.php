@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <label for="">Role</label>
                         <select type="" name="role" id='role' class="form-control" aria-describedby="helpId" required>
-                            <option value="">Pilih Role</option>
+                            <option value="-">Pilih Role</option>
                             <option value="Dosen">Dosen</option>
                             <option value="Auditor">Auditor</option>
                             <option value="Admin">Admin</option>
@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label for="">Prodi</label>
                         <select type="" name="prodi_kode" id='prodi_kode' class="form-control" aria-describedby="helpId" disabled>
-                            <option value="-">Pilih Prodi</option>
+                            <option value=""></option>
                             @foreach($f as $fak)
                             <optgroup label="{{ $fak->nama }}">
                                 @foreach($fak->prodi as $prod)

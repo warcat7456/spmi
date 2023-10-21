@@ -34,40 +34,29 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#prodi" aria-expanded="true" aria-controls="prodi">
-            <i class="fa-solid fa-circle-check"></i>
+        @foreach ($data['p'] as $pr)
+        @if(Auth::user()->prodi_kode == $pr->kode)
+        <a class="nav-link" href="{{ route($pr->kode) }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Penilain & Diagram</span></a>
-        </a>
-        <div id="prodi" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                @foreach ($data['p'] as $pr)
-                @if(Auth::user()->prodi_kode == $pr->kode)
-                <a class="collapse-item" href="{{ route($pr->kode) }}">{{ $pr->name }}{{ $pr->kode }}</a>
-                @endif
-                @endforeach
-            </div>
-        </div>
+        @endif
+        @endforeach
+
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#element" aria-expanded="true" aria-controls="element">
-            <i class="fa-brands fa-elementor"></i>
+        @foreach ($data['p'] as $pr)
+        @if(Auth::user()->prodi_kode == $pr->kode)
+        <a class="nav-link" href="{{ route('element-'.$pr->kode) }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Element & Berkas</span></a>
-        </a>
-        <div id="element" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                @foreach ($data['p'] as $pr)
-                @if(Auth::user()->prodi_kode == $pr->kode)
-                <a class="collapse-item" href="{{ route('element-' . $pr->kode) }}">{{ $pr->name }}</a>
-                @endif
-                @endforeach
-            </div>
-        </div>
+        @endif
+        @endforeach
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="{{ route('berkas') }}">
             <i class="fa-solid fa-magnifying-glass"></i>
             <span>Multi Search</span></a>
-    </li>
+    </li> -->
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

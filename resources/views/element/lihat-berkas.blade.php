@@ -55,6 +55,11 @@
                 <a href="{{ url('element/unggah-berkas/' . $element->id) }}" class="btn btn-info btn-sm">
                     Unggah Berkas
                 </a>
+                @else
+                <hr>
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#form_penilaian">
+                    Form Penilaian
+                </button>
                 @endif
             </div>
         </div>
@@ -87,4 +92,31 @@
         </form>
     </div>
 </div>
+
+
+<div class="modal fade" id="form_penilaian" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="/element/penilaian-auditor/{{ $element->id }}" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Form Auditor</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @csrf
+                    @method('put')
+                    <textarea class="form-control" id="ket_auditor" rows="5"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>Simpan
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 @endsection

@@ -129,6 +129,7 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UP
     Route::get('element/detail/{element}', 'ElementController@detailElement');
     Route::put('element/bobot/put/{element}', 'ElementController@putBobot');
 
+    Route::put('element/penilaian-auditor/{element}', 'ElementController@putPenilaianAuditor');
     //DATA BERKAS
     Route::get('berkas/cari', 'BerkasController@cari')->name('berkas');
     Route::post('berkas/hasil', 'BerkasController@hasil');
