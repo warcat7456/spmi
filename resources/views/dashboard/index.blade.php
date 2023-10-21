@@ -1,72 +1,45 @@
 @extends('template.BaseView')
-@section('content')
-@if (Auth::user()->prodi_kode == '-')
-<div class="row">
-    @foreach ($p as $i)
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-auto">
-                                <a href="{{ url('prodi/' . $i->kode) }}" class="h7 mb-0 mr-3 font-weight-bold text-info text-uppercase">
-                                    {{ $i->name }}</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
-</div>
-@else
-@foreach ($p as $i)
-@if($i->kode == Auth::user()->prodi_kode)
-<div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-info shadow h-100 py-2">
-        <div class="card-body">
-            <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col-auto">
-                            <a href="{{ url('prodi/' . $i->kode) }}" class="h7 mb-0 mr-3 font-weight-bold text-info text-uppercase">
-                                {{ $i->name }}</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endif
-@endforeach
-@endif
-<div class="row">
-    <div class="col">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">LPM Smart System</h4>
-                <p class="card-text">Selamat datang <b>{{ Auth::user()->name }}</b><br>
-                    @if (Auth::user()->prodi_kode == '-')
-                    Kamu dapat melakukan pemberkasan dengan lebih mudah dan untuk saat ini terdapat
-                    <b>{{ $p->count() }}</b> Program Studi yang terdaftar pada sistem.
-                    @else
-                    Saat ini kamu bertugas sebagai {{ Auth::user()->role }} pada Program Studi
-                    {{ Auth::user()->prodi_name }}, kamu dapat melakukan peningkatan dan pemberkasan melalui menu
-                    Element dan Berkas
-                    @endif
-                </p>
-                <hr>
-            </div>
-        </div>
-    </div>
-</div>
+
+@section('styles')
 @endsection
+
+@section('content')
+    <div class="bg-white py-3 px-4">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class=" font-weight-bold text-info">
+                    <u>Fakultas {{ auth()->user()->prodi->fakultas->nama }}</u>
+                </h1>
+                <span class="border border-info py-2 px-2 rounded my-1 d-inline-block">Profil</span>
+                <div class="my-3">
+                    {!! auth()->user()->prodi->fakultas->deskripsi !!}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Foto -->
+                <div style="min-width: 300px;min-height:300px"
+                    class="bg-info align-items-center justify-content-center d-flex rounded">
+                    <p class="text-white">Foto Fakultas</p>
+                </div>
+                <!-- Visi -->
+                <div class="my-2 py-2 text-center">
+                    <span class="border border-info py-2 px-4 rounded my-1 d-inline-block mx-auto">Visi</span>
+                    <p class="text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem neque
+                        odio dolore minus
+                        temporibus officia optio culpa asperiores dolor adipisci, modi autem ad natus quae, porro cum!
+                        Repudiandae, eaque ex?</p>
+                </div>
+                <!-- Misi -->
+                <div class="my-2 py-2 text-center">
+                    <span class="border border-info py-2 px-4 rounded my-1 d-inline-block mx-auto">Misi</span>
+                    <p class="text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem neque
+                        odio dolore minus
+                        temporibus officia optio culpa asperiores dolor adipisci, modi autem ad natus quae, porro cum!
+                        Repudiandae, eaque ex?</p>
+
+                </div>
+            </div>
+
+
+        </div>
+    @endsection
