@@ -24,18 +24,16 @@
             <!-- Visi -->
             <div class="my-2 py-2 text-center">
                 <span class="border border-info py-2 px-4 rounded my-1 d-inline-block mx-auto">Visi</span>
-                <p class="text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem neque
-                    odio dolore minus
-                    temporibus officia optio culpa asperiores dolor adipisci, modi autem ad natus quae, porro cum!
-                    Repudiandae, eaque ex?</p>
+                <div class="my-3">
+                    {!! !empty(auth()->user()->prodi->fakultas->visi) ? auth()->user()->prodi->fakultas->visi : '' !!}
+                </div>
             </div>
             <!-- Misi -->
             <div class="my-2 py-2 text-center">
                 <span class="border border-info py-2 px-4 rounded my-1 d-inline-block mx-auto">Misi</span>
-                <p class="text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem neque
-                    odio dolore minus
-                    temporibus officia optio culpa asperiores dolor adipisci, modi autem ad natus quae, porro cum!
-                    Repudiandae, eaque ex?</p>
+                <div class="my-3">
+                    {!! !empty(auth()->user()->prodi->fakultas->misi) ? auth()->user()->prodi->fakultas->misi : '' !!}
+                </div>
 
             </div>
         </div>
