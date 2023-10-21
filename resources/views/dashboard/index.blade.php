@@ -17,6 +17,7 @@
             </div>
             <div class="col-md-4">
                 <!-- Foto -->
+                <!-- TODO:Gunakan css Card -->
                 <div style="min-width: 300px;min-height:300px"
                     class="bg-info align-items-center justify-content-center d-flex rounded">
                     <p class="text-white">Foto Fakultas</p>
