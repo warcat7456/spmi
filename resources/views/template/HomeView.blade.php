@@ -45,6 +45,15 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('home/css/style.css') }}" rel="stylesheet">
+    @if (Route::currentRouteName() == 'about')
+        <style>
+            footer {
+                position: absolute;
+                width: 100vw;
+                bottom: 0;
+            }
+        </style>
+    @endif
 
 
 </head>
@@ -71,13 +80,12 @@
                         <li><a href="#">Galeri</a></li>
                         <li><a href="#">Siklus</a></li>
                         <li><a href="#">Tutorial</a></li>
-                        <li><a href="#">e-SPMI</a></li>
                         <li><a href="#">Siklus PPEP</a></li>
                         <li><a href="{{ route('multipleSearch') }}">Multiple Search</a></li>
                         <li><a href="{{ route('singleSearch') }}">Single Search</a></li>
                     </ul>
                     </li>
-                    <li class="dropdown"><a href="#"><span>Berkas</span> <i class="bi bi-chevron-down"></i></a>
+                    <li class="dropdown"><a href="#"><span>e-SPMI</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
                             @foreach ($data['p'] as $pr)
                                 <li><a href="{{ url('tabel/' . $pr->kode) }}">{{ $pr->name }}</a></li>

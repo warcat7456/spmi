@@ -41,6 +41,8 @@
     <script src="{{ asset('portal/vendor/jquery/jquery.min.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    @yield('styles')
+
 </head>
 
 <body id="page-top">
@@ -49,18 +51,18 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-
+        <!-- TODO: memperbaiki sidebar yang ditampilkan sesuai role (prodi-dosen,auditor-admin) -->
         @if (Auth::user()->role == 'Admin')
         @include('template.sidebar.admin')
-        @elseif(Auth::user()->role == "Ketua LPM")
+        @elseif(Auth::user()->role == 'Ketua LPM')
         @include('template.sidebar.ketua-lpm')
-        @elseif(Auth::user()->role == "Ketua Program Studi")
+        @elseif(Auth::user()->role == 'Ketua Program Studi')
         @include('template.sidebar.kaprodi')
-        @elseif(Auth::user()->role == "Dosen")
+        @elseif(Auth::user()->role == 'Dosen')
         @include('template.sidebar.dosen')
-        @elseif(Auth::user()->role == "UPPS")
+        @elseif(Auth::user()->role == 'UPPS')
         @include('template.sidebar.upps')
-        @elseif(Auth::user()->role == "Auditor")
+        @elseif(Auth::user()->role == 'Auditor')
         @include('template.sidebar.auditor')
         @else
         @include('template.sidebar.mhsalm')
@@ -89,7 +91,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }} {{Auth::user()->role == 'Dosen'  ? ' - '.Auth::user()->prodi_name : '' }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }} - {{ Auth::user()->prodi_name }}</span>
                                 <img class="img-profile rounded-circle" src="{{ asset('portal/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
