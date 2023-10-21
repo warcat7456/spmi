@@ -110,7 +110,6 @@ class ElementController extends Controller
         <strong>Element Berhasil Dibuat</strong>
     </div>');
         return redirect()->route('element-' . $prodi->kode);
-
     }
 
     public function unggahBerkas(Element $element)
@@ -276,7 +275,6 @@ class ElementController extends Controller
 
         session()->flash('pesan', $pesan);
         return redirect()->route('element-' . $prodi->kode);
-
     }
 
     public function unggul(Element $element)
@@ -315,7 +313,6 @@ class ElementController extends Controller
 
         session()->flash('pesan', $pesan);
         return redirect()->route('element-' . $prodi->kode);
-
     }
 
     public function baik(Element $element)
@@ -354,7 +351,6 @@ class ElementController extends Controller
 
         session()->flash('pesan', $pesan);
         return redirect()->route('element-' . $prodi->kode);
-
     }
 
     public function resetData(Element $element)
@@ -421,4 +417,12 @@ class ElementController extends Controller
         return redirect()->to('/element/detail/' . $element->id);
     }
 
+    public function putPenilaianAuditor(Element $element, Request $request)
+    {
+        $element->update([
+            'bobot' => $request->bobot,
+        ]);
+
+        return redirect()->to('/element/detail/' . $element->id);
+    }
 }
