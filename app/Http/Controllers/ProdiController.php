@@ -78,7 +78,7 @@ class ProdiController extends Controller
         return view('penilaian.informasi', [
             'p' => $prodi,
             'e' => $element,
-            'label'=>$label,
+            'label' => $label,
             'target' => $target,
             'pencapaian' => $pencapaian,
             'avg' => $avg,

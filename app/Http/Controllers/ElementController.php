@@ -419,10 +419,10 @@ class ElementController extends Controller
 
     public function putPenilaianAuditor(Element $element, Request $request)
     {
-        $element->update([
-            'bobot' => $request->bobot,
-        ]);
 
-        return redirect()->to('/element/detail/' . $element->id);
+        $element->update([
+            'ket_auditor' => $request->ket_auditor,
+        ]);
+        return redirect()->to('/element/lihat-berkas/' . $element->id);
     }
 }
