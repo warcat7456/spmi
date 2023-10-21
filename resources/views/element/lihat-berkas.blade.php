@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="col-2">
+    <div class="col-3">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Rata - Rata</h4>
@@ -55,10 +55,22 @@
                 <a href="{{ url('element/unggah-berkas/' . $element->id) }}" class="btn btn-info btn-sm">
                     Unggah Berkas
                 </a>
-                @else
+                @endif
                 <hr>
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#form_penilaian">
-                    Form Penilaian
+
+
+                @if($element->ket_auditor)
+                <h4 class="card-title">Keterangan Auditor</h4>
+                <p>
+                    {{ @$element->ket_auditor }}
+                </p>
+                <hr>
+                @endif
+
+
+                @if(Auth::user()->role == 'Auditor')
+                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="modal" data-target="#form_penilaian">
+                    Form Keterangan Auditor
                 </button>
                 @endif
             </div>
@@ -107,7 +119,7 @@
                 <div class="modal-body">
                     @csrf
                     @method('put')
-                    <textarea class="form-control" id="ket_auditor" rows="5"></textarea>
+                    <textarea class="form-control" id="ket_auditor" name="ket_auditor" rows="5">{{ @$element->ket_auditor }}</textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
