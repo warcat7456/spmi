@@ -8,11 +8,11 @@
         <div class="row">
             <div class="col-md-8">
                 <h1 class=" font-weight-bold text-info">
-                    <u>Fakultas {{ auth()->user()->prodi->fakultas->nama }}</u>
+                    <u>Fakultas {{ auth()->user()->prodi?->fakultas->nama }}</u>
                 </h1>
                 <span class="border border-info py-2 px-2 rounded my-1 d-inline-block">Profil</span>
                 <div class="my-3">
-                    {!! auth()->user()->prodi->fakultas->deskripsi !!}
+                    {!! auth()->user()->prodi?->fakultas->deskripsi !!}
                 </div>
             </div>
             <div class="col-md-4">
