@@ -61,7 +61,7 @@
 <body>
 
     <!-- ======= Header ======= -->
-    <header id="header" class="d-flex align-items-center">
+    <header id="header" class="d-flex align-items-center shadow-sm">
         <div class="container d-flex align-items-center">
 
             <h1 class="logo me-auto"><a href="{{ route('home') }}">LPM Smart System</a></h1>
@@ -75,12 +75,22 @@
                     </li>
 
                     <ul>
-                        <li><a class="{{ Route::currentRouteName() == 'about' ? 'active' : '' }}"
-                                href="{{ route('about') }}">About SPMI</a></li>
+                        <li class="dropdown {{ Route::currentRouteName() == 'about' ? 'active' : '' }} ">
+
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                About
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Tentang</a>
+                                <a class="dropdown-item" href="#">Tim</a>
+                                <a class="dropdown-item" href="#">Siklus</a>
+                            </div>
+
+                            {{-- <a class="{{ Route::currentRouteName() == 'about' ? 'active' : '' }}"
+                                href="{{ route('about') }}">About </a> --}}
+                        </li>
                         <li><a href="#">Galeri</a></li>
-                        <li><a href="#">Siklus</a></li>
                         <li><a href="#">Tutorial</a></li>
-                        <li><a href="#">Siklus PPEP</a></li>
                         <li><a href="{{ route('multipleSearch') }}">Multiple Search</a></li>
                         <li><a href="{{ route('singleSearch') }}">Single Search</a></li>
                     </ul>
