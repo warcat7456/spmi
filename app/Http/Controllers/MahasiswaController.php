@@ -34,10 +34,8 @@ class MahasiswaController extends Controller
 
         if ($request->prodi_kode == "0") {
             $att['prodi_kode'] = "-";
-            $att['prodi_name'] = "-";
         } else {
             $prodi = Prodi::where('kode', $request->prodi_kode)->first();
-            $att['prodi_name'] = $prodi->name;
         }
 
         User::create($att);
@@ -48,6 +46,5 @@ class MahasiswaController extends Controller
         <strong>Data Berhasil Ditambahkan</strong>
     </div>');
         return redirect()->to('data/mahasiswa/' . Auth::user()->prodi_kode);
-
     }
 }

@@ -79,13 +79,11 @@ class AdminController extends Controller
                 'password' => Hash::make($request->password),
             ];
             $prodi = Prodi::where('kode', $request->prodi_kode)->first();
-            $att['prodi_name'] = $prodi->name;
         } else {
             $att = [
                 'name' => $request->name,
                 'role' => $request->role,
                 'prodi_kode' => '-',
-                'prodi_name' => '-',
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ];
@@ -122,15 +120,12 @@ class AdminController extends Controller
                 'email' => $request->email,
                 'prodi_kode' => $request->prodi_kode,
             ];
-            $prodi = Prodi::where('kode', $request->prodi_kode)->first();
-            $att['prodi_name'] = $prodi->name;
         } else {
             $att = [
                 'name' => $request->name,
                 'role' => $request->role,
                 'email' => $request->email,
                 'prodi_kode' => '-',
-                'prodi_name' => '-',
             ];
         }
         if (!empty($request->password)) {

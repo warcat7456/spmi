@@ -7,6 +7,7 @@ use App\Jenjang;
 use App\L1;
 use App\Prodi;
 use App\Target;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ProdiController extends Controller
@@ -83,5 +84,39 @@ class ProdiController extends Controller
             'pencapaian' => $pencapaian,
             'avg' => $avg,
         ]);
+    }
+    public function profil(Prodi $prodi)
+    {
+        return view('prodi.profil', [
+            'p' => $prodi,
+        ]);
+    }
+    public function editprofil()
+    {
+        $prodi = Prodi::where('kode', Auth::user()->prodi_kode)->get()[0];
+        return view('prodi.form-profil', [
+            'edit' => true,
+            'i' => $prodi,
+        ]);
+    }
+
+    public function editprofilPut(Request $request, Prodi $prodi)
+    {
+
+        $attr = [
+            'deskripsi' => $request->deskripsi,
+            'visi' => $request->visi,
+            'misi' => $request->misi,
+        ];
+
+        $prodi->update($attr);
+
+        session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Data Berhasil Diedit</strong>
+    </div>');
+        return redirect()->route('profil-prodi', $prodi->kode);
     }
 }

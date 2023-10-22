@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prodi extends Model
 {
-    protected $fillable = ['name', 'kode', 'jenjang_id'];
+    protected $fillable = ['name', 'kode', 'jenjang_id', 'deskripsi', 'visi', 'misi', 'foto'];
     public $timestamps = false;
 
     public function jenjang()

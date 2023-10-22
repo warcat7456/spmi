@@ -47,9 +47,13 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Prodi,UP
     //Prodi
     foreach ($p as $prodi) {
         Route::get('prodi/' . $prodi->kode, 'ProdiController@index')->name($prodi->kode);
+        Route::get('prodi/profil/{prodi:kode}', 'ProdiController@profil')->name('profil-prodi');
         Route::get('prodi/{prodi:kode}/{any}', 'ProdiController@butir');
     }
 
+    // Edit Profil Prodi
+    Route::get('edit-profil-prodi', 'ProdiController@editprofil')->name('edit-profil-prodi');
+    Route::put('edit-profil-prodi/put/{prodi}', 'ProdiController@editprofilPut');
     //C1
     Route::post('kriteria/store', 'KriteriaController@store');
     Route::delete('kriteria/hapus/{l1}', 'KriteriaController@hapus');
