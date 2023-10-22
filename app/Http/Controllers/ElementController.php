@@ -36,7 +36,6 @@ class ElementController extends Controller
 
         $prodi = Prodi::where('id', $request->prodi_id)->first();
         $row = [];
-        dd($request);
         if ($request->l1_id & $request->l2_id == null & $request->l3_id == null & $request->l4_id == null) {
             for ($i = 0; $i < count($request->l1_id); $i++) {
                 $row[] = [
