@@ -36,7 +36,7 @@ class ElementController extends Controller
 
         $prodi = Prodi::where('id', $request->prodi_id)->first();
         $row = [];
-        if ($request->l1_id & $request->l2_id == null & $request->l3_id == null & $request->l4_id == null) {
+        if ($request->l1_id && $request->l2_id == null && $request->l3_id == null && $request->l4_id == null) {
             for ($i = 0; $i < count($request->l1_id); $i++) {
                 $row[] = [
                     'prodi_id' => $request->prodi_id,
@@ -51,7 +51,7 @@ class ElementController extends Controller
                     'indikator_id' => $request->ind_id,
                 ];
             }
-        } elseif ($request->l1_id & $request->l2_id & $request->l3_id == null & $request->l4_id == null) {
+        } elseif ($request->l1_id && $request->l2_id && $request->l3_id == null && $request->l4_id == null) {
             for ($i = 0; $i < count($request->l1_id); $i++) {
                 $row[] = [
                     'prodi_id' => $request->prodi_id,
@@ -66,7 +66,7 @@ class ElementController extends Controller
                     'indikator_id' => $request->ind_id,
                 ];
             }
-        } elseif ($request->l1_id & $request->l2_id & $request->l3_id & $request->l4_id == null) {
+        } elseif ($request->l1_id && $request->l2_id && $request->l3_id && $request->l4_id == null) {
             for ($i = 0; $i < count($request->l1_id); $i++) {
                 $row[] = [
                     'prodi_id' => $request->prodi_id,
@@ -81,7 +81,7 @@ class ElementController extends Controller
                     'indikator_id' => $request->ind_id,
                 ];
             }
-        } elseif ($request->l1_id & $request->l2_id & $request->l3_id & $request->l4_id) {
+        } elseif ($request->l1_id && $request->l2_id && $request->l3_id && $request->l4_id) {
             for ($i = 0; $i < count($request->l1_id); $i++) {
                 $row[] = [
                     'prodi_id' => $request->prodi_id,
