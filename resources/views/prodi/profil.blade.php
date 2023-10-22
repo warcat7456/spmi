@@ -11,7 +11,7 @@
                 <u>Program Studi {{ $p->name }}</u>
             </h1>
             <span class="border border-info py-2 px-2 rounded my-1 d-inline-block">Profil</span>
-            @if($p->kode == Auth::user()->prodi_kode)
+            @if($p->kode == Auth::user()->prodi_kode && $edit == true)
             <a class="btn btn-info py-2 px-2 rounded my-1 d-inline-block" href="{{ url('edit-profil-prodi')}}"><i class="fa fa-pencil"></i> Edit Profil</a>
             @endif
             <div class="my-3">

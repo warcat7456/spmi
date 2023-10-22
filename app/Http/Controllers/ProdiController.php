@@ -89,6 +89,7 @@ class ProdiController extends Controller
     {
         return view('prodi.profil', [
             'p' => $prodi,
+            'edit' => true
         ]);
     }
     public function editprofil()
