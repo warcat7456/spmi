@@ -74,7 +74,7 @@
                                     </div>
                                     <hr>
                                     <div class="dropdown open">
-                                        <button {{(Auth::user()->role == 'Dosen') ? 'hidden' : ''}} class="btn btn-info dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button {{(Auth::user()->role == 'Prodi') ? 'hidden' : ''}} class="btn btn-info dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Ketentuan
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="triggerId">

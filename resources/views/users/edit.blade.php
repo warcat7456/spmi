@@ -20,7 +20,7 @@
                             <option value="Admin">Admin</option>
                             <!-- <option value="Ketua LPM">Ketua LPM</option> -->
                             <!-- <option value="Ketua Program Studi">Ketua Program Studi</option> -->
-                            <option value="Dosen">Dosen</option>
+                            <option value="Prodi">Prodi</option>
                             <!-- <option value="UPPS">UPPS</option> -->
                             <!-- <option value="Mahasiswa">Mahasiswa</option> -->
                             <!-- <option value="Alumni">Alumni</option> -->

@@ -69,7 +69,7 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->role == 'Dosen') {
+        if ($request->role == 'Prodi') {
 
             $att = [
                 'name' => $request->name,
@@ -115,7 +115,7 @@ class AdminController extends Controller
     public function put(User $user, Request $request)
     {
 
-        if ($request->role == 'Dosen') {
+        if ($request->role == 'Prodi') {
             $att = [
                 'name' => $request->name,
                 'role' => $request->role,

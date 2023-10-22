@@ -58,7 +58,7 @@
         @include('template.sidebar.ketua-lpm')
         @elseif(Auth::user()->role == 'Ketua Program Studi')
         @include('template.sidebar.kaprodi')
-        @elseif(Auth::user()->role == 'Dosen')
+        @elseif(Auth::user()->role == 'Prodi')
         @include('template.sidebar.dosen')
         @elseif(Auth::user()->role == 'UPPS')
         @include('template.sidebar.upps')
@@ -91,7 +91,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }} {{ Auth::user()->role =="Dosen" ? '-'.Auth::user()->prodi_name : '' }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }} {{ Auth::user()->role =="Prodi" ? '-'.Auth::user()->prodi_name : '' }}</span>
                                 <img class="img-profile rounded-circle" src="{{ asset('portal/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->

@@ -19,7 +19,7 @@
                         <label for="">Role</label>
                         <select type="" name="role" id='role' class="form-control" aria-describedby="helpId" required>
                             <option value="-">Pilih Role</option>
-                            <option value="Dosen">Dosen</option>
+                            <option value="Prodi">Prodi</option>
                             <option value="Auditor">Auditor</option>
                             <option value="Admin">Admin</option>
                         </select>
@@ -68,7 +68,7 @@
 
 
         FormUser.role.on('change', function(ev) {
-            if (FormUser.role.val() == 'Dosen') {
+            if (FormUser.role.val() == 'Prodi') {
 
                 FormUser.prodi_kode.prop('disabled', false)
                 FormUser.prodi_kode.prop('required', true)
@@ -85,7 +85,7 @@
             FormUser.email.val('<?= $i->email ?>');
             FormUser.role.val('<?= $i->role ?>');
             FormUser.role.trigger('change');
-            <?php if ($i->role == 'Dosen') { ?>
+            <?php if ($i->role == 'Prodi') { ?>
                 FormUser.prodi_kode.val('<?= $i->prodi_kode ?>');
 
         <?php }
