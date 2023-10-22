@@ -180,6 +180,15 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Prodi,UP
 
     // Halaman Statis (About SPMI,dll)
     Route::resource('halaman-statis', 'HalamanStatisController');
+    // Show image
+    Route::get('/show-image/{filename}', function ($filename) {
+        $path = storage_path('app/prodi/' . $filename);
+        if (file_exists($path)) {
+            return response()->file($path);
+        } else {
+            abort(404);
+        }
+    })->name('showimage');
 });
 
 //Dropdown Ajax [Buat Element, Cari Berkas]

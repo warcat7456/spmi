@@ -103,21 +103,25 @@ class ProdiController extends Controller
 
     public function editprofilPut(Request $request, Prodi $prodi)
     {
-
         $attr = [
             'deskripsi' => $request->deskripsi,
             'visi' => $request->visi,
             'misi' => $request->misi,
         ];
 
+        if ($request->hasFile('foto_file') && $request->input('ganti_gambar')) {
+            $photo = $request->file('foto_file');
+            $originalFilename = $photo->getClientOriginalName(); // Ambil nama asli file
+            $path = $photo->storeAs('prodi', $originalFilename, 'local'); // Simpan file dengan nama asli
+            $prodi->foto = $originalFilename; // Simpan nama asli file ke dalam atribut foto pada model
+            $prodi->save();
+        }
+
+
         $prodi->update($attr);
 
-        session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <strong>Data Berhasil Diedit</strong>
-    </div>');
+        session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Data Berhasil Diedit</strong></div>');
+
         return redirect()->route('profil-prodi', $prodi->kode);
     }
 }

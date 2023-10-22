@@ -14,9 +14,13 @@
                         <hr>
                         <h5>Data Profil</h5>
                         <div class="form-group">
-                            <label for="">Gambar </label>
+                            <label for="">Gambar</label>
                             <input type="file" name="foto_file" accept="image/*" class="form-control"
                                 placeholder="Urutan" aria-describedby="helpId">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="ganti_gambar" name="ganti_gambar">
+                            <label class="form-check-label" for="ganti_gambar">Ganti Gambar</label>
                         </div>
                         <div class="form-group">
                             <label for="">Deskripsi</label>
@@ -28,7 +32,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Misi</label>
-                            <textarea name="misi" id="misi" class="form-control">{{ $i->misi }}</textarea>
+                            <textarea name "misi" id="misi" class="form-control">{{ $i->misi }}</textarea>
                         </div>
                         <div class="form-group">
                             <button class="btn-primary btn-sm" type="submit">Simpan</button>
@@ -45,6 +49,15 @@
             CKEDITOR.replace('deskripsi');
             CKEDITOR.replace('visi');
             CKEDITOR.replace('misi');
-        })
+            $('#ganti_gambar').on('change', function() {
+                if (this.checked) {
+                    // Aktifkan input file
+                    $('#foto_file').prop('disabled', false);
+                } else {
+                    // Nonaktifkan input file
+                    $('#foto_file').prop('disabled', true);
+                }
+            });
+        });
     </script>
 @endsection
