@@ -111,8 +111,8 @@
 
     {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('berkas') }}">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Unggah Berkas</span></a>
+    <i class="fas fa-fw fa-cog"></i>
+    <span>Unggah Berkas</span></a>
     </li> --}}
     <li class="nav-item">
         <a class="nav-link" href="{{ route('berkas') }}">
@@ -142,6 +142,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('jenjang') }}">Jenjang Pendidikan</a>
                 <a class="collapse-item" href="{{ route('prodi') }}">Program Studi</a>
+                <a class="collapse-item" href="{{ route('fakultas') }}">Fakultas</a>
                 <a class="collapse-item" href="{{ route('target') }}">Target Pencapaian</a>
                 <!--<a class="collapse-item" href="{{ route('users') }}">Tambah User</a>-->
             </div>

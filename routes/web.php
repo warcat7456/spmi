@@ -150,6 +150,11 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Dosen,UP
     Route::delete('program-studi/hapus/{prodi}', 'PengaturanController@prodiDelete');
     Route::put('program-studi/put/{prodi}', 'PengaturanController@prodiPut');
 
+    Route::get('edit-profil-fakultas/{fakultas}', 'PengaturanController@fakultasProfil')->name('edit-profil-fakultas');
+    Route::get('fakultas', 'PengaturanController@fakultas')->name('fakultas');
+    Route::post('fakultas/post', 'PengaturanController@fakultasPost');
+    Route::delete('fakultas/hapus/{fakultas}', 'PengaturanController@fakultasDelete');
+    Route::put('fakultas/put/{fakultas}', 'PengaturanController@fakultasPut');
     //DATA USER
     Route::get('users', 'AdminController@index')->name('users');
     Route::get('users/tambah/', 'AdminController@tambahUser')->name('tambah');
