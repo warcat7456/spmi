@@ -16,7 +16,16 @@ class CreateL3STable extends Migration
         Schema::create('l3_s', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('l2_id');
+            $table->unsignedBigInteger('l2_id');
+            $table->foreign('l2_id')
+                ->references('id')
+                ->on('l2_s')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('jenjang_id');
+            $table->foreign('jenjang_id')
+                ->references('id')
+                ->on('jenjangs')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

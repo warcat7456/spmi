@@ -14,10 +14,14 @@ class Prodi extends Migration
     public function up()
     {
         Schema::create('prodis', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name');
             $table->string('kode');
-            $table->string('jenjang_id');
+            $table->unsignedBigInteger('jenjang_id');
+            $table->foreign('jenjang_id')
+                ->references('id')
+                ->on('jenjangs')
+                ->onDelete('cascade');
         });
     }
 
@@ -28,6 +32,6 @@ class Prodi extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('prodis');
     }
 }

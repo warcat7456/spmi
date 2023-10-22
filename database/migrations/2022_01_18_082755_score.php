@@ -14,10 +14,14 @@ class Score extends Migration
     public function up()
     {
         Schema::create('scores', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name');
-            $table->string('value');
-            $table->bigInteger('indikator_id');
+            $table->decimal('value', 3, 2)->default(0.00);
+            $table->unsignedBigInteger('indikator_id');
+            $table->foreign('indikator_id')
+                ->references('id')
+                ->on('indikators')
+                ->onDelete('cascade');
         });
     }
 
@@ -28,6 +32,6 @@ class Score extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('scores');
     }
 }

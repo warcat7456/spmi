@@ -16,6 +16,11 @@ class CreateL1STable extends Migration
         Schema::create('l1_s', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('jenjang_id');
+            $table->foreign('jenjang_id')
+                ->references('id')
+                ->on('jenjangs')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

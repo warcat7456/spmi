@@ -14,8 +14,12 @@ class Indikator extends Migration
     public function up()
     {
         Schema::create('indikators', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('element_id');
+            $table->id();
+            $table->unsignedBigInteger('jenjang_id');
+            $table->foreign('jenjang_id')
+                ->references('id')
+                ->on('jenjangs')
+                ->onDelete('cascade');
             $table->string('dec');
         });
     }
@@ -27,6 +31,6 @@ class Indikator extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('indikators');
     }
 }

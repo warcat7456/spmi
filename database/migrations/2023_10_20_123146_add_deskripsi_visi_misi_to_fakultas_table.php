@@ -15,8 +15,8 @@ class AddDeskripsiVisiMisiToFakultasTable extends Migration
     {
         Schema::table('fakultas', function (Blueprint $table) {
             $table->text('deskripsi')->nullable();
-            $table->string('visi', 255)->nullable();
-            $table->string('misi', 255)->nullable();
+            $table->text('visi')->nullable();
+            $table->text('misi')->nullable();
             $table->string('foto')->nullable();
         });
     }

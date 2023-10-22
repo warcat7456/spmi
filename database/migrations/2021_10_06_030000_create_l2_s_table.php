@@ -16,7 +16,16 @@ class CreateL2STable extends Migration
         Schema::create('l2_s', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('l1_id');
+            $table->unsignedBigInteger('l1_id');
+            $table->foreign('l1_id')
+                ->references('id')
+                ->on('l1_s')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('jenjang_id');
+            $table->foreign('jenjang_id')
+                ->references('id')
+                ->on('jenjangs')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
