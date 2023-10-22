@@ -65,8 +65,8 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#sub-butir" aria-expanded="true"
-            aria-controls="sub-butir">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#sub-butir"
+            aria-expanded="true" aria-controls="sub-butir">
             <i class="fa-solid fa-folder-tree"></i>
             <span>Sub Butir Kriteria</span>
         </a>
@@ -80,8 +80,8 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#indikator" aria-expanded="true"
-            aria-controls="indikator">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#indikator"
+            aria-expanded="true" aria-controls="indikator">
             <i class="fa-solid fa-chart-bar"></i>
             <span>Indikator Penilaian</span></a>
         </a>
@@ -121,14 +121,20 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="{{ route('halaman-statis.index') }}">
+            <i class="fa-solid fa-file"></i>
+            <span>Halaman Statis</span>
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="{{ route('users') }}">
             <i class="fa-solid fa-user-plus"></i>
             <span>Tambah User</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pengaturan" aria-expanded="true"
-            aria-controls="pengaturan">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pengaturan"
+            aria-expanded="true" aria-controls="pengaturan">
             <i class="fas fa-fw fa-cog"></i>
             <span>Pengaturan</span>
         </a>
@@ -142,12 +148,12 @@
         </div>
     </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+    <li class <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
 
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
 
 </ul>
