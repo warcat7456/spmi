@@ -195,6 +195,7 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Prodi,UP
 Route::post('dropdownlist/getJen', 'dropdownController@getJen')->name('getJen');
 Route::post('dropdownlist/getPro', 'dropdownController@getPro')->name('getPro');
 Route::post('dropdownlist/getIndikator', 'dropdownController@getIndikator')->name('getInd');
+Route::post('dropdownlist/searchIndikator', 'dropdownController@searchIndikator')->name('searchIndikator');
 Route::post('dropdownlist/getScore', 'dropdownController@getScore')->name('getScore');
 Route::post('dropdownlist/getl1', 'dropdownController@getL1')->name('l1');
 Route::post('dropdownlist/getl2', 'dropdownController@getL2')->name('l2');

@@ -43,7 +43,16 @@ class dropdownController extends Controller
             echo "<option value='" . $i->id . "'>" . $i->dec . "</option>";
         }
     }
-
+    public function searchIndikator(Request $request)
+    {
+        $indk = Ind::where('jenjang_id', $request->jen)->get();
+        dd($indk);
+        $data = Ind::where('jenjang_id', $request->jenjang_id)->get();
+        echo "<option value=''>=== SILAHKAN PILIH INDIKATOR === </option>";
+        foreach ($data as $i) {
+            echo "<option value='" . $i->id . "'>" . $i->dec . "</option>";
+        }
+    }
     public function getScore(Request $request)
     {
         $data = Score::where('indikator_id', $request->ind_id)->get();
@@ -52,7 +61,6 @@ class dropdownController extends Controller
             echo "<div class='form-check'><input class='form-check-input' type='radio' name='score' value='" . $i->value . "'>
             <label class='form-check-label' >" . $i->name . "</label></div>";
         }
-
     }
 
     public function getL1(Request $request)
@@ -76,7 +84,6 @@ class dropdownController extends Controller
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
-
     }
 
     public function getL3(Request $request)
@@ -88,7 +95,6 @@ class dropdownController extends Controller
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
-
     }
 
     public function getL4(Request $request)
@@ -100,7 +106,6 @@ class dropdownController extends Controller
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
-
     }
 
     // Untuk Tambah DropDown Tidak Multiple #FormEdit
@@ -128,7 +133,6 @@ class dropdownController extends Controller
         $fl2 = L2::where('id', $l2)->first();
         echo "<option value='" . $fl2->id . "'>" . $fl2->name . "</option>";
         echo "<option value=''>=== FILE DAPAT DI UBAH SETELAH LEVEL ATAS DI ISI === </option>";
-
     }
 
     public function getL3ne(Request $request)
@@ -140,7 +144,6 @@ class dropdownController extends Controller
         $fl3 = L3::where('id', $l3)->first();
         echo "<option value='" . $fl3->id . "'>" . $fl3->name . "</option>";
         echo "<option value=''>=== FILE DAPAT DI UBAH SETELAH LEVEL ATAS DI ISI === </option>";
-
     }
 
     public function getL4ne(Request $request)
@@ -152,7 +155,6 @@ class dropdownController extends Controller
         $fl4 = L4::where('id', $l4)->first();
         echo "<option value='" . $fl4->id . "'>" . $fl4->name . "</option>";
         echo "<option value=''>=== FILE DAPAT DI UBAH SETELAH LEVEL ATAS DI ISI === </option>";
-
     }
 
     // Untuk Tambah DropDown Tidak Multiple #FormCari
@@ -174,7 +176,6 @@ class dropdownController extends Controller
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
-
     }
 
     public function getL2n(Request $request)
@@ -187,7 +188,6 @@ class dropdownController extends Controller
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
-
     }
 
     public function getL3n(Request $request)
@@ -200,7 +200,6 @@ class dropdownController extends Controller
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
-
     }
 
     public function getL4n(Request $request)
@@ -213,7 +212,6 @@ class dropdownController extends Controller
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
-
     }
 
     // Untuk Tambah DropDown Tidak Multiple #FormEdit Level
@@ -235,7 +233,6 @@ class dropdownController extends Controller
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
-
     }
 
     public function getL2u(Request $request)
@@ -248,7 +245,6 @@ class dropdownController extends Controller
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
-
     }
 
     public function getL3u(Request $request)
@@ -261,7 +257,6 @@ class dropdownController extends Controller
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
-
     }
 
     public function getL4u(Request $request)
@@ -274,6 +269,5 @@ class dropdownController extends Controller
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
-
     }
 }
