@@ -16,6 +16,12 @@ class DashboardController extends Controller
                 'p' => $prodi,
                 'edit' => false
             ]);
+        } else if (Auth::user()->role == 'Admin') {
+            $prodi = Prodi::all();
+            return view('dashboard.index', [
+                'p' => $prodi,
+                'edit' => false
+            ]);
         } else {
 
             return view('dashboard.index', [

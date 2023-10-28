@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card mb-3">
-                    <img src="{{ route('showimage', ['filename' => $p->foto]) }}" alt="Deskripsi Gambar">
+                    <img src="{{ $p->foto ? route('showimage', ['filename' => $p->foto]) : '' }}" alt="Deskripsi Gambar">
                 </div>
 
                 <!-- Visi -->

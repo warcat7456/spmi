@@ -242,7 +242,7 @@ function filter($arr, $cond)
 // arr: [{a: '###', b: 'wp'}, {a: 'gg', b: '###'}, {a: 'yy', b: '###'}]
 // value: ###
 // output: [{a: 'gg'}, {b: 'tt'}, {a: 'yy''}]
-function deleteColumnWhere($arr = array(), $value)
+function deleteColumnWhere($value, $arr = array())
 {
     $ret = array();
     foreach ($arr as $a) {
