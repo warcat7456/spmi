@@ -210,7 +210,7 @@ Route::post('dropdownlist/getl4ne', 'dropdownController@getL4ne')->name('l4ne');
 //
 // p
 //login
-//NO MULTIPLE [Sub Butir L2 - L4]
+//NO MULTIPLE [Sub Butir L2 - L9]
 Route::post('dropdownlist/getjn', 'dropdownController@getjn')->name('jn');
 Route::post('dropdownlist/getl1n', 'dropdownController@getL1n')->name('l1n');
 Route::post('dropdownlist/getl2n', 'dropdownController@getL2n')->name('l2n');
