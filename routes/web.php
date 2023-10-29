@@ -1,7 +1,5 @@
 <?php
 
-use App\Jenjang;
-use App\Prodi;
 use Illuminate\Support\Facades\Route;
 
 //Auth
@@ -32,64 +30,54 @@ Route::get('diagram/login', function () {
 Route::get('diagram/{prodi:kode}', 'HomeController@radarDiagram');
 
 Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Prodi,UPPS,Mahasiswa,Alumni,Auditor'])->group(function () {
-    //GET PRODI AND JENJANG
-    $j = Jenjang::get();
-    $p = Prodi::get();
 
     //DASHBOARD
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
-    //Jenjang
-    foreach ($j as $jenjang) {
-        Route::get('kriteria/' . $jenjang->kode, 'KriteriaController@index')->name($jenjang->kode);
-    }
+    /**
+     * perbaikan route yang perlu get data terlebih dahulu
+     * hal ini dapat menyebabkan running artisan tidak dapat dijalankan
+     * sebelum data di database terinisiasi
+     */
+    Route::get('kriteria/{jenjang}', 'KriteriaController@show')->name('jenjang');
 
     //Prodi
-    foreach ($p as $prodi) {
-        Route::get('prodi/' . $prodi->kode, 'ProdiController@index')->name($prodi->kode);
-        Route::get('prodi/profil/{prodi:kode}', 'ProdiController@profil')->name('profil-prodi');
-        Route::get('prodi/{prodi:kode}/{any}', 'ProdiController@butir');
-    }
+    Route::get('prodi/{prodi}', 'ProdiController@index')->name("prodis");
+    Route::get('prodi/profil/{prodi:kode}', 'ProdiController@profil')->name('profil-prodi');
+    Route::get('prodi/{prodi:kode}/{any}', 'ProdiController@butir');
 
     // Edit Profil Prodi
     Route::get('edit-profil-prodi', 'ProdiController@editprofil')->name('edit-profil-prodi');
     Route::put('edit-profil-prodi/put/{prodi}', 'ProdiController@editprofilPut');
+
     //C1
     Route::post('kriteria/store', 'KriteriaController@store');
     Route::delete('kriteria/hapus/{l1}', 'KriteriaController@hapus');
     Route::put('kriteria/put/{l1}', 'KriteriaController@put');
 
     //C1.x
-    foreach ($j as $jenjang) {
-        Route::get('sub-kriteria/l2/' . $jenjang->kode, 'Level2Controller@sort');
-    }
+    Route::get('sub-kriteria/l2/{jenjang}', 'Level2Controller@sort')->name('l2-jenjang');
     Route::get('sub-kriteria/l2', 'Level2Controller@index')->name('level2');
     Route::post('sub-kriteria/l2/post', 'Level2Controller@store');
     Route::delete('sub-kriteria/l2/hapus/{l2}', 'Level2Controller@hapus');
     Route::put('sub-kriteria/l2/put/{l2}', 'Level2Controller@put');
 
     //C1.x.x
-    foreach ($j as $jenjang) {
-        Route::get('sub-kriteria/l3/' . $jenjang->kode, 'Level3Controller@sort');
-    }
+    Route::get('sub-kriteria/l3/{jenjang}', 'Level3Controller@sort')->name('l3-jenjang');
     Route::get('sub-kriteria/l3', 'Level3Controller@index')->name('level3');
     Route::post('sub-kriteria/l3/post', 'Level3Controller@store');
     Route::delete('sub-kriteria/l3/hapus/{l3}', 'Level3Controller@hapus');
     Route::put('sub-kriteria/l3/put/{l3}', 'Level3Controller@put');
 
     //C1.x.x
-    foreach ($j as $jenjang) {
-        Route::get('sub-kriteria/l4/' . $jenjang->kode, 'Level4Controller@sort');
-    }
+    Route::get('sub-kriteria/l4/{jenjang}', 'Level4Controller@sort')->name('l4-jenjang');
     Route::get('sub-kriteria/l4', 'Level4Controller@index')->name('level4');
     Route::post('sub-kriteria/l4/post', 'Level4Controller@store');
     Route::delete('sub-kriteria/l4/hapus/{l4}', 'Level4Controller@hapus');
     Route::put('sub-kriteria/l4/put/{l4}', 'Level4Controller@put');
 
     //Indikator
-    foreach ($j as $jenjang) {
-        Route::get('indikator/' . $jenjang->kode, 'IndikatorController@index')->name('indikator-' . $jenjang->kode);
-    }
+    Route::get('indikator/{jenjang}', 'IndikatorController@index')->name('indikator-jenjang');
     Route::post('indikator/store', 'IndikatorController@store');
     Route::get('indikator/input-score/{indikator}', 'IndikatorController@inputScore');
     Route::post('indikator/store-score', 'IndikatorController@storeScore');
@@ -106,10 +94,7 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Prodi,UP
     Route::put('indikator/score/put/{score}', 'IndikatorController@putScore');
 
     //Element
-    // dd($p);
-    foreach ($p as $prodi) {
-        Route::get('element/' . $prodi->kode, 'ElementController@index')->name('element-' . $prodi->kode);
-    }
+    Route::get('element/{prodi}', 'ElementController@index')->name('element-prodi');
     Route::get('element/tambah', 'ElementController@tambahElement')->name('tambah-element');
     Route::post('element/store', 'ElementController@store');
 
@@ -143,7 +128,8 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Prodi,UP
     Route::get('berkas/edit/{berkas}', 'BerkasController@edit');
     Route::put('berkas/put/{berkas}', 'BerkasController@put');
 
-    //Pengaturan
+    // TODO: Penamaan controller harusnya berbeda antara satu route dengan yang lain supaya tidak ada konflik
+    // Pengaturan
     Route::get('jenjang-pendidkan', 'PengaturanController@jenjang')->name('jenjang');
     Route::post('jenjang-pendidikan/post', 'PengaturanController@jenjangPost');
     Route::delete('jenjang-pendidikan/hapus/{jenjang}', 'PengaturanController@jenjangDelete');
@@ -207,8 +193,7 @@ Route::post('dropdownlist/getl1ne', 'dropdownController@getL1ne')->name('l1ne');
 Route::post('dropdownlist/getl2ne', 'dropdownController@getL2ne')->name('l2ne');
 Route::post('dropdownlist/getl3ne', 'dropdownController@getL3ne')->name('l3ne');
 Route::post('dropdownlist/getl4ne', 'dropdownController@getL4ne')->name('l4ne');
-//
-// p
+
 //NO MULTIPLE [Sub Butir L2 - L3]
 Route::post('dropdownlist/getjn', 'dropdownController@getjn')->name('jn');
 Route::post('dropdownlist/getl1n', 'dropdownController@getL1n')->name('l1n');
@@ -222,6 +207,3 @@ Route::post('dropdownlist/getl1nu', 'dropdownController@getL1nu')->name('l1nu');
 Route::post('dropdownlist/getl2nu', 'dropdownController@getL2nu')->name('l2nu');
 Route::post('dropdownlist/getl3nu', 'dropdownController@getL3nu')->name('l3nu');
 Route::post('dropdownlist/getl4nu', 'dropdownController@getL4nu')->name('l4nu');
-//
-
-// editan baru
