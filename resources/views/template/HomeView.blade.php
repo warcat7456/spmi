@@ -104,7 +104,7 @@
                     </li>
                     <li>
                         @if (Auth::guest())
-                            <a class="getstarted scrollto" href="{{ route('login') }}">Login Admin</a>
+                            <a class="getstarted scrollto" href="{{ route('login') }}">Login</a>
                         @else
                             <a class="getstarted scrollto" href="{{ route('dashboard') }}">Dashboard</a>
                         @endif
