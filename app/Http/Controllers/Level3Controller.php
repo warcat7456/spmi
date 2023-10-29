@@ -63,10 +63,9 @@ class Level3Controller extends Controller
         return redirect()->to($request->rollbackUrl);
     }
 
-    public function sort(Request $request)
+    public function sort(Request $request, $jenjang)
     {
-        $kode = basename($request->path());
-        $v = Jenjang::where('kode', $kode)->first();
+        $v = Jenjang::where('kode', $jenjang)->first();
         $c = L3::where('jenjang_id', $v->id)->orderBy('id', 'ASC')->get();
 
         return view('sub-kriteria.l3-sort', [

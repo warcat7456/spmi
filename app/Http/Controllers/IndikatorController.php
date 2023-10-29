@@ -9,16 +9,14 @@ use Illuminate\Http\Request;
 
 class IndikatorController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $jenjang)
     {
-        $kode = basename($request->path());
-        $jenjang = Jenjang::where('kode', $kode)->first();
-        $indikator = Indikator::where('jenjang_id', $jenjang->id)->orderBy('id', 'ASC')->get();
+        $j = Jenjang::where('kode', $jenjang)->first();
+        $indikator = Indikator::where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get();
         return view('indikator.index', [
             'd' => $indikator,
-            'j' => $jenjang,
+            'j' => $j,
         ]);
-
     }
 
     public function store(Request $request)

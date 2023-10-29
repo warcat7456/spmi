@@ -16,10 +16,9 @@ class Level2Controller extends Controller
         ]);
     }
 
-    public function sort(Request $request)
+    public function sort(Request $request, $jenjang)
     {
-        $kode = basename($request->path());
-        $v = Jenjang::where('kode', $kode)->first();
+        $v = Jenjang::where('kode', $jenjang)->first();
         $c = L2::where('jenjang_id', $v->id)->orderBy('id', 'ASC')->get();
 
         return view('sub-kriteria.l2-sort', [
@@ -43,7 +42,7 @@ class Level2Controller extends Controller
         </button>
         <strong>Data Berhasil Ditambahkan</strong>
     </div>');
-    return redirect()->to($request->rollbackUrl);
+        return redirect()->to($request->rollbackUrl);
     }
 
     public function hapus(L2 $l2)
@@ -72,6 +71,6 @@ class Level2Controller extends Controller
         </button>
         <strong>Data Berhasil Diperbaharui</strong>
     </div>');
-    return redirect()->to($request->rollbackUrl);
+        return redirect()->to($request->rollbackUrl);
     }
 }

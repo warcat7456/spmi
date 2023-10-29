@@ -63,10 +63,9 @@ class Level4Controller extends Controller
         return redirect()->to($request->rollbackUrl);
     }
 
-    public function sort(Request $request)
+    public function sort(Request $request, $jenjang)
     {
-        $kode = basename($request->path());
-        $v = Jenjang::where('kode', $kode)->first();
+        $v = Jenjang::where('kode', $jenjang)->first();
         $c = L4::where('jenjang_id', $v->id)->orderBy('id', 'ASC')->get();
 
         return view('sub-kriteria.l4-sort', [

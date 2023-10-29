@@ -20,6 +20,18 @@ class KriteriaController extends Controller
         ]);
     }
 
+    // Menampilkan per jenjang
+    public function show($jenjang)
+    {
+        $j = Jenjang::where('kode', $jenjang)->first();
+        $c = L1::where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get();
+
+        return view('kriteria.index', [
+            'j' => $j,
+            'c' => $c,
+        ]);
+    }
+
     public function store(Request $request)
     {
         $url = $request->url;
