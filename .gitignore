@@ -16,3 +16,5 @@ yarn-error.log
 LICENSE
 .zshrc
 .vscode
+psysh_history
+init_db.sql
