@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a href="{{ url('indikator/' . $j->kode) }}" class="btn btn-secondary">
+                            <a href="{{ route('indikator-jenjang', $j->kode) }}" class="btn btn-secondary">
                                 Kembali
                             </a>
                             <button type="submit" class="btn btn-primary">Save</button>
@@ -29,10 +29,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 @endsection
 @section('script')
     <script>

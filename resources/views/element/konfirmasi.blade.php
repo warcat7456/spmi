@@ -7,7 +7,7 @@
                 <hr>
                 @if (($element->l2_id == 0) & ($element->l3_id == 0) & ($element->l4_id == 0))
                     <b>{{ $element->l1->name }}</b><br>
-                @elseif($element->l3_id == 0 & $element->l4_id == 0)
+                @elseif(($element->l3_id == 0) & ($element->l4_id == 0))
                     <b>{{ $element->l1->name }}</b><br>
                     {{ $element->l2->name }}
                 @elseif($element->l4_id == 0)
@@ -30,7 +30,7 @@
                 <form action="/element/delete/{{ $element->id }}" method="post" class="in-line form">
                     @csrf
                     @method('DELETE')
-                    <a href="{{ url('element/' . $prodi->kode) }}" class="btn btn-info btn-sm">
+                    <a href="{{ route('element-prodi', $prodi->kode) }}" class="btn btn-info btn-sm">
                         Kembali
                     </a>
                     <button type="submit" class="btn btn-danger btn-sm">

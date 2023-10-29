@@ -44,8 +44,8 @@
                                     </tr>
 
                                     {{-- EDIT DATA --}}
-                                    <div class="modal fade" id="modelEdit{{ $i->id }}" tabindex="-1"
-                                        role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                    <div class="modal fade" id="modelEdit{{ $i->id }}" tabindex="-1" role="dialog"
+                                        aria-labelledby="modelTitleId" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <form action="/sub-kriteria/l4/put/{{ $i->id }}" method="POST">
                                                 <div class="modal-content">
@@ -69,17 +69,20 @@
                                                             <label>Level 1</label>
                                                             <input type="text" name="rollbackUrl"
                                                                 value="{{ request()->url() }}" hidden>
-                                                            <select class="form-control" name="l1_id" id="l1u" required>
+                                                            <select class="form-control" name="l1_id" id="l1u"
+                                                                required>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Level 2</label>
-                                                            <select class="form-control" name="l2_id" id="l2u" required>
+                                                            <select class="form-control" name="l2_id" id="l2u"
+                                                                required>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Level 3</label>
-                                                            <select class="form-control" name="l3_id" id="l3u" required>
+                                                            <select class="form-control" name="l3_id" id="l3u"
+                                                                required>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -104,8 +107,8 @@
                                     </div>
 
                                     {{-- HAPUS DATA --}}
-                                    <div class="modal fade" id="modelHapus{{ $i->id }}" tabindex="-1"
-                                        role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                    <div class="modal fade" id="modelHapus{{ $i->id }}" tabindex="-1" role="dialog"
+                                        aria-labelledby="modelTitleId" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <form action="/sub-kriteria/l4/hapus/{{ $i->id }}" method="post">
                                                 <div class="modal-content">
@@ -157,7 +160,7 @@
                     <h5 class="card-title">Jenjang Pendidikan</h5>
                     <ul>
                         @foreach ($j as $i)
-                            <li><a href="{{ url('/sub-kriteria/l4/' . $i->kode) }}">{{ $i->kode }}</a></li>
+                            <li><a href="{{ route('l4-jenjang', $i->kode) }}">{{ $i->kode }}</a></li>
                         @endforeach
 
                     </ul>
@@ -218,7 +221,6 @@
             </form>
         </div>
     </div>
-
 @endsection
 @section('script')
     <script>

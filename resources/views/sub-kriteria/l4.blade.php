@@ -16,7 +16,7 @@
                                             <div class="col mr-2">
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col-auto">
-                                                        <a href="{{ url('/sub-kriteria/l4/' . $i->kode) }}"
+                                                        <a href="{{ route('l4-jenjang', $i->kode) }}"
                                                             class="h7 mb-0 mr-3 font-weight-bold text-info text-uppercase">
                                                             {{ $i->name }}</a>
                                                     </div>
@@ -37,7 +37,4 @@
         </div>
 
     </div>
-
-
-
 @endsection

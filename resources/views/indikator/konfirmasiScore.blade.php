@@ -11,7 +11,7 @@
                 <form action="/indikator/score-hapus/{{ $s->id }}" method="post" class="in-line form">
                     @csrf
                     @method('DELETE')
-                    <a href="{{ url('indikator/' . $j->kode) }}" class="btn btn-info btn-sm">
+                    <a href="{{ route('indikator-jenjang', $j->kode) }}" class="btn btn-info btn-sm">
                         Kembali
                     </a>
                     <button type="submit" class="btn btn-danger btn-sm">
