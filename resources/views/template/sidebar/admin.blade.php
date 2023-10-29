@@ -42,7 +42,7 @@
         <div id="prodi" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['p'] as $pr)
-                    <a class="collapse-item" href="{{ route($pr->kode) }}">{{ $pr->name }}</a>
+                    <a class="collapse-item" href="{{ route('prodis', $pr->kode) }}">{{ $pr->name }}</a>
                 @endforeach
             </div>
         </div>
@@ -58,7 +58,7 @@
         <div id="jenjang" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['j'] as $jn)
-                    <a class="collapse-item" href="{{ route($jn->kode) }}">{{ $jn->name }}</a>
+                    <a class="collapse-item" href="{{ route('jenjang', $jn->kode) }}">{{ $jn->name }}</a>
                 @endforeach
             </div>
         </div>
@@ -88,7 +88,7 @@
         <div id="indikator" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['j'] as $j)
-                    <a class="collapse-item" href="{{ route('indikator-' . $j->kode) }}">{{ $j->name }}</a>
+                    <a class="collapse-item" href="{{ route('indikator-jenjang', $j->kode) }}">{{ $j->name }}</a>
                 @endforeach
             </div>
         </div>
@@ -103,7 +103,7 @@
         <div id="element" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['p'] as $pr)
-                    <a class="collapse-item" href="{{ route('element-' . $pr->kode) }}">{{ $pr->name }}</a>
+                    <a class="collapse-item" href="{{ route('element-prodi', $pr->kode) }}">{{ $pr->name }}</a>
                 @endforeach
             </div>
         </div>
@@ -120,12 +120,14 @@
             <span>Multi Search</span>
         </a>
     </li>
-    <li class="nav-item">
+
+    {{-- //TODO: Aktifkan link halaman statis apabila fitur/fungsinya sudah berjalan --}}
+    {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('halaman-statis.index') }}">
             <i class="fa-solid fa-file"></i>
             <span>Halaman Statis</span>
         </a>
-    </li>
+    </li> --}}
     <li class="nav-item">
         <a class="nav-link" href="{{ route('users') }}">
             <i class="fa-solid fa-user-plus"></i>
@@ -144,17 +146,17 @@
                 <a class="collapse-item" href="{{ route('prodi') }}">Program Studi</a>
                 <a class="collapse-item" href="{{ route('fakultas') }}">Fakultas</a>
                 <a class="collapse-item" href="{{ route('target') }}">Target Pencapaian</a>
-                <!--<a class="collapse-item" href="{{ route('users') }}">Tambah User</a>-->
+                {{-- <a class="collapse-item" href="{{ route('users') }}">Tambah User</a> --}}
             </div>
         </div>
     </li>
 
-    <li class <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
 
-        <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
 
 </ul>
