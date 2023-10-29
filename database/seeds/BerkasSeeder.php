@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class FakultasSeeder extends Seeder
+class BerkasSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,7 @@ class FakultasSeeder extends Seeder
     public function run()
     {
         // Define the path to your SQL file
-        $sqlFilePath = database_path('seeds/fakultas-data.sql');
+        $sqlFilePath = database_path('seeds/berkas-data.sql');
 
         // Check if the file exists
         if (file_exists($sqlFilePath)) {
