@@ -11,14 +11,13 @@ use Illuminate\Http\Request;
 
 class ElementController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $prodi)
     {
-        $kode = basename($request->path());
-        $prodi = Prodi::where('kode', $kode)->first();
-        $element = Element::where('prodi_id', $prodi->id)->get();
+        $p = Prodi::where('kode', $prodi)->first();
+        $element = Element::where('prodi_id', $p->id)->get();
 
         return view('element.index', [
-            'p' => $prodi,
+            'p' => $p,
             'e' => $element,
             'count_element' => $element->count(),
             'count_berkas' => $element->sum("count_berkas"),

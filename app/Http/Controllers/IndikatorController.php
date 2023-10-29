@@ -116,8 +116,7 @@ class IndikatorController extends Controller
         </button>
         <strong>Data Berhasil Ditambahkan</strong>
     </div>');
-        return redirect()->route('indikator-' . $jenjang->kode);
-        // return redirect()->to('indikator/' . $jenjang->kode);
+        return redirect()->route('indikator-jenjang', $jenjang->kode);
     }
 
     public function cekScore(Indikator $indikator)
