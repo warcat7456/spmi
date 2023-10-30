@@ -10,8 +10,9 @@ class DashboardController extends Controller
     public function index()
     {
         if (Auth::user()->role == 'Prodi') {
+            // dd(Auth::user());
             $prodi = Prodi::where('kode', Auth::user()->prodi_kode)->get()[0];
-            // dd($prodi);
+            // // dd($prodi);
             return view('prodi.profil', [
                 'p' => $prodi,
                 'edit' => false
