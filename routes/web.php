@@ -23,6 +23,8 @@ Route::post('single-search/hasil', 'HomeController@hasilsingleSearch');
 Route::get('multiple-search', 'HomeController@multiSearch')->name('multipleSearch');
 Route::post('multi-search/hasil', 'HomeController@hasilmultiSearch');
 
+Route::get('search-kriteria/{lv}/{id}', 'KriteriaController@search');
+
 Route::get('diagram', 'HomeController@diagram')->name('diagram');
 Route::get('diagram/login', function () {
     return redirect()->route('login');
@@ -39,7 +41,8 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Prodi,UP
      * hal ini dapat menyebabkan running artisan tidak dapat dijalankan
      * sebelum data di database terinisiasi
      */
-    Route::get('kriteria/{jenjang}', 'KriteriaController@show')->name('jenjang');
+    Route::get('kriteria/{jenjang}', 'KriteriaController@detail')->name('jenjang');
+    Route::get('kriteria/', 'KriteriaController@index')->name('kriteria');
 
     //Prodi
     Route::get('prodi/{prodi}', 'ProdiController@index')->name("prodis");

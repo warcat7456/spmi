@@ -47,6 +47,13 @@
         </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('kriteria') }}">
+            <i class="fa-solid fa-folder"></i>
+            <span>Kriteria</span>
+        </a>
+    </li>
+
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#jenjang" aria-expanded="true" aria-controls="jenjang">
