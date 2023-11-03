@@ -177,6 +177,11 @@
     <!-- Page level plugins -->
     <script src="{{ asset('portal/vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('portal/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- ex -->
+    <link href="https://cdn.datatables.net/rowgroup/1.0.2/css/rowGroup.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('dist/ckeditor/ckeditor.js') }}"></script>
 

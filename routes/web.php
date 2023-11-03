@@ -24,6 +24,8 @@ Route::post('single-search/hasil', 'HomeController@hasilsingleSearch');
 Route::get('multiple-search', 'HomeController@multiSearch')->name('multipleSearch');
 Route::post('multi-search/hasil', 'HomeController@hasilmultiSearch');
 
+Route::get('search-kriteria/{lv}/{id}', 'KriteriaController@search');
+
 Route::get('diagram', 'HomeController@diagram')->name('diagram');
 Route::get('diagram/login', function () {
     return redirect()->route('login');
@@ -40,7 +42,11 @@ Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
      * hal ini dapat menyebabkan running artisan tidak dapat dijalankan
      * sebelum data di database terinisiasi
      */
-    Route::get('kriteria/{jenjang}', 'KriteriaController@show')->name('jenjang');
+    Route::get('kriteria/{jenjang}', 'KriteriaController@detail')->name('jenjang');
+    Route::get('kriteria/', 'KriteriaController@index')->name('kriteria');
+    Route::delete('kriteria/delete', 'KriteriaController@delete');
+    Route::put('kriteria/rubah', 'KriteriaController@rubah');
+    Route::post('kriteria/tambahbaru', 'KriteriaController@tambah');
 
     // Static Page (halaman statis/profil)
     Route::resource('halaman', 'StaticPageController')->except(['show']);
