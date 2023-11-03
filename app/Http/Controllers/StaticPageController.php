@@ -54,6 +54,11 @@ class StaticPageController extends Controller
         return view('home.profil', ['page' => $page]);
     }
 
+    public function detail(StaticPage $page)
+    {
+        return response()->json(['page' => $page]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -95,7 +100,7 @@ class StaticPageController extends Controller
     }
     public function datatable(Request $request)
     {
-        $query = StaticPage::query(); // Replace YourModel with your actual Eloquent model
+        $query = StaticPage::query();
 
         // Handle search
         if ($request->filled('search.value')) {

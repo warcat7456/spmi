@@ -45,16 +45,30 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('home/css/style.css') }}" rel="stylesheet">
-    @if (Route::currentRouteName() == 'about')
-        <style>
-            footer {
-                position: absolute;
-                width: 100vw;
-                bottom: 0;
-            }
-        </style>
-    @endif
+    <style>
+        .dropdown-menu>a.active {
+            color: white !important;
+            background: #0082ad;
+        }
 
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+
+        }
+
+        footer {
+            padding: 10px;
+            margin-top: auto;
+        }
+    </style>
+
+    @yield('styles')
 
 </head>
 
@@ -73,21 +87,25 @@
                     <li><a class="nav-link scrollto {{ request()->is('/') ? 'active' : '' }}"
                             href="{{ route('home') }}">Home</a>
                     </li>
-
                     <ul>
-                        <li class="dropdown {{ Route::currentRouteName() == 'about' ? 'active' : '' }} ">
+                        <li class="dropdown">
 
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                About
+                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" aria-expanded="false">
+                                Profil
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Tentang</a>
-                                <a class="dropdown-item" href="#">Tim</a>
-                                <a class="dropdown-item" href="#">Siklus</a>
+                                <a class="dropdown-item {{ request()->segment(2) === 'tentang' ? 'active text-white' : '' }}"
+                                    href="{{ route('home.static-page', 'tentang') }}">Tentang</a>
+                                <a class="dropdown-item {{ request()->segment(2) === 'visi-misi' ? 'active text-white' : '' }}"
+                                    href="{{ route('home.static-page', 'visi-misi') }}">Visi & Misi</a>
+                                <a class="dropdown-item {{ request()->segment(2) === 'struktur' ? 'active text-white' : '' }}"
+                                    href="{{ route('home.static-page', 'struktur') }}">Struktur</a>
+                                <a class="dropdown-item {{ request()->segment(2) === 'ppep' ? 'active text-white' : '' }}"
+                                    href="{{ route('home.static-page', 'ppep') }}">PPEP</a>
+                                <a class="dropdown-item {{ request()->segment(2) === 'hubungi-kami' ? 'active text-white' : '' }}"
+                                    href="{{ route('home.static-page', 'hubungi-kami') }}">Hubungi Kami</a>
                             </div>
 
-                            {{-- <a class="{{ Route::currentRouteName() == 'about' ? 'active' : '' }}"
-                                href="{{ route('about') }}">About </a> --}}
                         </li>
                         <li><a href="#">Galeri</a></li>
                         <li><a href="#">Tutorial</a></li>

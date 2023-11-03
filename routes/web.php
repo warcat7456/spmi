@@ -50,6 +50,7 @@ Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
 
     // Static Page (halaman statis/profil)
     Route::resource('halaman', 'StaticPageController')->except(['show']);
+    Route::get('detail-halaman/{page}', 'StaticPageController@detail')->name('halaman.detail');
     Route::get('datatable-halaman', 'StaticPageController@datatable')->name('halaman.datatable');
 
     //Prodi
