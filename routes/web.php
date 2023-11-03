@@ -43,6 +43,9 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Prodi,UP
      */
     Route::get('kriteria/{jenjang}', 'KriteriaController@detail')->name('jenjang');
     Route::get('kriteria/', 'KriteriaController@index')->name('kriteria');
+    Route::delete('kriteria/delete', 'KriteriaController@delete');
+    Route::put('kriteria/rubah', 'KriteriaController@rubah');
+    Route::post('kriteria/tambahbaru', 'KriteriaController@tambah');
 
     //Prodi
     Route::get('prodi/{prodi}', 'ProdiController@index')->name("prodis");
