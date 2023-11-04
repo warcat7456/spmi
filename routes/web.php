@@ -10,8 +10,9 @@ Route::post('logout', 'AuthController@logout')->name('logout');
 //HOME
 Route::get('/', 'HomeController@index')->name('home');
 
-// ABOUT
-Route::get('/about', 'HomeController@about')->name('about');
+// Halaman Statis
+Route::get('/profil/{slug}', 'StaticPageController@show')->name('home.static-page');
+// Route::get('/about', 'HomeController@about')->name('about');
 
 Route::get('tabel/{prodi:kode}', 'HomeController@tabel');
 Route::get('tabel/berkas/{element}', 'HomeController@berkas');
@@ -31,7 +32,7 @@ Route::get('diagram/login', function () {
 });
 Route::get('diagram/{prodi:kode}', 'HomeController@radarDiagram');
 
-Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Prodi,UPPS,Mahasiswa,Alumni,Auditor'])->group(function () {
+Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
 
     //DASHBOARD
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
@@ -46,6 +47,11 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Prodi,UP
     Route::delete('kriteria/delete', 'KriteriaController@delete');
     Route::put('kriteria/rubah', 'KriteriaController@rubah');
     Route::post('kriteria/tambahbaru', 'KriteriaController@tambah');
+
+    // Static Page (halaman statis/profil)
+    Route::resource('halaman', 'StaticPageController')->except(['show']);
+    Route::get('detail-halaman/{page}', 'StaticPageController@detail')->name('halaman.detail');
+    Route::get('datatable-halaman', 'StaticPageController@datatable')->name('halaman.datatable');
 
     //Prodi
     Route::get('prodi/{prodi}', 'ProdiController@index')->name("prodis");
@@ -170,8 +176,6 @@ Route::middleware(['auth', 'cekRole:Admin,Ketua LPM,Ketua Program Studi,Prodi,UP
     Route::get('data/mahasiswa/tambah/{prodi:kode}', 'MahasiswaController@tambah');
     Route::post('data/mahasiswa/store', 'MahasiswaController@store');
 
-    // Halaman Statis (About SPMI,dll)
-    Route::resource('halaman-statis', 'HalamanStatisController');
     // Show image
     Route::get('/show-image/{filename}', function ($filename) {
         $path = storage_path('app/prodi/' . $filename);

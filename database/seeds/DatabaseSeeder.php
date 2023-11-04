@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // non aktifkan beberapa seeder karna bergantung pada id relasi satu sama lain
+        $this->call(StaticPageSeeder::class);
         $this->call(FakultasSeeder::class);
         $this->call(JenjangSeeder::class);
         // $this->call(IndikatorSeeder::class);
