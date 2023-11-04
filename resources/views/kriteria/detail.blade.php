@@ -122,7 +122,7 @@
 
 </div>
 
-<!-- Modal -->
+
 <div class="modal fade" id="modalKritNew" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form id="krit_form_new">
@@ -136,19 +136,16 @@
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
-                        <!-- <label for="parent">Sub level</label> -->
-                        <!-- <select class="form-control" style="width : 100%" name="parent" id="parent" multiple="multiple">
-                        </select> -->
+
                     </div>
                     <div class="form-group">
                         <label for="">Nama</label>
 
                         <input type="text" name="name" id="name" class="form-control" placeholder="*contoh : C.1.2. Profil Unit" aria-describedby="helpId" required>
-                        <input type="text" name="lv" id="lv" class="form-control" value="">
-                        <input type="text" name="id" id="id" class="form-control" value="">
-                        <input type="text" name="parent" id="parent" class="form-control" value="">
-                        <input type="text" name="jenjang" class="form-control" value="{{ $j->id }}">
-                        <input type="text" name="url" class="form-control" value="{{ request()->url() }}">
+                        <input hidden type="text" name="lv" id="lv" class="form-control" value="">
+                        <input hidden type="text" name="id" id="id" class="form-control" value="">
+                        <input hidden type="text" name="parent" id="parent" class="form-control" value="">
+                        <input hidden type="text" name="jenjang" class="form-control" value="{{ $j->id }}">
                         <small id="helpId" class="text-muted">Nama
                             kode harus di akhiri dengan tanda titik (.) contoh : C.1.3<strong>.</strong>
                         </small>
@@ -184,11 +181,11 @@
                         <label for="">Nama</label>
 
                         <input type="text" name="name" id="name" class="form-control" placeholder="*contoh : C.1.2. Profil Unit" aria-describedby="helpId" required>
-                        <input type="text" name="lv" id="lv" class="form-control" value="">
-                        <input type="text" name="id" id="id" class="form-control" value="">
-                        <input type="text" name="parent" id="parent" class="form-control" value="">
-                        <input type="text" name="jenjang" class="form-control" value="{{ $j->id }}">
-                        <input type="text" name="url" class="form-control" value="{{ request()->url() }}">
+                        <input hidden type="text" name="lv" id="lv" class="form-control" value="">
+                        <input hidden type="text" name="id" id="id" class="form-control" value="">
+                        <input hidden type="text" name="parent" id="parent" class="form-control" value="">
+                        <input hidden type="text" name="jenjang" class="form-control" value="{{ $j->id }}">
+                        <input hidden type="text" name="url" class="form-control" value="{{ request()->url() }}">
                         <small id="helpId" class="text-muted">Nama
                             kode harus di akhiri dengan tanda titik (.) contoh : C.1.3<strong>.</strong>
                         </small>
@@ -233,35 +230,26 @@
 
                 target = $(this).data('target');
                 const curstatus = $(this).data('curstatus');
-                console.log(curstatus);
-                console.log($(target));
                 if (curstatus == 'show') {
+                    $(this)
+                        .find('.fa-eye')
+                        .removeClass("fa-eye")
+                        .addClass("fa-eye-slash");
+
                     $(target).css('display', 'none')
                     $(this).data('curstatus', 'hide');
                 } else {
+                    $(this)
+                        .find('.fa-eye-slash')
+                        .removeClass("fa-eye-slash")
+                        .addClass("fa-eye");
                     $(target).css('display', '')
                     $(this).data('curstatus', 'show');
                 }
-
-                //             .find(".fa-eye")
-                //             .removeClass("fa-eye")
-                //             .addClass("fa-eye-slash");
-
-                //     })
-                // .on('hidden.bs.collapse', function() {
-                //     console.log('close');
-                //     $(this)
-                //         .parent().parent()
-                //         .find(".fa-eye-slash")
-                //         .removeClass("fa-eye-slash")
-                //         .addClass("fa-eye");
             });
 
         var collapsedGroups = {};
         var TKriteria = $('#TKriteria').DataTable({
-            // order: [
-            //     [1, 'asc']
-            // ],
             "paging": false,
             "columns": [{
                     "visible": false
@@ -279,87 +267,7 @@
                 null,
                 null,
             ],
-            // "ordering": false,
-            // rowGroup: {
-            //     // Uses the 'row group' plugin
-            //     dataSrc: 0,
-            //     startRender: function(rows, group) {
-            //         var collapsed = !!collapsedGroups[group];
-
-            //         rows.nodes().each(function(r) {
-            //             r.style.display = collapsed ? 'none' : '';
-            //         });
-
-            //         // Add category name to the <tr>. NOTE: Hardcoded colspan
-            //         return $('<tr/>')
-            //             .append('<td colspan="8">' + group + ' (' + rows.count() + ')</td>')
-            //             .attr('data-name', group)
-            //             .toggleClass('collapsed', collapsed);
-            //     }
-            // }
         });
-        TKriteria.on('click', 'tr.group-start', function() {
-            // var name = $(this).data('name');
-            // collapsedGroups[name] = !collapsedGroups[name];
-            // console.log(collapsedGroups[name]);
-            // TKriteria.draw(false);
-        });
-        var dataKriteria = <?= json_encode($r) ?>;
-        console.log(dataKriteria);
-        // renderKriteria(dataKriteria)
-
-        function renderBtnK(lv, id) {
-            return `
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Action
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="edit dropdown-item" data-id="${id}" data-lv="${lv}" ><i class="mdi mdi-pencil-outline"></i> Edit </a>
-                             <a class="delete dropdown-item text-danger" data-id="${id}" data-lv="${lv}" ><i class="mdi mdi-trash-can-outline"></i> Hapus </a>
-                             </div>
-                        </div>`;
-        }
-
-        function renderKriteria(data) {
-            if (data == null || typeof data != "object") {
-                console.log("User::UNKNOWN DATA");
-                return;
-            }
-            // var i = 0;
-
-
-            var renderData = [];
-            Object.values(data).forEach((d) => {
-                var button = renderBtnK(1, d['id'])
-                renderData.push([
-                    '1', d['kode1'], '', '', '', '',
-                    d['s_name'], button
-                ]);
-
-                Object.values(d['lv2']).forEach((l2) => {
-                    var button = renderBtnK(2, l2['id'])
-                    renderData.push([
-                        '2', l2['kode1'], l2['kode2'], '', '', l2['kode2'], l2['s_name'], button
-                    ]);
-
-                    Object.values(l2['lv3']).forEach((l3) => {
-                        var button = renderBtnK(3, d['id'])
-                        renderData.push([
-                            '3', l3['kode3'], l3['s_name'], button
-                        ]);
-                        Object.values(l3['lv4']).forEach((l4) => {
-                            var button = renderBtnK(4, d['id'])
-                            renderData.push([
-                                '4', l4['kode4'], l4['s_name'], button
-                            ]);
-                        });
-                    });
-                });
-            });
-
-            TKriteria.clear().rows.add(renderData).draw('full-hold');
-        }
 
         $('#CreateNew').on('click', () => {
             console.log('cr');
@@ -382,9 +290,6 @@
             var lv = $(this).data('lv');
             ModalKrit.form.trigger('reset');
 
-            console.log(id)
-            console.log(lv)
-
             swalLoading();
             $.ajax({
                 url: `<?= url('search-kriteria') ?>/${lv}/${id}`,
@@ -399,16 +304,11 @@
                     }
                     var curDat = json['data'];
                     console.log(curDat)
-                    // var user = json['data']
-                    // dataDusun[user['id']] = user;
                     ModalKrit.self.modal('show')
                     ModalKrit.id.val(curDat['id'])
                     ModalKrit.lv.val(curDat['lv'])
                     ModalKrit.kode.val(curDat['kode1'])
                     ModalKrit.name.val(curDat['name'])
-                    // if (curDat['lv'] == 1) {
-                    //     ModalKrit.parent.val('');
-                    // }
                 },
                 error: function(e) {}
             });
@@ -472,8 +372,6 @@
             var id = $(this).data('id');
             var lv = $(this).data('lv');
 
-            console.log(id)
-            console.log(lv)
             Swal.fire(SwalOpt('Apakah anda yakin?', 'data akan dihapus!')).then((result) => {
                 if (!result.isConfirmed) {
                     return;
@@ -502,18 +400,7 @@
             });
 
         });
-        // $("#parent").change(function() {
-        //     var l1_id = $("#l1").val();
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: '<?= route('l2') ?>',
-        //         data: 'l1_id=' + l1_id,
-        //         cache: false,
-        //         success: function(msg) {
-        //             $("#l2").html(msg);
-        //         }
-        //     });
-        // });
+
 
         function swalLoading() {
             Swal.fire({
