@@ -172,11 +172,11 @@ class KriteriaController extends Controller
         if ($req['lv'] == 1) {
             L1::where('id', $req['id'])->update(['name' => $req['name']]);
         } else if ($req['lv'] == 2) {
-            L2::where('id', $req['id'])->delete();
+            L2::where('id', $req['id'])->update(['name' => $req['name']]);
         } else if ($req['lv'] == 3) {
-            L3::where('id', $req['id'])->delete();
+            L3::where('id', $req['id'])->update(['name' => $req['name']]);
         } else if ($req['lv'] == 4) {
-            L4::where('id', $req['id'])->delete();
+            L4::where('id', $req['id'])->update(['name' => $req['name']]);;
         }
         session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
