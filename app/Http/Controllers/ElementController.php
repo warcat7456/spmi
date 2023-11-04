@@ -14,6 +14,7 @@ class ElementController extends Controller
     public function index(Request $request, $prodi)
     {
         $p = Prodi::where('kode', $prodi)->first();
+        // dd
         $element = Element::where('prodi_id', $p->id)->get();
 
         return view('element.index', [
@@ -40,9 +41,9 @@ class ElementController extends Controller
                 $row[] = [
                     'prodi_id' => $request->prodi_id,
                     'l1_id' => $request->l1_id[$i],
-                    'l2_id' => 0,
-                    'l3_id' => 0,
-                    'l4_id' => 0,
+                    // 'l2_id' => 0,
+                    // 'l3_id' => 0,
+                    // 'l4_id' => 0,
                     'bobot' => floatval($request->bobot),
                     'score_berkas' => 0,
                     'score_hitung' => 0,
@@ -56,8 +57,8 @@ class ElementController extends Controller
                     'prodi_id' => $request->prodi_id,
                     'l1_id' => $request->l1_id[$i],
                     'l2_id' => $request->l2_id[$i],
-                    'l3_id' => 0,
-                    'l4_id' => 0,
+                    // 'l3_id' => 0,
+                    // 'l4_id' => 0,
                     'bobot' => floatval($request->bobot),
                     'score_berkas' => 0,
                     'score_hitung' => 0,
@@ -72,7 +73,7 @@ class ElementController extends Controller
                     'l1_id' => $request->l1_id[$i],
                     'l2_id' => $request->l2_id[$i],
                     'l3_id' => $request->l3_id[$i],
-                    'l4_id' => 0,
+                    // 'l4_id' => null,
                     'bobot' => floatval($request->bobot),
                     'score_berkas' => 0,
                     'score_hitung' => 0,
@@ -107,7 +108,7 @@ class ElementController extends Controller
         </button>
         <strong>Element Berhasil Dibuat</strong>
     </div>');
-        return redirect()->route('element-' . $prodi->kode);
+        return redirect()->route('element-prodi', $prodi->kode);
     }
 
     public function unggahBerkas(Element $element)

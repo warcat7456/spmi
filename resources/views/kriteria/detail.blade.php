@@ -5,10 +5,29 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Aksi</h4>
-                <button type="button" class="btn btn-primary btn-sm float-left" id="CreateNew">
-                    Tambah LV 1
-                </button>
+                <form action="{{url('kriteria/'.$j->kode)}}" id="toolbar" method="GET">
+                    <h4 class="card-title">Filter</h4>
+                    <div class="row">
+
+                        <div class="col-3">
+                            <select class="form-control" id="level" name="level">
+                                <option value="">-- Semua Level --</option>
+                                <option value="1">Level 1</option>
+                                <option value="2">Level 2</option>
+                                <option value="3">Level 3</option>
+                                <option value="4">Level 4</option>
+
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <!-- <h4 class="card-title">Aksi</h4> -->
+                            <button type="button" class="btn btn-primary btn-sm float-right" id="CreateNew">
+                                Tambah LV 1
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -32,7 +51,8 @@
                                 <th>Lv4</th>
                                 <th>Kode</th>
                                 <th>Name</th>
-                                <th width="150px">Aksi</th>
+                                <th width="10px">Level</th>
+                                <th width="120px">Aksi</th>
                             </tr>
                         </thead>
 
@@ -63,6 +83,7 @@
                                 <td></td>
                                 <td>{{ $i['kode1'] }}</td>
                                 <td>{{ $i['s_name'] }}</td>
+                                <td>1</td>
                                 <td width="150px">
                                     <?= renderBtnK(1, $i['id'], $i['kode1']) ?>
                                 </td>
@@ -76,6 +97,7 @@
                                 <td></td>
                                 <td>{{ $l2['kode2'] }}</td>
                                 <td>{{ $l2['s_name'] }}</td>
+                                <td>2</td>
                                 <td width="150px">
                                     <?= renderBtnK(2, $l2['id'], $l2['kode2']) ?>
                                 </td>
@@ -90,6 +112,7 @@
                                 <td></td>
                                 <td>{{ $l3['kode3'] }}</td>
                                 <td>{{ $l3['s_name'] }}</td>
+                                <td>3</td>
                                 <td width="150px">
                                     <?= renderBtnK(3, $l3['id'], $l3['kode3']) ?>
                                 </td>
@@ -104,6 +127,7 @@
                                 <td>{{ $l4['kode4'] }}</td>
                                 <td>{{ $l4['kode4'] }}</td>
                                 <td>{{ $l4['s_name'] }}</td>
+                                <td>4</td>
                                 <td width="150px">
                                     <?= renderBtnK(4, $l4['id'], $l4['kode4']) ?>
                                 </td>
@@ -123,12 +147,12 @@
 </div>
 
 
-<div class="modal fade" id="modalKritNew" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+<div class="modal fade" id="modalKritNew" tabindex="-1" role="dialog" style="background : rgba(158, 167, 170, 0.6) !important" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form id="krit_form_new">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Form Kriteria X</h5>
+                    <h5 class="modal-title">Form Kriteria LV 1</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -136,11 +160,12 @@
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
+                        <label for="">Parent</label>
+                        <input type="text" name="parent_name" id="parent_name" class="form-control" placeholder="" readonly aria-describedby="helpId" required>
 
                     </div>
                     <div class="form-group">
                         <label for="">Nama</label>
-
                         <input type="text" name="name" id="name" class="form-control" placeholder="*contoh : C.1.2. Profil Unit" aria-describedby="helpId" required>
                         <input hidden type="text" name="lv" id="lv" class="form-control" value="">
                         <input hidden type="text" name="id" id="id" class="form-control" value="">
@@ -160,7 +185,7 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="modalKrit" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+<div class="modal fade" id="modalKrit" tabindex="-1" role="dialog" style="background : rgba(158, 167, 170, 0.6) !important" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form id="krit_form">
             <div class="modal-content">
@@ -179,7 +204,6 @@
                     </div>
                     <div class="form-group">
                         <label for="">Nama</label>
-
                         <input type="text" name="name" id="name" class="form-control" placeholder="*contoh : C.1.2. Profil Unit" aria-describedby="helpId" required>
                         <input hidden type="text" name="lv" id="lv" class="form-control" value="">
                         <input hidden type="text" name="id" id="id" class="form-control" value="">
@@ -214,11 +238,22 @@
             'lv': $('#modalKrit').find('#lv'),
         };
 
+        var toolbar = {
+            'form': $('#toolbar'),
+            'level': $('#toolbar').find('#level'),
+        }
+
+        toolbar.level.on('change', function() {
+            console.log('ch')
+            toolbar.form.submit();
+        })
+
         var ModalKritNew = {
             'self': $('#modalKritNew'),
             'form': $('#modalKritNew').find('#krit_form_new'),
             'id': $('#modalKritNew').find('#id'),
             'name': $('#modalKritNew').find('#name'),
+            'parent_name': $('#modalKritNew').find('#parent_name'),
             'kode': $('#modalKritNew').find('#kode'),
             'parent': $('#modalKritNew').find('#parent'),
             'lv': $('#modalKritNew').find('#lv'),
@@ -227,7 +262,6 @@
 
         $('.btn-colapsed')
             .on('click', function() {
-
                 target = $(this).data('target');
                 const curstatus = $(this).data('curstatus');
                 if (curstatus == 'show') {
@@ -235,7 +269,6 @@
                         .find('.fa-eye')
                         .removeClass("fa-eye")
                         .addClass("fa-eye-slash");
-
                     $(target).css('display', 'none')
                     $(this).data('curstatus', 'hide');
                 } else {
@@ -266,6 +299,7 @@
                 null,
                 null,
                 null,
+                null,
             ],
         });
 
@@ -279,10 +313,31 @@
         TKriteria.on('click', '.addsub', function() {
             var id = $(this).data('id');
             var lv = $(this).data('lv');
-            ModalKritNew.self.modal('show')
-            ModalKritNew.form.trigger('reset');
-            ModalKritNew.lv.val(lv + 1);
-            ModalKritNew.parent.val(id);
+            swalLoading();
+            $.ajax({
+                url: `<?= url('search-kriteria') ?>/${lv}/${id}`,
+                'type': 'GET',
+                data: {},
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    Swal.close();
+                    if (json['error']) {
+                        swalError(json['message'], "Simpan Gagal !!");
+                        return;
+                    }
+                    var curDat = json['data'];
+                    console.log(curDat)
+
+                    ModalKritNew.self.modal('show')
+                    ModalKritNew.form.trigger('reset');
+                    ModalKritNew.lv.val(lv + 1);
+                    ModalKritNew.parent.val(id);
+                    ModalKritNew.parent_name.val(curDat['name']);
+                },
+                error: function(e) {}
+            });
+
+
         })
         TKriteria.on('click', '.edit', function() {
 

@@ -107,7 +107,7 @@ Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
 
     //Element
     Route::get('element/{prodi}', 'ElementController@index')->name('element-prodi');
-    Route::get('element/tambah', 'ElementController@tambahElement')->name('tambah-element');
+    Route::get('tambah-element', 'ElementController@tambahElement')->name('tambah-element');
     Route::post('element/store', 'ElementController@store');
 
     Route::get('element/unggah-berkas/{element}', 'ElementController@unggahBerkas');
