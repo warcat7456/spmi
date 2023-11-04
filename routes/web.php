@@ -12,7 +12,6 @@ Route::get('/', 'HomeController@index')->name('home');
 
 // Halaman Statis
 Route::get('/profil/{slug}', 'StaticPageController@show')->name('home.static-page');
-// Route::get('/about', 'HomeController@about')->name('about');
 
 Route::get('tabel/{prodi:kode}', 'HomeController@tabel');
 Route::get('tabel/berkas/{element}', 'HomeController@berkas');
@@ -37,6 +36,7 @@ Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
     //DASHBOARD
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
+
     /**
      * perbaikan route yang perlu get data terlebih dahulu
      * hal ini dapat menyebabkan running artisan tidak dapat dijalankan
@@ -52,6 +52,12 @@ Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
     Route::resource('halaman', 'StaticPageController')->except(['show']);
     Route::get('detail-halaman/{page}', 'StaticPageController@detail')->name('halaman.detail');
     Route::get('datatable-halaman', 'StaticPageController@datatable')->name('halaman.datatable');
+
+    // Gallery
+    Route::get('/gallery', 'GalleryController@index')->name('gallery.index');
+    Route::post('/gallery', 'GalleryController@store')->name('gallery.store');
+    Route::get('/gallery/create', 'GalleryController@create')->name('gallery.create');
+
 
     //Prodi
     Route::get('prodi/{prodi}', 'ProdiController@index')->name("prodis");
