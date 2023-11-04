@@ -97,7 +97,7 @@ Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
 
     Route::get('indikator/konfirmasi/{indikator}', 'IndikatorController@konfirmasi');
     Route::delete('indikator/hapus/{indikator}', 'IndikatorController@hapusIndikator');
-    Route::get('indikator/edit/{indikator}', 'IndikatorController@editFormIndikator');
+    Route::get('indikator/edit/{id}', 'IndikatorController@editFormIndikator');
     Route::put('indikator/put/{indikator}', 'IndikatorController@putIndikator');
 
     Route::get('indikator/konfrimasi-score/{score}', 'IndikatorController@konfirmasiScore');

@@ -36,10 +36,16 @@ class dropdownController extends Controller
 
     public function getIndikator(Request $request)
     {
-
-        $data = Ind::where('jenjang_id', $request->jenjang_id)->get();
+        // 
+        $data = Ind::where('jenjang_id', $request->jenjang_id);
+        if (!empty($request->l1_id)) $data->where('l1_id', $request->l1_id);
+        if (!empty($request->l2_id)) $data->where('l2_id', $request->l2_id);
+        if (!empty($request->l3_id)) $data->where('l3_id', $request->l3_id);
+        if (!empty($request->l4_id)) $data->where('l4_id', $request->l4_id);
+        $res =  $data->get();
+        // dd($res);
         echo "<option value=''>=== SILAHKAN PILIH INDIKATOR === </option>";
-        foreach ($data as $i) {
+        foreach ($res as $i) {
             echo "<option value='" . $i->id . "'>" . $i->dec . "</option>";
         }
     }
@@ -69,7 +75,8 @@ class dropdownController extends Controller
         $jenjang = explode(',', $jenjang_id);
 
         $data = L1::whereIn('jenjang_id', $jenjang)->get();
-
+        if (!empty($data))
+            echo "<option value=''> -- Pilih Level 1 --</option>";
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
@@ -81,6 +88,8 @@ class dropdownController extends Controller
         $l1 = explode(',', $l1_id);
 
         $data = L2::whereIn('l1_id', $l1)->get();
+        if (!empty($data))
+            echo "<option value=''> -- Pilih Level 2 --</option>";
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
@@ -92,6 +101,8 @@ class dropdownController extends Controller
         $l2 = explode(',', $l2_id);
 
         $data = L3::whereIn('l2_id', $l2)->get();
+        if (!empty($data))
+            echo "<option value=''> -- Pilih Level 3 --</option>";
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
@@ -103,6 +114,8 @@ class dropdownController extends Controller
         $l3 = explode(',', $l3_id);
 
         $data = L4::whereIn('l3_id', $l3)->get();
+        if (!empty($data))
+            echo "<option value=''> -- Pilih Level 4 --</option>";
         foreach ($data as $i) {
             echo "<option value='" . $i->id . "'>" . $i->name . "</option>";
         }
