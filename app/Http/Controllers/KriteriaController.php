@@ -32,15 +32,22 @@ class KriteriaController extends Controller
     // }
 
     // Menampilkan per jenjang
+
+    function searchQuery($lv)
+    {
+
+        $q1 = "TRIM(BOTH ' ' FROM SUBSTRING_INDEX(name, SUBSTRING_INDEX(name, ' ', 1), -1))";
+    }
+
     public function detail(Request $request, $jenjang)
     {
         $j = Jenjang::where('kode', $jenjang)->first();
         $filter = $request->input();
         // $c = L1::where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get()->toArray();
-        $l1 = L1::select('*')->selectRaw("TRIM(BOTH ' ' FROM SUBSTRING_INDEX(name, SUBSTRING_INDEX(name, ' ', 1), -1)) as s_name, SUBSTRING_INDEX(name, '.', 1) AS kode1")->where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get()->toArray(); //A
-        $l2 = L2::select('*')->selectRaw("TRIM(BOTH ' ' FROM SUBSTRING_INDEX(name, SUBSTRING_INDEX(name, ' ', 1), -1)) as s_name, SUBSTRING_INDEX(name, '.', 1) AS kode1 ,SUBSTRING_INDEX(name, '.', 2) AS kode2")->where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get()->toArray(); // A.1.2.3
-        $l3 = L3::select('*')->selectRaw("TRIM(BOTH ' ' FROM SUBSTRING_INDEX(name, SUBSTRING_INDEX(name, ' ', 1), -1)) as s_name, SUBSTRING_INDEX(name, '.', 1) AS kode1 ,SUBSTRING_INDEX(name, '.', 2) AS kode2 ,SUBSTRING_INDEX(name, '.', 3) AS kode3")->where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get()->toArray(); // A
-        $l4 = L4::select('*')->selectRaw("TRIM(BOTH ' ' FROM SUBSTRING_INDEX(name, SUBSTRING_INDEX(name, ' ', 1), -1)) as s_name, SUBSTRING_INDEX(name, '.', 1) AS kode1 ,SUBSTRING_INDEX(name, '.', 2) AS kode2 ,SUBSTRING_INDEX(name, '.', 3) AS kode3 ,SUBSTRING_INDEX(name, '.', 4) AS kode4")->where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get()->toArray();
+        $l1 = L1::select('*')->selectRaw("TRIM(BOTH ' ' FROM SUBSTRING_INDEX(name, SUBSTRING_INDEX(name, ' ', 1), -1)) as s_name, SUBSTRING_INDEX(name, '.', 1) AS kode")->where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get()->toArray(); //A
+        $l2 = L2::select('*')->selectRaw("TRIM(BOTH ' ' FROM SUBSTRING_INDEX(name, SUBSTRING_INDEX(name, ' ', 1), -1)) as s_name, SUBSTRING_INDEX(name, '.', 1) AS kode1 ,SUBSTRING_INDEX(name, '.', 2) AS kode")->where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get()->toArray(); // A.1.2.3
+        $l3 = L3::select('*')->selectRaw("TRIM(BOTH ' ' FROM SUBSTRING_INDEX(name, SUBSTRING_INDEX(name, ' ', 1), -1)) as s_name, SUBSTRING_INDEX(name, '.', 1) AS kode1 ,SUBSTRING_INDEX(name, '.', 2) AS kode2 ,SUBSTRING_INDEX(name, '.', 3) AS kode")->where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get()->toArray(); // A
+        $l4 = L4::select('*')->selectRaw("TRIM(BOTH ' ' FROM SUBSTRING_INDEX(name, SUBSTRING_INDEX(name, ' ', 1), -1)) as s_name, SUBSTRING_INDEX(name, '.', 1) AS kode1 ,SUBSTRING_INDEX(name, '.', 2) AS kode2 ,SUBSTRING_INDEX(name, '.', 3) AS kode3 ,SUBSTRING_INDEX(name, '.', 4) AS kode")->where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get()->toArray();
         // dd($filter);
         if (!empty($filter['level'])) {
             if ($filter['level'] == 1) {
@@ -69,8 +76,9 @@ class KriteriaController extends Controller
 
     public function search($lv, $id)
     {
+        $q_name = "SUBSTRING_INDEX(name, '.', 1) AS kode";
         if ($lv == 1) {
-            $data = L1::select('*')->where('id', $id)->get()->first()->toArray(); //A
+            $data = L1::select('*')->selectRaw($q_name)->where('id', $id)->get()->first()->toArray(); //A
         } else    if ($lv == 2) {
             $data = L2::select('*')->where('id', $id)->get()->first()->toArray(); //A
         } else    if ($lv == 3) {
@@ -90,19 +98,19 @@ class KriteriaController extends Controller
     {
         $arr = [];
         foreach ($l1 as $lv1) {
-            $arr[$lv1['kode1']] = $lv1;
-            $arr[$lv1['kode1']]['lv2'] = [];
+            $arr[$lv1['kode']] = $lv1;
+            $arr[$lv1['kode']]['lv2'] = [];
         }
         foreach ($l2 as $lv2) {
-            $arr[$lv2['kode1']]['lv2'][$lv2['kode2']] = $lv2;
-            $arr[$lv2['kode1']]['lv2'][$lv2['kode2']]['lv3'] = [];
+            $arr[$lv2['kode1']]['lv2'][$lv2['kode']] = $lv2;
+            $arr[$lv2['kode1']]['lv2'][$lv2['kode']]['lv3'] = [];
         }
         foreach ($l3 as $lv3) {
-            $arr[$lv3['kode1']]['lv2'][$lv3['kode2']]['lv3'][$lv3['kode3']] = $lv3;
-            $arr[$lv3['kode1']]['lv2'][$lv3['kode2']]['lv3'][$lv3['kode3']]['lv4'] = [];
+            $arr[$lv3['kode1']]['lv2'][$lv3['kode2']]['lv3'][$lv3['kode']] = $lv3;
+            $arr[$lv3['kode1']]['lv2'][$lv3['kode2']]['lv3'][$lv3['kode']]['lv4'] = [];
         }
         foreach ($l4 as $lv4) {
-            $arr[$lv4['kode1']]['lv2'][$lv4['kode2']]['lv3'][$lv4['kode3']]['lv4'][$lv4['kode4']] = $lv4;
+            $arr[$lv4['kode1']]['lv2'][$lv4['kode2']]['lv3'][$lv4['kode3']]['lv4'][$lv4['kode']] = $lv4;
         }
 
         return $arr;

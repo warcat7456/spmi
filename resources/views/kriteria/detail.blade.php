@@ -77,59 +77,59 @@
                             ?>
                             @foreach ($r as $i)
                             <tr>
-                                <td>{{ $i['kode1'] }}</td>
+                                <td>{{ $i['kode'] }}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>{{ $i['kode1'] }}</td>
+                                <td>{{ $i['kode'] }}</td>
                                 <td>{{ $i['s_name'] }}</td>
                                 <td>1</td>
                                 <td width="150px">
-                                    <?= renderBtnK(1, $i['id'], $i['kode1']) ?>
+                                    <?= renderBtnK(1, $i['id'], $i['kode']) ?>
                                 </td>
                             </tr>
                             @foreach($i['lv2'] as $l2)
                             @if(!empty($l2['id']))
-                            <tr class="kode-{{ str_replace('.','-',$i['kode1']) }}" class="btn-colapsed" data-parent="">
+                            <tr class="kode-{{ str_replace('.','-',$i['kode']) }}" class="btn-colapsed" data-parent="">
                                 <td>{{ $l2['kode1'] }}</td>
-                                <td>{{ $l2['kode2'] }}</td>
+                                <td>{{ $l2['kode'] }}</td>
                                 <td></td>
                                 <td></td>
-                                <td>{{ $l2['kode2'] }}</td>
+                                <td>{{ $l2['kode'] }}</td>
                                 <td>{{ $l2['s_name'] }}</td>
                                 <td>2</td>
                                 <td width="150px">
-                                    <?= renderBtnK(2, $l2['id'], $l2['kode2']) ?>
+                                    <?= renderBtnK(2, $l2['id'], $l2['kode']) ?>
                                 </td>
                             </tr>
                             @endif
                             @foreach($l2['lv3'] as $l3)
                             @if(!empty($l3['id']))
-                            <tr class="kode-{{ str_replace('.','-',$i['kode1']) }} kode-{{ str_replace('.','-',$l2['kode2']) }}" data-parent="">
+                            <tr class="kode-{{ str_replace('.','-',$i['kode']) }} kode-{{ str_replace('.','-',$l2['kode']) }}" data-parent="">
                                 <td>{{ $l3['kode1'] }}</td>
                                 <td>{{ $l3['kode2'] }}</td>
-                                <td>{{ $l3['kode3'] }}</td>
+                                <td>{{ $l3['kode'] }}</td>
                                 <td></td>
-                                <td>{{ $l3['kode3'] }}</td>
+                                <td>{{ $l3['kode'] }}</td>
                                 <td>{{ $l3['s_name'] }}</td>
                                 <td>3</td>
                                 <td width="150px">
-                                    <?= renderBtnK(3, $l3['id'], $l3['kode3']) ?>
+                                    <?= renderBtnK(3, $l3['id'], $l3['kode']) ?>
                                 </td>
                             </tr>
                             @endif
                             @foreach($l3['lv4'] as $l4)
                             @if(!empty($l4['id']))
-                            <tr class="kode-{{ str_replace('.','-',$i['kode1']? $i['kode1'] : '') }} kode-{{ str_replace('.','-',$l2['kode2']? $l2['kode2'] : '') }} kode-{{ str_replace('.','-', !empty($l3['kode3'])? $l3['kode3'] : '') }}" data-parent="">
+                            <tr class="kode-{{ str_replace('.','-',$i['kode']? $i['kode'] : '') }} kode-{{ str_replace('.','-',$l2['kode']? $l2['kode'] : '') }} kode-{{ str_replace('.','-', !empty($l3['kode'])? $l3['kode'] : '') }}" data-parent="">
                                 <td>{{ $l4['kode1'] }}</td>
                                 <td>{{ $l4['kode2'] }}</td>
                                 <td>{{ $l4['kode3'] }}</td>
-                                <td>{{ $l4['kode4'] }}</td>
-                                <td>{{ $l4['kode4'] }}</td>
+                                <td>{{ $l4['kode'] }}</td>
+                                <td>{{ $l4['kode'] }}</td>
                                 <td>{{ $l4['s_name'] }}</td>
                                 <td>4</td>
                                 <td width="150px">
-                                    <?= renderBtnK(4, $l4['id'], $l4['kode4']) ?>
+                                    <?= renderBtnK(4, $l4['id'], $l4['kode']) ?>
                                 </td>
                             </tr>
                             @endif

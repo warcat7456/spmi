@@ -30,6 +30,10 @@ class IndikatorController extends Controller
         Indikator::create([
             'dec' => $request->dec,
             'jenjang_id' => $request->jenjang,
+            'l1_id' => $request->l1_id,
+            'l2_id' => $request->l2_id,
+            'l3_id' => $request->l3_id,
+            'l4_id' => $request->l4_id,
         ]);
 
         session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -64,8 +68,12 @@ class IndikatorController extends Controller
         return redirect()->route('indikator-' . $jenjang->kode);
     }
 
-    public function editFormIndikator(Indikator $indikator)
+    public function editFormIndikator($id)
     {
+
+        $indikator = Indikator::with(['l1', 'l2', 'l3', 'l4'])->find($id);
+        // dd($indikator);
+
         return view('indikator.editIndikator', [
             'i' => $indikator,
             'j' => Jenjang::where('id', $indikator->jenjang_id)->first(),
@@ -77,6 +85,10 @@ class IndikatorController extends Controller
         $jenjang = Jenjang::where('id', $indikator->jenjang_id)->first();
         $indikator->update([
             'dec' => $request->dec,
+            'l1_id' => $request->l1_id,
+            'l2_id' => $request->l2_id,
+            'l3_id' => $request->l3_id,
+            'l4_id' => $request->l4_id,
         ]);
         session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -84,7 +96,7 @@ class IndikatorController extends Controller
         </button>
         <strong>Data Berhasil Diedit</strong>
     </div>');
-        return redirect()->route('indikator-' . $jenjang->kode);
+        return redirect()->route('indikator-jenjang', $jenjang->kode);
     }
 
     public function inputScore(Indikator $indikator)
