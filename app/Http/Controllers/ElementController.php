@@ -219,7 +219,7 @@ class ElementController extends Controller
         </button>
         <strong>Berkas berhasil di simpan</strong>
     </div>');
-        return redirect()->route('element-' . $prodi->kode);
+        return redirect()->route('element-prodi', $prodi->kode);
     }
 
     public function lihatBerkas(Element $element)
@@ -273,7 +273,7 @@ class ElementController extends Controller
         ]);
 
         session()->flash('pesan', $pesan);
-        return redirect()->route('element-' . $prodi->kode);
+        return redirect()->route('element-prodi', $prodi->kode);
     }
 
     public function unggul(Element $element)
@@ -311,7 +311,7 @@ class ElementController extends Controller
         ]);
 
         session()->flash('pesan', $pesan);
-        return redirect()->route('element-' . $prodi->kode);
+        return redirect()->route('element-prodi', $prodi->kode);
     }
 
     public function baik(Element $element)
@@ -349,7 +349,7 @@ class ElementController extends Controller
         ]);
 
         session()->flash('pesan', $pesan);
-        return redirect()->route('element-' . $prodi->kode);
+        return redirect()->route('element-prodi', $prodi->kode);
     }
 
     public function resetData(Element $element)
@@ -375,7 +375,7 @@ class ElementController extends Controller
             <span aria-hidden="true">&times;</span>
         </button>
         <strong>Data Berhasil Direset</strong></div>');
-        return redirect()->route('element-' . $prodi->kode);
+        return redirect()->route('element-prodi', $prodi->kode);
     }
 
     public function konfirHapus(Element $element)
@@ -396,7 +396,7 @@ class ElementController extends Controller
             <span aria-hidden="true">&times;</span>
         </button>
         <strong>Data Berhasil Dihapus</strong></div>');
-        return redirect()->route('element-' . $prodi->kode);
+        return redirect()->route('element-prodi', $prodi->kode);
     }
 
     public function detailElement(Element $element)

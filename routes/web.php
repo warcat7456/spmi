@@ -146,7 +146,6 @@ Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
     Route::get('berkas/edit/{berkas}', 'BerkasController@edit');
     Route::put('berkas/put/{berkas}', 'BerkasController@put');
 
-    // TODO: Penamaan controller harusnya berbeda antara satu route dengan yang lain supaya tidak ada konflik
     // Pengaturan
     Route::get('jenjang-pendidkan', 'PengaturanController@jenjang')->name('jenjang');
     Route::post('jenjang-pendidikan/post', 'PengaturanController@jenjangPost');
