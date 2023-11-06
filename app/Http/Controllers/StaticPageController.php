@@ -15,7 +15,13 @@ class StaticPageController extends Controller
      */
     public function index()
     {
-        return view('static-page.index');
+        // First, you create your view or any response you want to return
+        $view = view('static-page.index');
+
+        // Then, you can modify the headers directly on the response object
+        return $view->withHeaders([
+            'Content-Security-Policy' => "default-src 'self' blob:; img-src 'self' blob:;",
+        ]);
     }
 
     /**

@@ -31,7 +31,6 @@
                         <table class="table table-bordered" id="table-static-page" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th></th>
                                     <th>Judul Halaman</th>
                                     <th>Tautan (URL)</th>
                                     <th>Tgl dibuat</th>

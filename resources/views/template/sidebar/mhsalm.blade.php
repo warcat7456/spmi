@@ -39,7 +39,7 @@
             <span>Penilain & Diagram</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('element-' . Auth::user()->prodi_kode) }}">
+        <a class="nav-link" href="{{ route('element-prodi', Auth::user()->prodi_kode) }}">
             <i class="fa-brands fa-elementor"></i>
             <span>Element & Berkas</span></a>
     </li>

@@ -45,18 +45,15 @@ class BerkasController extends Controller
 
         if (isset($_POST['l3_id'])) {
             $b = Berkas::where('prodi_id', $prodi)->whereIn('l1_id', $l1_id)->whereIn('l2_id', $l2_id)->whereIn('l3_id', $l3_id)->get();
-
         }
 
         if (isset($_POST['l4_id'])) {
             $b = Berkas::where('prodi_id', $prodi)->whereIn('l1_id', $l1_id)->whereIn('l2_id', $l2_id)->whereIn('l3_id', $l3_id)->whereIn('l4_id', $l4_id)->get();
-
         }
 
         return view('berkas.index', [
             'berkas' => $b,
         ]);
-
     }
 
     public function detail(Berkas $berkas)
@@ -160,7 +157,7 @@ class BerkasController extends Controller
         </button>
         <strong>Berkas Berhasil Dibaharui <a href="/berkas/cari">Klik disini untuk mencari
                 file</a></strong></div>');
-        return redirect()->route('element-' . $prodi->kode);
+        return redirect()->route('element-prodi', $prodi->kode);
     }
 
     public function hapus(Berkas $berkas)
@@ -173,6 +170,6 @@ class BerkasController extends Controller
             <span aria-hidden="true">&times;</span>
         </button>
         <strong>Berkas Berhasil Dihapus</strong></div>');
-        return redirect()->route('element-' . $prodi->kode);
+        return redirect()->route('element-prodi', $prodi->kode);
     }
 }

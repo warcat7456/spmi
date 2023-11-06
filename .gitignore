@@ -1,7 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
-
+.npm/
 /storage/*.key
 /vendor
 .env
@@ -18,3 +18,7 @@ LICENSE
 .vscode
 psysh_history
 init_db.sql
+.composer
+.config/configstore
+public/images/
+/mysql/docker-entrypoint-initdb.d/**.sql
