@@ -35,30 +35,30 @@
 
     <li class="nav-item">
         @foreach ($data['p'] as $pr)
-        @if(Auth::user()->prodi_kode == $pr->kode)
-        <a class="nav-link" href="{{ route('prodis',$pr->kode) }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Penilain & Diagram</span></a>
-        @endif
+            @if (Auth::user()->prodi_kode == $pr->kode)
+                <a class="nav-link" href="{{ route('prodis', $pr->kode) }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Penilain & Diagram</span></a>
+            @endif
         @endforeach
 
     </li>
     <li class="nav-item">
         @foreach ($data['p'] as $pr)
-        @if(Auth::user()->prodi_kode == $pr->kode)
-        <a class="nav-link" href="{{ route('jenjang',$pr->kode) }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Element & Berkas</span></a>
-        @endif
+            @if (Auth::user()->prodi_kode == $pr->kode)
+                <a class="nav-link" href="{{ route('element-prodi', $pr->kode) }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Element & Berkas</span></a>
+            @endif
         @endforeach
     </li>
     <li class="nav-item">
         @foreach ($data['p'] as $pr)
-        @if(Auth::user()->prodi_kode == $pr->kode)
-        <a class="nav-link" href="{{ url('edit-profil-prodi') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Profil Prodi</span></a>
-        @endif
+            @if (Auth::user()->prodi_kode == $pr->kode)
+                <a class="nav-link" href="{{ url('edit-profil-prodi') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Profil Prodi</span></a>
+            @endif
         @endforeach
     </li>
     <!-- <li class="nav-item">

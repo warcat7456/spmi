@@ -42,7 +42,7 @@
         <div id="prodi" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['p'] as $pr)
-                    <a class="collapse-item" href="{{ route($pr->kode) }}">{{ $pr->name }}</a>
+                    <a class="collapse-item" href="{{ route('prodis', $pr->kode) }}">{{ $pr->name }}</a>
                 @endforeach
             </div>
         </div>
@@ -58,7 +58,7 @@
         <div id="element" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['p'] as $pr)
-                    <a class="collapse-item" href="{{ route('element-' . $pr->kode) }}">{{ $pr->name }}</a>
+                    <a class="collapse-item" href="{{ route('element-prodi', $pr->kode) }}">{{ $pr->name }}</a>
                 @endforeach
             </div>
         </div>
@@ -75,8 +75,8 @@
             <span>Multi Search</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pengaturan" aria-expanded="true"
-            aria-controls="pengaturan">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pengaturan"
+            aria-expanded="true" aria-controls="pengaturan">
             <i class="fas fa-fw fa-cog"></i>
             <span>Pengaturan</span>
         </a>
