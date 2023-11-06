@@ -28,4 +28,9 @@ class Indikator extends Model
     {
         return $this->belongsTo(L4::class);
     }
+
+    public function elements_parent()
+    {
+        return $this->hasMany(ElementParent::class);
+    }
 }

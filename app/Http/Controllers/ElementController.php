@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Berkas;
 use App\Element;
+use App\ElementParent;
+use App\ElementItem;
 use App\Indikator;
+use App\Jenjang;
 use App\Prodi;
 use App\Score;
 use Illuminate\Http\Request;
@@ -26,6 +29,93 @@ class ElementController extends Controller
             'score_hitung' => $element->sum("score_hitung"),
         ]);
     }
+
+    public function prodi(Request $request, $prodi)
+    {
+        $p = Prodi::where('kode', $prodi)->first();
+        // $element = ElementItem::select('elements.id')->where('prodi_id', $p->id)
+        //     ->leftJoin('elements_parent', 'bobot', '=', 'elements_parent.id')->get();
+        // $element = Indikator::with(['l1', 'l2', 'l3', 'l4', 'elements_parent'])
+        //     ->leftJoin('elements_item', 'elements_item.elements_parent_id', '=', 'elements_parent.id')
+        //     ->get();
+        $element = ElementItem::GetElement();
+        // dd($this->susunElement($element));
+
+        return view('element.index_prodi', [
+            'p' => $p,
+            'e' => $element,
+            'count_element' => $element->count(),
+            'count_berkas' => $element->sum("count_berkas"),
+            'score_hitung' => $element->sum("score_hitung"),
+        ]);
+    }
+
+    function susunElement($element)
+    {
+        $arr = [];
+
+        foreach ($element as $e) {
+            if (!empty($e->l4_name))
+                $e = $this->inspekKode($e->l4_name);
+            else  if (!empty($e->l3_name))
+                $e = $this->inspekKode($e->l3_name);
+            else  if (!empty($e->l2_name))
+                $e = $this->inspekKode($e->l2_name);
+            else  if (!empty($e->l1_name))
+                $e =  $this->inspekKode($e->l1_name);
+            // return $e;
+
+            // if (!empty($e[3])) {
+            //     $arr[$e[0]][]
+            //     // LV4
+            // } else if (!empty($e[2])) {
+            //     // LV 3
+            // } else if (!empty($e[1])) {
+            //     // LV 2
+            // } else if (!empty($e[0])) {
+            //     // LV 1
+            // }
+            // // dd($e);
+        }
+
+        return $arr;
+    }
+
+    function inspekKode($k)
+    {
+        $kode = explode(' ', $k);
+        if (!empty($kode[0])) {
+
+            $kode = explode('.', $kode[0]);
+            return $kode;
+        } else {
+            echo "Kesalahan pada " . $k;
+            die();
+        }
+    }
+    public function listElement(Request $requestm, $jenjang)
+    {
+        $j = Jenjang::where('kode', $jenjang)->first();
+        $element = Indikator::with(['l1', 'l2', 'l3', 'l4', 'elements_parent'])->where('jenjang_id', $j->id)->get();
+        return view('element.index_parent', [
+            'j' => $j,
+            'e' => $element,
+            'count_element' => $element->count(),
+        ]);
+    }
+
+    public function tambahElementParent(Request $req)
+    {
+        $filter = [];
+        if (!empty($req->jenjang)) $filter['jenjang_id'] = $req->jenjang;
+        return view(
+            'element.tambah_parent',
+            [
+                'filter' => $filter
+            ]
+        );
+    }
+
 
     public function tambahElement(Request $req)
     {
@@ -141,6 +231,29 @@ class ElementController extends Controller
         <strong>Element Berhasil Dibuat</strong>
     </div>');
         return redirect()->route('element-prodi', $prodi->kode);
+    }
+
+    public function storeparent(Request $request)
+    {
+
+        $row = [];
+        for ($i = 0; $i < count($request->bobot); $i++) {
+            $row[] = [
+                'jenjang_id' => $request->jenjang_id,
+                'bobot' => floatval($request->bobot[$i]),
+                'deskripsi' => $request->deskripsi[$i],
+                'indikator_id' => $request->ind_id,
+            ];
+        }
+
+        ElementParent::insert($row);
+        session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Element Berhasil Dibuat</strong>
+    </div>');
+        return redirect()->route('element-list');
     }
 
     public function unggahBerkas(Element $element)

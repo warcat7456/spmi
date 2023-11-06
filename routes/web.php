@@ -106,9 +106,12 @@ Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
     Route::put('indikator/score/put/{score}', 'IndikatorController@putScore');
 
     //Element
-    Route::get('element/{prodi}', 'ElementController@index')->name('element-prodi');
+    Route::get('element/{prodi}', 'ElementController@prodi')->name('element-prodi');
     Route::get('tambah-element', 'ElementController@tambahElement')->name('tambah-element');
+    Route::get('tambah-element-parent', 'ElementController@tambahElementParent')->name('tambah-element-parent');
+    Route::get('element-list/{jenjang}', 'ElementController@listElement')->name('element-list');
     Route::post('element/store', 'ElementController@store');
+    Route::post('element/storeparent', 'ElementController@storeparent');
 
     Route::get('element/unggah-berkas/{element}', 'ElementController@unggahBerkas');
     Route::post('element/store-berkas', 'ElementController@storeBerkas');

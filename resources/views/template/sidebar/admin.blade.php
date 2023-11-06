@@ -47,13 +47,7 @@
         </div>
     </li>
 
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="{{ route('kriteria') }}">
-            <i class="fa-solid fa-folder"></i>
-            <span>Kriteria</span>
-        </a>
-    </li> -->
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Master Kriteria -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#kriteria" aria-expanded="true" aria-controls="jenjang">
             <i class="fa-solid fa-folder"></i>
@@ -67,6 +61,35 @@
             </div>
         </div>
     </li>
+    <!-- Master Indikator -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#indikator" aria-expanded="true" aria-controls="indikator">
+            <i class="fa-solid fa-chart-bar"></i>
+            <span>Indikator Penilaian</span></a>
+        </a>
+        <div id="indikator" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                @foreach ($data['j'] as $j)
+                <a class="collapse-item" href="{{ route('indikator-jenjang', $j->kode) }}">{{ $j->name }}</a>
+                @endforeach
+            </div>
+        </div>
+    </li>
+    <!-- Master Element -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#masterelement" aria-expanded="true" aria-controls="jenjang">
+            <i class="fa-solid fa-folder"></i>
+            <span>Master Element</span>
+        </a>
+        <div id="masterelement" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                @foreach ($data['j'] as $jn)
+                <a class="collapse-item" href="{{ route('element-list', $jn->kode) }}">{{ $jn->name }}</a>
+                @endforeach
+            </div>
+        </div>
+    </li>
+
 
     <!-- Nav Item - Pages Collapse Menu -->
     <!-- <li class="nav-item">
@@ -97,24 +120,12 @@
         </div>
     </li> -->
 
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#indikator" aria-expanded="true" aria-controls="indikator">
-            <i class="fa-solid fa-chart-bar"></i>
-            <span>Indikator Penilaian</span></a>
-        </a>
-        <div id="indikator" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                @foreach ($data['j'] as $j)
-                <a class="collapse-item" href="{{ route('indikator-jenjang', $j->kode) }}">{{ $j->name }}</a>
-                @endforeach
-            </div>
-        </div>
-    </li>
+
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#element" aria-expanded="true" aria-controls="element">
             <i class="fa-brands fa-elementor"></i>
-            <span>Element & Berkas</span></a>
+            <span>Berkas Prodi</span></a>
         </a>
         <div id="element" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">

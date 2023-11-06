@@ -102,6 +102,18 @@
                                     <?= renderBtnK(2, $l2['id'], $l2['kode']) ?>
                                 </td>
                             </tr>
+                            @else
+                            <tr class="kode-{{ str_replace('.','-',$i['kode']) }}" class="btn-colapsed" data-parent="">
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                            </tr>
+                            <?php $l2['kode'] = ''; ?>
                             @endif
                             @foreach($l2['lv3'] as $l3)
                             @if(!empty($l3['id']))
@@ -301,6 +313,7 @@
                 null,
                 null,
             ],
+            'ordering': false
         });
 
         $('#CreateNew').on('click', () => {
