@@ -107,8 +107,8 @@
             cache: false,
             success: function(msg) {
                 $("#jen").html(msg);
-                <?php if (!empty($filter['jenjang_id'])) {
-                    echo "$('#jen').val(" . $filter['jenjang_id'] . ").trigger('change');";
+                <?php if (!empty($filter['jenjang'])) {
+                    echo "$('#jen').val(" . $filter['jenjang'] . ").trigger('change');";
                 } ?>
             }
         });
@@ -122,6 +122,10 @@
                 cache: false,
                 success: function(msg) {
                     $("#l1").html(msg);
+                    <?php if (!empty($filter['l1'])) {
+                        echo "$('#l1').val(" . $filter['l1'] . ").trigger('change');";
+                    } ?>
+
                 }
             });
         });
@@ -134,6 +138,9 @@
                 cache: false,
                 success: function(msg) {
                     $("#l2").html(msg);
+                    <?php if (!empty($filter['l2'])) {
+                        echo "$('#l2').val(" . $filter['l2'] . ").trigger('change');";
+                    } ?>
                 }
             });
         });
@@ -147,6 +154,9 @@
                 cache: false,
                 success: function(msg) {
                     $("#l3").html(msg);
+                    <?php if (!empty($filter['l3'])) {
+                        echo "$('#l3').val(" . $filter['l3'] . ").trigger('change');";
+                    } ?>
                 }
             });
         });
@@ -160,6 +170,9 @@
                 cache: false,
                 success: function(msg) {
                     $("#l4").html(msg);
+                    <?php if (!empty($filter['l4'])) {
+                        echo "$('#l4').val(" . $filter['l4'] . ").trigger('change');";
+                    } ?>
                 }
             });
         });
@@ -173,6 +186,9 @@
                 cache: false,
                 success: function(msg) {
                     $("#ind").html(msg);
+                    <?php if (!empty($filter['indi'])) {
+                        echo "$('#ind').val(" . $filter['indi'] . ").trigger('change');";
+                    } ?>
                     // searchIndikator();
                 }
             });
