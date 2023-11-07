@@ -18,6 +18,7 @@
                                 <th>Indikator</th>
                                 <th>Element</th>
                                 <th>Bobot</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <!-- <tfoot>
@@ -49,6 +50,14 @@
                                 <td>
                                     <?= !empty($i->elements_parent[0]->bobot) ? $i->elements_parent[0]->bobot : '<strong>-</strong>' ?>
                                 </td>
+                                <td>
+                                    @if(Auth::user()->role == 'Admin')
+                                    <a href="{{ route('tambah-element-parent', 'jenjang='.$j->id.'&l1='.$i->l1->id.'&l2='.($i->l2?$i->l2->id:'').'&l3='.($i->l3? $i->l3->id : '').'&l4='.($i->l4? $i->l4->id :'').'&indi='.($i->id? $i->id :'')) }}" class="btn btn-primary btn-sm float-right">
+                                        Tambah Element
+                                    </a>
+                                    @endif
+                                </td>
+
                             </tr>
                             <?php for ($a = 1; $a < $c_el; $a++) { ?>
                                 <tr>

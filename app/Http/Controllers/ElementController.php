@@ -106,8 +106,7 @@ class ElementController extends Controller
 
     public function tambahElementParent(Request $req)
     {
-        $filter = [];
-        if (!empty($req->jenjang)) $filter['jenjang_id'] = $req->jenjang;
+        $filter = $req->toArray();
         return view(
             'element.tambah_parent',
             [
