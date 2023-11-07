@@ -235,25 +235,30 @@ class ElementController extends Controller
 
     public function storeparent(Request $request)
     {
+        try {
+            $kodeJenjang = Jenjang::findOrFail($request->jenjang_id)?->kode;
+            $row = [];
+            for ($i = 0; $i < count($request->bobot); $i++) {
+                $row[] = [
+                    'jenjang_id' => $request->jenjang_id,
+                    'bobot' => floatval($request->bobot[$i]),
+                    'deskripsi' => $request->deskripsi[$i],
+                    'indikator_id' => $request->ind_id,
+                ];
+            }
 
-        $row = [];
-        for ($i = 0; $i < count($request->bobot); $i++) {
-            $row[] = [
-                'jenjang_id' => $request->jenjang_id,
-                'bobot' => floatval($request->bobot[$i]),
-                'deskripsi' => $request->deskripsi[$i],
-                'indikator_id' => $request->ind_id,
-            ];
-        }
-
-        ElementParent::insert($row);
-        session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert">
+            ElementParent::insert($row);
+            session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
         <strong>Element Berhasil Dibuat</strong>
     </div>');
-        return redirect()->route('element-list');
+            return redirect()->route('element-list', ['jenjang' => $kodeJenjang]);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return redirect()->route('some.route')->with('error', 'Model not found.');
+        }
     }
 
     public function unggahBerkas(Element $element)
