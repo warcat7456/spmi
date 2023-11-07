@@ -70,6 +70,7 @@ packages/
 *.nupkg
 package-lock.json
 
+Manual Book.pdf
 # Excluding temporary files
 *.tmp
 *.temp
