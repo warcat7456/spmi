@@ -30,13 +30,13 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="my-2 py-2 text-center">
+                    <div class="my-2 py-2">
                         <span class="border border-info py-2 px-4 rounded my-1 d-inline-block mx-auto">Visi</span>
                         <div class="my-3 text-justify" style="word-wrap: break-word ">
                             {!! $p->visi !!}
                         </div>
                     </div>
-                    <div class="my-2 py-2 text-center">
+                    <div class="my-2 py-2">
                         <span class="border border-info py-2 px-4 rounded my-1 d-inline-block mx-auto">Misi</span>
                         <div class="my-3 text-justify" style="word-wrap: break-word">
                             {!! $p->misi !!}
