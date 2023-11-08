@@ -2,6 +2,10 @@
 1. docker-compose build <!-- Untuk build image (cukup running 1x jika image sudah dibuild) -->
 2. docker-compose up <!-- Untuk running container -->
 
+## Command running ke container docker
+1. docker-compose exec -u www-data app <!-- Untuk running command/terminal ke container aplikasi -->
+2. docker-compose exec -u www-data db <!-- Untuk running command/terminal ke container db (mysql) -->
+
 ## Command Inisiasi:
 1. php artisan migrate atau php artisan migrate:fresh (untuk migrasi awal;buat struktur database)
 2. php artisan db:seed (untuk melakukan inisiasi data;import database letakkan file SQL inisiasi data ke dalam folder seeds)
