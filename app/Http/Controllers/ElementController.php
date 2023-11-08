@@ -33,13 +33,7 @@ class ElementController extends Controller
     public function prodi(Request $request, $prodi)
     {
         $p = Prodi::where('kode', $prodi)->first();
-        // $element = ElementItem::select('elements.id')->where('prodi_id', $p->id)
-        //     ->leftJoin('elements_parent', 'bobot', '=', 'elements_parent.id')->get();
-        // $element = Indikator::with(['l1', 'l2', 'l3', 'l4', 'elements_parent'])
-        //     ->leftJoin('elements_item', 'elements_item.elements_parent_id', '=', 'elements_parent.id')
-        //     ->get();
         $element = Element::with(['l1', 'l2', 'l3', 'l4', 'indikator', 'berkas'])->where('prodi_id', $p->id)->get();
-        // dd($this->susunElement($element));
 
         return view('element.index_prodi', [
             'p' => $p,
@@ -136,7 +130,6 @@ class ElementController extends Controller
 
     public function sync(Request $request)
     {
-
         $prodi = Prodi::where('jenjang_id', $request->jenjang)->get();
         $indikator = Indikator::where('jenjang_id', $request->jenjang)->get();
         $jenjang = Jenjang::where('id', $request->jenjang)->get()->first();
@@ -146,31 +139,33 @@ class ElementController extends Controller
         // for ($i = 0; $i < count($request->bobot); $i++) {
         foreach ($indikator as $i) {
             foreach ($prodi as $p) {
-                $row[] = [
-                    'prodi_id' => $p->id,
-                    'l1_id' => $i->l1_id,
-                    'l2_id' => $i->l2_id,
-                    'l3_id' => $i->l3_id,
-                    'l4_id' => $i->l4_id,
-                    'bobot' => 0,
-                    'deskripsi' => '',
-                    'score_berkas' => 0,
-                    'score_hitung' => 0,
-                    'count_berkas' => 0,
-                    'indikator_id' => $i->id,
-                ];
+                Element::updateOrCreate(
+                    [
+                        'prodi_id' => $p->id,
+                        'l1_id' => $i->l1_id,
+                        'l2_id' => $i->l2_id,
+                        'l3_id' => $i->l3_id,
+                        'l4_id' => $i->l4_id,
+                        'indikator_id' => $i->id,
+                    ],
+                    [
+                        'bobot' => 0,
+                        'deskripsi' => '',
+                        'score_berkas' => 0,
+                        'score_hitung' => 0,
+                        'count_berkas' => 0
+                    ]
+                );
             }
         }
-        // }
-        // Element::trunc
-        Element::insert($row);
+
         session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <strong>Element Berhasil Dibuat</strong>
+                    <strong>Element Berhasil Sinkron</strong>
                 </div>');
-        return redirect()->route('element-list', $jenjang->kode);
+        return redirect()->route('indikator-jenjang', $jenjang->kode);
     }
 
     public function store(Request $request)

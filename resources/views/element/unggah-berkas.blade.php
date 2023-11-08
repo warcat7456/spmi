@@ -40,7 +40,7 @@
                                     </div>
                                 @endforeach
                             @else
-                                @if (Auth::user()->role === 'Auditor')
+                                @if (Auth::user()->role === 'Auditor' || Auth::user()->role === 'Admin')
                                     <div class="form-group">
                                         {!! $indikator->dec !!}
                                         <hr>
