@@ -12,7 +12,7 @@ class IndikatorController extends Controller
     public function index(Request $request, $jenjang)
     {
         $j = Jenjang::where('kode', $jenjang)->first();
-        $indikator = Indikator::where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get();
+        $indikator = Indikator::with(['l1', 'l2', 'l3', 'l4'])->where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get();
         return view('indikator.index', [
             'd' => $indikator,
             'j' => $j,

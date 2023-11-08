@@ -14,6 +14,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>Kriteria</th>
                                 <th>Name</th>
                                 <th width="150px">Score</th>
                                 <th width="150px">Aksi</th>
@@ -21,6 +22,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Kriteria</th>
                                 <th>Name</th>
                                 <th width="150px">Score</th>
                                 <th width="150px">Aksi</th>
@@ -29,6 +31,13 @@
                         <tbody>
                             @foreach ($d as $i)
                             <tr>
+                                <td>
+
+                                    <?= !empty($i->l1->name) ? $i->l1->name : '' ?>
+                                    <?= !empty($i->l2->name) ? '<br>' . $i->l2->name : '' ?>
+                                    <?= !empty($i->l3->name) ? '<br>' . $i->l3->name : '' ?>
+                                    <?= !empty($i->l4->name) ? '<br>' . $i->l4->name : '' ?>
+                                </td>
                                 <td>{!! $i->dec !!}</td>
                                 <td width="150px">
                                     <a href="{{ url('indikator/input-score') . '/' . $i->id }}" class="btn btn-info btn-sm">
