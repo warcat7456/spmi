@@ -20,7 +20,7 @@ class Indikator extends Migration
                 ->references('id')
                 ->on('jenjangs')
                 ->onDelete('cascade');
-            $table->string('dec');
+            $table->text('dec');
         });
     }
 

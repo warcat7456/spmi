@@ -34,7 +34,7 @@ class CreateElementsItem extends Migration
             $table->enum('status_unggul', ['F', 'Y', 'N'])->default('F')->nullable();
             $table->decimal('min_baik', 3, 2, true)->nullable()->default(0.00);
             $table->enum('status_baik', ['F', 'Y', 'N'])->default('F')->nullable();
-            $table->string('ket_auditor', 255)->nullable();
+            $table->text('ket_auditor', 255)->nullable();
         });
     }
 
