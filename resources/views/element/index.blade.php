@@ -4,7 +4,7 @@
     <div class="col">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Element {{ $p->name }}</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Element {{ $j->name }}</h6>
             </div>
             <div class="card-body">
                 @if (session()->has('pesan'))
@@ -101,7 +101,7 @@
             @if(Auth::user()->role == 'Admin')
             <div class="card-body">
                 <h4 class="card-title">Aksi</h4>
-                <a href="{{ route('tambah-element', 'prodi='.$p->id.'&jenjang='.$p->jenjang_id ) }}" class="btn btn-primary btn-sm float-right">
+                <a href="{{ route('tambah-element', 'jenjang='.$j->jenjang_id ) }}" class="btn btn-primary btn-sm float-right">
                     Tambah Element
                 </a>
             </div>
@@ -109,9 +109,9 @@
             @endif
             <div class="card-body">
                 <h4 class="card-title">Report</h4>
-                Element = {{ $count_element }}<br>
-                Berkas = {{ $count_berkas }}<br>
-                Score = {{ $score_hitung }}
+                Element = $count_element <br>
+                Berkas = $count_berkas <br>
+                Score = $score_hitung
             </div>
         </div>
     </div>

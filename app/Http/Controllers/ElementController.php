@@ -96,8 +96,10 @@ class ElementController extends Controller
     public function listElement(Request $requestm, $jenjang)
     {
         $j = Jenjang::where('kode', $jenjang)->first();
-        $element = Indikator::with(['l1', 'l2', 'l3', 'l4', 'elements_parent'])->where('jenjang_id', $j->id)->get();
-        return view('element.index_parent', [
+        $element = Element::with(['l1', 'l2', 'l3', 'l4'])
+            ->leftJoin('prodis', 'prodis.id', '=', 'elements.prodi_id')
+            ->where('jenjang_id', $j->id)->get();
+        return view('element.index', [
             'j' => $j,
             'e' => $element,
             'count_element' => $element->count(),
@@ -133,7 +135,8 @@ class ElementController extends Controller
     public function store(Request $request)
     {
 
-        $prodi = Prodi::where('id', $request->prodi_id)->first();
+        $prodi = Prodi::where('jenjang_id', $request->jenjang_id)->get();
+        $jenjang = Jenjang::where('id', $request->jenjang_id)->get()->first();
         $row = [];
         // $row = [
         //     'prodi_id' => $request->prodi_id,
@@ -148,19 +151,21 @@ class ElementController extends Controller
         // ];
 
         for ($i = 0; $i < count($request->bobot); $i++) {
-            $row[] = [
-                'prodi_id' => $request->prodi_id,
-                'l1_id' => $request->l1_id,
-                'l2_id' => $request->l2_id,
-                'l3_id' => $request->l3_id,
-                'l4_id' => $request->l4_id,
-                'bobot' => floatval($request->bobot[$i]),
-                'deskripsi' => $request->deskripsi[$i],
-                'score_berkas' => 0,
-                'score_hitung' => 0,
-                'count_berkas' => 0,
-                'indikator_id' => $request->ind_id,
-            ];
+            foreach ($prodi as $p) {
+                $row[] = [
+                    'prodi_id' => $p->id,
+                    'l1_id' => $request->l1_id,
+                    'l2_id' => $request->l2_id,
+                    'l3_id' => $request->l3_id,
+                    'l4_id' => $request->l4_id,
+                    'bobot' => floatval($request->bobot[$i]),
+                    'deskripsi' => $request->deskripsi[$i],
+                    'score_berkas' => 0,
+                    'score_hitung' => 0,
+                    'count_berkas' => 0,
+                    'indikator_id' => $request->ind_id,
+                ];
+            }
         }
 
         // if ($request->l1_id && $request->l2_id == null && $request->l3_id == null && $request->l4_id == null) {
@@ -229,13 +234,15 @@ class ElementController extends Controller
         </button>
         <strong>Element Berhasil Dibuat</strong>
     </div>');
-        return redirect()->route('element-prodi', $prodi->kode);
+        return redirect()->route('element-list', $jenjang->kode);
     }
 
     public function storeparent(Request $request)
     {
         try {
-            $kodeJenjang = Jenjang::findOrFail($request->jenjang_id)?->kode;
+            $kodeJenjang = Jenjang::findOrFail($request->jenjang_id);
+            $kodeJenjang = $kodeJenjang->kode ? $kodeJenjang->kode : null;
+            // $kodeJenjang = Jenjang::findOrFail($request->jenjang_id)?->kode;
             $row = [];
             for ($i = 0; $i < count($request->bobot); $i++) {
                 $row[] = [
