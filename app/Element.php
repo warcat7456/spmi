@@ -33,4 +33,9 @@ class Element extends Model
     {
         return $this->belongsTo(Indikator::class);
     }
+
+    public function berkas()
+    {
+        return $this->hasMany(Berkas::class);
+    }
 }

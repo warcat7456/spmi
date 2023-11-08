@@ -17,6 +17,7 @@
                                 <th>Kriteria</th>
                                 <th>Indikator</th>
                                 <th>Element</th>
+                                <th>Jumlah Berkas</th>
                                 <th width="150px">Berkas & Ketentuan</th>
                             </tr>
                         </thead>
@@ -40,8 +41,13 @@
                                 </td>
                                 <td> {{ $indi->indikator->dec }}</td>
                                 <td> {{ $indi->deskripsi }}</td>
+                                <td> {{ count( $indi->berkas ) == 0? "-": count( $indi->berkas ).' Berkas'  }}</td>
 
                                 <td>
+                                    <a class="btn btn-primary" href="{{url('element/detail',$indi->id )}}">
+                                        <i class="fa fa-eye"></i> Liat Detail
+                                    </a>
+                                    <hr>
                                     <div class="dropdown open">
                                         <button class="btn btn-primary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Berkas

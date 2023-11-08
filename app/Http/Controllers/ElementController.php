@@ -38,8 +38,7 @@ class ElementController extends Controller
         // $element = Indikator::with(['l1', 'l2', 'l3', 'l4', 'elements_parent'])
         //     ->leftJoin('elements_item', 'elements_item.elements_parent_id', '=', 'elements_parent.id')
         //     ->get();
-        $element = Element::with(['l1', 'l2', 'l3', 'l4', 'indikator'])->where('prodi_id', $p->id)->get();
-        // dd($element);
+        $element = Element::with(['l1', 'l2', 'l3', 'l4', 'indikator', 'berkas'])->where('prodi_id', $p->id)->get();
         // dd($this->susunElement($element));
 
         return view('element.index_prodi', [
