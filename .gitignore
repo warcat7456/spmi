@@ -38,6 +38,7 @@ $RECYCLE.BIN/
 /node_modules
 /public/hot
 /public/storage
+/public/document
 
 #-------------------------
 # Logs and databases
