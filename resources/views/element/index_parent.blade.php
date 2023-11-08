@@ -43,7 +43,7 @@
                                     <?= !empty($i->l3->name) ? '<br>' . $i->l3->name : '' ?>
                                     <?= !empty($i->l4->name) ? '<br>' . $i->l4->name : '' ?>
                                 </td>
-                                <td rowspan="{{$c_el}}"> {{ $i->dec }}</td>
+                                <td rowspan="{{$c_el}}"> {{ $i->indikator->dec }}</td>
                                 <td>
                                     <?= !empty($i->elements_parent[0]->deskripsi) ? $i->elements_parent[0]->deskripsi : '<strong>Belum Ada Element</strong>' ?>
                                 </td>
@@ -87,6 +87,9 @@
                 <a href="{{ route('tambah-element-parent', 'jenjang='.$j->id) }}" class="btn btn-primary btn-sm float-right">
                     Tambah Element
                 </a>
+                <a href="{{ route('element-sync') }}" class="btn btn-primary btn-sm float-right">
+                    Synconize Element
+                </a>
             </div>
             <hr>
             @endif
@@ -97,4 +100,15 @@
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        $('#sync_element').on('click', function() {
+
+        })
+    })
+</script>
 @endsection

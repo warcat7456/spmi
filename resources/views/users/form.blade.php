@@ -69,7 +69,6 @@
 
         FormUser.role.on('change', function(ev) {
             if (FormUser.role.val() == 'Prodi') {
-
                 FormUser.prodi_kode.prop('disabled', false)
                 FormUser.prodi_kode.prop('required', true)
             } else {

@@ -104,6 +104,9 @@
                 <a href="{{ route('tambah-element', 'jenjang='.$j->jenjang_id ) }}" class="btn btn-primary btn-sm float-right">
                     Tambah Element
                 </a>
+                <a href="{{ route('element-sync','jenjang='.$j->id) }}" class="btn btn-primary btn-sm float-right">
+                    Synconize Element
+                </a>
             </div>
             <hr>
             @endif

@@ -28,17 +28,18 @@
                             </tr>
                         </tfoot> -->
                         <tbody>
-                            <?php $no = 1; ?>
-                            @foreach ($e as $i)
+
+
+                            @foreach ($element as $indi)
                             <tr>
                                 <td>
-                                    <?= !empty($i->l1_name) ? $i->l1_name : '' ?>
-                                    <?= !empty($i->l2_name) ? '<br>' . $i->l2_name : '' ?>
-                                    <?= !empty($i->l3_name) ? '<br>' . $i->l3_name : '' ?>
-                                    <?= !empty($i->l4_name) ? '<br>' . $i->l4_name : '' ?>
+                                    <?= !empty($indi->l1->name) ? $indi->l1->name : '' ?>
+                                    <?= !empty($indi->l2->name) ? '<br>' . $indi->l2->name : '' ?>
+                                    <?= !empty($indi->l3->name) ? '<br>' . $indi->l3->name : '' ?>
+                                    <?= !empty($indi->l4->name) ? '<br>' . $indi->l4->name : '' ?>
                                 </td>
-                                <td> {{ $i->ind_name }}</td>
-                                <td> {{ $i->deskripsi }}</td>
+                                <td> {{ $indi->indikator->dec }}</td>
+                                <td> {{ $indi->deskripsi }}</td>
 
                                 <td>
                                     <div class="dropdown open">
@@ -47,10 +48,10 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="triggerId">
                                             @if(Auth::user()->role != 'Auditor')
-                                            <a class="dropdown-item" href="{{ url('element/unggah-berkas/' . $i->id) }}">Unggah
+                                            <a class="dropdown-item" href="{{ url('element/unggah-berkas/' . $indi->id) }}">Unggah
                                                 Berkas</a>
                                             @endif
-                                            <a class="dropdown-item" href="{{ url('element/lihat-berkas/' . $i->id) }}">Lihat
+                                            <a class="dropdown-item" href="{{ url('element/lihat-berkas/' . $indi->id) }}">Lihat
                                                 Berkas</a>
                                         </div>
                                     </div>
@@ -60,17 +61,16 @@
                                             Ketentuan
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="triggerId">
-                                            <a class="dropdown-item" href="{{ url('element/syarat-akreditasi/' . $i->id) }}">Syarat
+                                            <a class="dropdown-item" href="{{ url('element/syarat-akreditasi/' . $indi->id) }}">Syarat
                                                 Perlu Akreditasi</a>
-                                            <a class="dropdown-item" href="{{ url('element/syarat-unggul/' . $i->id) }}">Syarat
+                                            <a class="dropdown-item" href="{{ url('element/syarat-unggul/' . $indi->id) }}">Syarat
                                                 Peringkat Unggul</a>
-                                            <a class="dropdown-item" href="{{ url('element/syarat-baik/' . $i->id) }}">Syarat
+                                            <a class="dropdown-item" href="{{ url('element/syarat-baik/' . $indi->id) }}">Syarat
                                                 Peringkat Baik Sekali</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                            <?php $no++; ?>
 
                             @endforeach
                         </tbody>
