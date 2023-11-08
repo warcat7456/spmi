@@ -3,7 +3,7 @@
 #-------------------------
 
 # OS X
-.DS_Store
+**.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -11,67 +11,93 @@
 ._*
 
 # Windows image file caches
+Desktop.ini
 Thumbs.db
 ehthumbs.db
-Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
+#-------------------------
+# Development
+#-------------------------
+
 # IDEs and editors
+.vscode
 /.idea
 /.vscode
 
 # Configurations
+.env
+.env.backup
+.npm/
 /.env.local
-/.env.staging
 /.env.production
-
+/.env.staging
+/nginx/conf.d/app.conf
 /node_modules
 /public/hot
 /public/storage
-.npm/
-/storage/*.key
-/vendor
-.env
-composer.lock
-.env.backup
-.phpunit.result.cache
-/nginx/conf.d/app.conf
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
-**.DS_Store
-LICENSE
-.zshrc
-.vscode
-psysh_history
-init_db.sql
-.composer
-.config/configstore
-public/images/
-/mysql/docker-entrypoint-initdb.d/**.sql
-/storage/*.key
-/storage/framework/sessions/*
-/storage/framework/views/*
-/storage/framework/cache/data/*
-!storage/framework/cache/.gitignore
-/bootstrap/cache/*
-!.gitignore
+
+#-------------------------
+# Logs and databases
+#-------------------------
+
 # Ignore all log files.
 *.log
-# Ignore Composer's files
-/composer.phar
+
+# Ignore database files
+/mysql/docker-entrypoint-initdb.d/**.sql
+init_db.sql
+
+#-------------------------
+# Dependencies
+#-------------------------
+
+# Composer dependencies
 /vendor/
 composer.lock
-# Ignore all .nupkg files and the packages directory.
-packages/
-*.nupkg
-package-lock.json
 
+#-------------------------
+# Caches
+#-------------------------
+
+#-------------------------
+# Files
+#-------------------------
+
+# Ignore documentation files
+!.gitignore
+!storage/framework/cache/.gitignore
 Manual Book.pdf
+
+# Ignore all .nupkg files and the packages directory.
+*.nupkg
+packages/
+
 # Excluding temporary files
-*.tmp
-*.temp
 *.swp
+*.temp
+*.tmp
+
+# Other
+.composer
+.config/configstore
+.phpunit.result.cache
+.zshrc
+/bootstrap/cache/*
+/composer.phar
+/storage/*.key
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/vendor
+Homestead.json
+Homestead.yaml
+LICENSE
+npm-debug.log
+package-lock.json
+psysh_history
+public/images/
+yarn-error.log
+ids.json
