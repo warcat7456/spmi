@@ -34,27 +34,44 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#prodi" aria-expanded="true" aria-controls="prodi">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#prodi" aria-expanded="true"
+            aria-controls="prodi">
             <i class="fa-solid fa-circle-check"></i>
             <span>Penilain & Diagram</span></a>
         </a>
         <div id="prodi" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['p'] as $pr)
-                <a class="collapse-item" href="{{ route($pr->kode) }}">{{ $pr->name }}{{ $pr->kode }}</a>
+                    <a class="collapse-item" href="{{ route('prodis', $pr->kode) }}">{{ $pr->name }}</a>
+                @endforeach
+            </div>
+        </div>
+    </li>
+    <!-- Master Element -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#masterelement"
+            aria-expanded="true" aria-controls="jenjang">
+            <i class="fa-solid fa-folder"></i>
+            <span>Master Element</span>
+        </a>
+        <div id="masterelement" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                @foreach ($data['j'] as $jn)
+                    <a class="collapse-item" href="{{ route('element-list', $jn->kode) }}">{{ $jn->name }}</a>
                 @endforeach
             </div>
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#element" aria-expanded="true" aria-controls="element">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#element" aria-expanded="true"
+            aria-controls="element">
             <i class="fa-brands fa-elementor"></i>
             <span>Element & Berkas</span></a>
         </a>
         <div id="element" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['p'] as $pr)
-                <a class="collapse-item" href="{{ route('element-' . $pr->kode) }}">{{ $pr->name }}</a>
+                    <a class="collapse-item" href="{{ route('element-prodi', $pr->kode) }}">{{ $pr->name }}</a>
                 @endforeach
             </div>
         </div>
