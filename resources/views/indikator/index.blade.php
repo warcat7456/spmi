@@ -16,7 +16,7 @@
                             <tr>
                                 <th>Kriteria</th>
                                 <th>Name</th>
-                                <th width="150px">Score</th>
+                                <th width="150px">Bobot</th>
                                 <th width="150px">Aksi</th>
                             </tr>
                         </thead>
@@ -39,14 +39,7 @@
                                     <?= !empty($i->l4->name) ? '<br>' . $i->l4->name : '' ?>
                                 </td>
                                 <td>{!! $i->dec !!}</td>
-                                <td width="150px">
-                                    <a href="{{ url('indikator/input-score') . '/' . $i->id }}" class="btn btn-info btn-sm">
-                                        Input Score
-                                    </a>
-                                    <hr>
-                                    <a href="{{ url('indikator/cek-score') . '/' . $i->id }}" class="btn btn-primary btn-sm">Cek
-                                        Score</a>
-                                </td>
+                                <td>{!! $i->bobot !!}</td>
                                 <td width="150px">
                                     <a href="{{ url('indikator/edit/' . $i->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                     <hr>

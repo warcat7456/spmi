@@ -61,11 +61,12 @@ Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
     //DATA BERKAS
     Route::get('berkas/cari', 'BerkasController@cari')->name('berkas');
     Route::post('berkas/hasil', 'BerkasController@hasil');
-    Route::get('berkas/{berkas}', 'BerkasController@detail');
+    Route::get('berkas/{berkas}', 'BerkasController@detail')->name('detail-berkas');
 
     Route::delete('berkas/hapus/{berkas}', 'BerkasController@hapus');
     Route::get('berkas/edit/{berkas}', 'BerkasController@edit');
     Route::put('berkas/put/{berkas}', 'BerkasController@put');
+    Route::put('berkas/catatan-auditor/{berkas}', 'BerkasController@putCatatan');
 
     // Pengaturan
     Route::get('jenjang-pendidkan', 'PengaturanController@jenjang')->name('jenjang');

@@ -59,7 +59,6 @@
                 <!-- <hr> -->
 
 
-                @if($element->ket_auditor)
                 <h4 class="card-title">Bobot * Score</h4>
                 <p>
                     {{ @$element->bobot }} * {{ @$element->score_auditor }} = {{ @$element->score_hitung }}
@@ -70,7 +69,6 @@
                     {{ @$element->ket_auditor }}
                 </p>
                 <hr>
-                @endif
 
 
                 @if(Auth::user()->role == 'Auditor')
