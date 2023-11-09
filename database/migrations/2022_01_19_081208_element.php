@@ -56,6 +56,7 @@ class Element extends Migration
             $table->decimal('min_baik', 3, 2, true)->nullable()->default(0.00);
             $table->enum('status_baik', ['F', 'Y', 'N'])->default('F')->nullable();
             $table->text('ket_auditor', 255)->nullable();
+            $table->decimal('score_auditor', 3, 2, true)->nullable()->default(0.00);
         });
     }
 

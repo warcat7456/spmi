@@ -149,11 +149,11 @@ class ElementController extends Controller
                         'indikator_id' => $i->id,
                     ],
                     [
-                        'bobot' => 0,
-                        'deskripsi' => '',
-                        'score_berkas' => 0,
-                        'score_hitung' => 0,
-                        'count_berkas' => 0
+                        'bobot' => $i->bobot,
+                        // 'deskripsi' => '',
+                        // 'score_berkas' => 0,
+                        // 'score_hitung' => 0,
+                        // 'count_berkas' => 0
                     ]
                 );
             }
@@ -610,10 +610,20 @@ class ElementController extends Controller
 
     public function putPenilaianAuditor(Element $element, Request $request)
     {
+        $score_hitung = floatval($request->score_auditor) * floatval($element->bobot);
+        echo "Score ht : " . $score_hitung;
+        echo "<br>score_auditor ht : " . $request->score_auditor;
+        echo "<br>bobot ht : " . $element->bobot;
+        // die();
+        // dd($request->score_auditor);
 
         $element->update([
             'ket_auditor' => $request->ket_auditor,
+            'score_auditor' => floatval($request->score_auditor),
+            'score_hitung' => floatval($score_hitung),
         ]);
+
+        // dd($element);
         return redirect()->to('/element/lihat-berkas/' . $element->id);
     }
 }

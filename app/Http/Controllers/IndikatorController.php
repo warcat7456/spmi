@@ -89,6 +89,7 @@ class IndikatorController extends Controller
             'l2_id' => $request->l2_id,
             'l3_id' => $request->l3_id,
             'l4_id' => $request->l4_id,
+            'bobot' => floatval($request->bobot),
         ]);
         session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

@@ -44,22 +44,27 @@
     <div class="col-3">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Rata - Rata</h4>
-                {{ $avg }}
+                <!-- <h4 class="card-title">Rata - Rata</h4>
+                {{ $avg }} -->
                 @if(Auth::user()->role != 'Auditor')
-                <hr>
+                <!-- <hr> -->
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#resetNilai">
                     Reset Nilai
                 </button>
-                <hr>
+                <!-- <hr> -->
                 <a href="{{ url('element/unggah-berkas/' . $element->id) }}" class="btn btn-info btn-sm">
                     Unggah Berkas
                 </a>
                 @endif
-                <hr>
+                <!-- <hr> -->
 
 
                 @if($element->ket_auditor)
+                <h4 class="card-title">Bobot * Score</h4>
+                <p>
+                    {{ @$element->bobot }} * {{ @$element->score_auditor }} = {{ @$element->score_hitung }}
+                </p>
+                <hr>
                 <h4 class="card-title">Keterangan Auditor</h4>
                 <p>
                     {{ @$element->ket_auditor }}
@@ -119,7 +124,14 @@
                 <div class="modal-body">
                     @csrf
                     @method('put')
-                    <textarea class="form-control" id="ket_auditor" name="ket_auditor" rows="5">{{ @$element->ket_auditor }}</textarea>
+                    <div class="form-group">
+                        <label>Score</label>
+                        <input class="form-control" id="score_auditor" name="score_auditor" value="{{ @$element->score_auditor }}"></input>
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <textarea class="form-control" id="ket_auditor" name="ket_auditor" rows="5">{{ @$element->ket_auditor }}</textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
