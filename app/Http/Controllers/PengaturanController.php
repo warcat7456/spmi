@@ -69,6 +69,7 @@ class PengaturanController extends Controller
         return view('prodi.index', [
             'prodi' => Prodi::NotIn(),
             'jenjang' => Jenjang::NotIn(),
+            'fakultas' => Fakultas::all()
         ]);
     }
 

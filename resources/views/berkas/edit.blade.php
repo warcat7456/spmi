@@ -5,9 +5,9 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">{{ $element->l1->name }}</h4>
-                    <p class="card-text">{{ $element->l2->name }}</p>
-                    <p class="card-text">{{ $element->l3->name }}</p>
-                    <p class="card-text">{{ $element->l4->name }}</p>
+                    <p class="card-text">{{ $element->l2?->name }}</p>
+                    <p class="card-text">{{ $element->l3?->name }}</p>
+                    <p class="card-text">{{ $element->l4?->name }}</p>
                 </div>
             </div>
             <hr>
@@ -41,14 +41,16 @@
                                     </div>
                                 @endforeach
                             @else
-                                <div class="form-group">
-                                    {!! $indikator->dec !!}
-                                    <hr>
-                                    <label>Score Input Manual</label>
-                                    <input type="text" class="form-control" name="score" required>
-                                    <small id="helpId" class="text-muted">Masukan nilai dengan menambahkan titik
-                                        3.50</small>
-                                </div>
+                                @if (Auth::user()->role !== 'Prodi')
+                                    <div class="form-group">
+                                        {!! $indikator->dec !!}
+                                        <hr>
+                                        <label>Score Input Manual</label>
+                                        <input type="text" class="form-control" name="score" required>
+                                        <small id="helpId" class="text-muted">Masukan nilai dengan menambahkan titik
+                                            3.50</small>
+                                    </div>
+                                @endif
                             @endif
                         </div>
                         <div class="form-group">

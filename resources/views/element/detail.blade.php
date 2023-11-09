@@ -109,14 +109,14 @@
                 <a href="{{ route('element-prodi', $prodi->kode) }}" class="btn btn-info btn-sm">
                     Kembali
                 </a>
-                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modelEdit">
-                    Update Nilai Bobot
-                </button>
-                <a href="{{ url('element/konfirmasi/' . $element->id) }}" class="btn btn-danger btn-sm">
-                    Hapus Element
-                </a>
-
-
+                @if (Auth::user()->role === 'Admin' || Auth::user()->role === 'Auditor')
+                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modelEdit">
+                        Update Nilai Bobot
+                    </button>
+                    <a href="{{ url('element/konfirmasi/' . $element->id) }}" class="btn btn-danger btn-sm">
+                        Hapus Element
+                    </a>
+                @endif
                 <div class="modal fade" id="modelEdit" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
