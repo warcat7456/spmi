@@ -16,14 +16,14 @@
                             <tr>
                                 <th>Name</th>
                                 <th width="150px">Dec</th>
-                                <th width="150px">Score</th>
+                                <th width="150px">Catatan Auditor</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>Name</th>
                                 <th width="150px">Dec</th>
-                                <th width="150px">Score</th>
+                                <th width="150px">Catatan Auditor</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -32,7 +32,7 @@
                                 <td><a href="{{ url('berkas/' . $i->id) }}" target="_blank">{{ $i->file_name }}</a>
                                 </td>
                                 <td>{!! $i->dec !!}</td>
-                                <td>{{ $i->score }}</td>
+                                <td>{{ $i->catatan_auditor }}</td>
                             </tr>
                             @endforeach
                         </tbody>

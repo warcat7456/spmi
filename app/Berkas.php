@@ -33,5 +33,4 @@ class Berkas extends Model
     {
         return $this->belongsTo(Prodi::class);
     }
-
 }

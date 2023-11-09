@@ -18,7 +18,7 @@ services:
       - app-network
 
   db:
-    image: arm64v8/mysql
+    image: mysql
     container_name: laravel-db
     restart: unless-stopped
     ports:

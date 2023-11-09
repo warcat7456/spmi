@@ -48,6 +48,7 @@ class CreateBerkasTable extends Migration
             $table->string('file_name');
             $table->string('file');
             $table->text('dec')->nullable();
+            $table->text('catatan_auditor')->nullable();
             $table->decimal('score', 3, 2)->default(0.00);
             $table->timestamps();
         });

@@ -16,7 +16,9 @@
                             <tr class="text-center">
                                 <th>Kriteria</th>
                                 <th>Indikator</th>
-                                <th>Element</th>
+                                <th>Bobot</th>
+                                <th>Score</th>
+                                <th>Hasil</th>
                                 <th>Jumlah Berkas</th>
                                 <th width="150px">Berkas & Ketentuan</th>
                             </tr>
@@ -31,7 +33,10 @@
                                     <?= !empty($indi->l4->name) ? '<br>' . $indi->l4->name : '' ?>
                                 </td>
                                 <td> {{ $indi->indikator->dec }}</td>
-                                <td> {{ $indi->deskripsi ?: '-' }}</td>
+                                <td> {{ $indi->bobot }}</td>
+                                <td> {{ $indi->score_auditor }}</td>
+                                <td> {{ $indi->score_hitung }}</td>
+                                <!-- <td> {{ $indi->deskripsi ?: '-' }}</td> -->
                                 <td> {{ count($indi->berkas) == 0 ? '-' : count($indi->berkas) . ' Berkas' }}</td>
 
                                 <td>
