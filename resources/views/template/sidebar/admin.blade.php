@@ -98,12 +98,12 @@
     </li>
 
 
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('halaman.index') }}">
             <i class="fa-solid fa-file"></i>
             <span>Halaman</span>
         </a>
-    </li>
+    </li> --}}
     <li class="nav-item">
         <a class="nav-link" href="{{ route('users') }}">
             <i class="fa-solid fa-user-plus"></i>
