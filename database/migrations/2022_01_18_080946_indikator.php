@@ -21,6 +21,7 @@ class Indikator extends Migration
                 ->on('jenjangs')
                 ->onDelete('cascade');
             $table->text('dec');
+            $table->decimal('bobot', 3, 2, true)->nullable()->default(0.00);
         });
     }
 

@@ -160,6 +160,22 @@ class BerkasController extends Controller
         return redirect()->route('element-prodi', $prodi->kode);
     }
 
+    public function putCatatan(Berkas $berkas, Request $request)
+    {
+
+
+        $berkas->update([
+            'catatan_auditor' => $request->catatan_auditor,
+        ]);
+
+        session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>');
+        return redirect()->route('detail-berkas', $berkas->id);
+    }
+
     public function hapus(Berkas $berkas)
     {
         $element = Element::where('id', $berkas->element_id)->first();

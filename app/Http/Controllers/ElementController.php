@@ -134,11 +134,10 @@ class ElementController extends Controller
         $indikator = Indikator::where('jenjang_id', $request->jenjang)->get();
         $jenjang = Jenjang::where('id', $request->jenjang)->get()->first();
 
-        // dd($indikator);
         $row = [];
-        // for ($i = 0; $i < count($request->bobot); $i++) {
         foreach ($indikator as $i) {
             foreach ($prodi as $p) {
+                // $score_hitung = $i->bobot * Element->score_auditor;
                 Element::updateOrCreate(
                     [
                         'prodi_id' => $p->id,
@@ -149,11 +148,11 @@ class ElementController extends Controller
                         'indikator_id' => $i->id,
                     ],
                     [
-                        'bobot' => 0,
-                        'deskripsi' => '',
-                        'score_berkas' => 0,
-                        'score_hitung' => 0,
-                        'count_berkas' => 0
+                        'bobot' => $i->bobot,
+                        // 'deskripsi' => '',
+                        // 'score_berkas' => 0,
+                        'score_hitung' => \DB::raw('IFNULL((score_auditor * ' . $i->bobot . '), 0)'),
+                        // 'count_berkas' => 0
                     ]
                 );
             }
@@ -411,12 +410,13 @@ class ElementController extends Controller
         </button>
         <strong>Berkas berhasil di simpan</strong>
     </div>');
-        return redirect()->route('element-prodi', $prodi->kode);
+        return redirect()->route('lihat-berkas', $element->id);
     }
 
     public function lihatBerkas(Element $element)
     {
         $berkas = Berkas::where('element_id', $element->id)->get();
+        $prodi = Prodi::where('id', $element->prodi_id)->get()->first();
         if ($berkas->count() > 1) {
             $avg = round($berkas->sum('score') / $berkas->count(), 2);
         } else {
@@ -426,6 +426,7 @@ class ElementController extends Controller
         return view('element.lihat-berkas', [
             'element' => $element,
             'berkas' => $berkas,
+            'prodi' => $prodi,
             'avg' => $avg,
         ]);
     }
@@ -610,9 +611,11 @@ class ElementController extends Controller
 
     public function putPenilaianAuditor(Element $element, Request $request)
     {
-
+        $score_hitung = floatval($request->score_auditor) * floatval($element->bobot);
         $element->update([
             'ket_auditor' => $request->ket_auditor,
+            'score_auditor' => floatval($request->score_auditor),
+            'score_hitung' => floatval($score_hitung),
         ]);
         return redirect()->to('/element/lihat-berkas/' . $element->id);
     }

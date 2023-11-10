@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Berkas extends Model
 {
-    protected $fillable = ['element_id', 'prodi_id', 'l1_id', 'l2_id', 'l3_id', 'l4_id', 'file_name', 'file', 'dec', 'score'];
+    protected $fillable = ['element_id', 'prodi_id', 'l1_id', 'l2_id', 'l3_id', 'l4_id', 'file_name', 'file', 'dec', 'score', 'catatan_auditor'];
     public $timestamps = false;
 
     public function l1()
@@ -33,5 +33,4 @@ class Berkas extends Model
     {
         return $this->belongsTo(Prodi::class);
     }
-
 }

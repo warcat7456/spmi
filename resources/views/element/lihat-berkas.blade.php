@@ -16,14 +16,14 @@
                             <tr>
                                 <th>Name</th>
                                 <th width="150px">Dec</th>
-                                <th width="150px">Score</th>
+                                <th width="150px">Catatan Auditor</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>Name</th>
                                 <th width="150px">Dec</th>
-                                <th width="150px">Score</th>
+                                <th width="150px">Catatan Auditor</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -32,7 +32,7 @@
                                 <td><a href="{{ url('berkas/' . $i->id) }}" target="_blank">{{ $i->file_name }}</a>
                                 </td>
                                 <td>{!! $i->dec !!}</td>
-                                <td>{{ $i->score }}</td>
+                                <td>{{ $i->catatan_auditor }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -44,35 +44,42 @@
     <div class="col-3">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Rata - Rata</h4>
-                {{ $avg }}
-                @if(Auth::user()->role != 'Auditor')
-                <hr>
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#resetNilai">
-                    Reset Nilai
-                </button>
-                <hr>
-                <a href="{{ url('element/unggah-berkas/' . $element->id) }}" class="btn btn-info btn-sm">
-                    Unggah Berkas
+                <!-- <h4 class="card-title">Rata - Rata</h4>
+                {{ $avg }} -->
+                <a href="{{ route('element-prodi', $prodi->kode) }}" class=" btn btn-primary btn-sm d-flex justify-content-start align-items-center mb-2 w-100">
+                    <i class="fa fa-arrow-left mr-2"></i> Kembali
                 </a>
+                @if(Auth::user()->role == 'Admin')
+                <button type="button" class="btn btn-warning btn-sm d-flex justify-content-start align-items-center mb-2 w-100" data-toggle="modal" data-target="#resetNilai">
+                    <i class="fa fa-arrow-left mr-2"></i> Reset Nilai
+                </button>
+                @endif
+                @if(in_array(Auth::user()->role,['Admin','Prodi']))
+                <a href="{{ url('element/unggah-berkas/' . $element->id) }}" class="btn btn-info btn-sm d-flex justify-content-start align-items-center mb-2 w-100">
+                    <i class="fa fa-upload mr-2"></i> Unggah Berkas
+                </a>
+                @endif
+                @if(Auth::user()->role == 'Auditor')
+                <button type="button" class="btn btn-primary btn-sm d-flex justify-content-start align-items-center mb-2 w-100" data-toggle="modal" data-target="#form_penilaian">
+                    <i class="fa fa-wpforms  mr-2"></i> Form Auditor
+                </button>
                 @endif
                 <hr>
 
 
-                @if($element->ket_auditor)
-                <h4 class="card-title">Keterangan Auditor</h4>
+                <h5 class="card-title">Bobot * Score</h5>
+                <p>
+                    {{ @$element->bobot }} * {{ @$element->score_auditor }} = {{ @$element->score_hitung }}
+                </p>
+                <hr>
+                <h5 class="card-title">Keterangan Auditor</h5>
                 <p>
                     {{ @$element->ket_auditor }}
                 </p>
                 <hr>
-                @endif
 
 
-                @if(Auth::user()->role == 'Auditor')
-                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="modal" data-target="#form_penilaian">
-                    Form Keterangan Auditor
-                </button>
-                @endif
+
             </div>
         </div>
     </div>
@@ -119,7 +126,14 @@
                 <div class="modal-body">
                     @csrf
                     @method('put')
-                    <textarea class="form-control" id="ket_auditor" name="ket_auditor" rows="5">{{ @$element->ket_auditor }}</textarea>
+                    <div class="form-group">
+                        <label>Score</label>
+                        <input class="form-control" id="score_auditor" name="score_auditor" value="{{ @$element->score_auditor }}"></input>
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <textarea class="form-control" id="ket_auditor" name="ket_auditor" rows="5">{{ @$element->ket_auditor }}</textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

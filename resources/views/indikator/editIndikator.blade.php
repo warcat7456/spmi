@@ -34,6 +34,10 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label>Bobot</label>
+                            <input id="text" class="form-control" name="bobot" value="{!! $i->bobot !!}">
+                        </div>
+                        <div class="form-group">
                             <label>Indikator</label>
                             <textarea id="name" class="form-control" name="dec">{!! $i->dec !!}</textarea>
                         </div>
