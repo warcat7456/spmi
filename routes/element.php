@@ -10,7 +10,7 @@ Route::post('element-storeparent', 'ElementController@storeparent')->name('store
 
 Route::get('element/unggah-berkas/{element}', 'ElementController@unggahBerkas');
 Route::post('element/store-berkas', 'ElementController@storeBerkas');
-Route::get('element/lihat-berkas/{element}', 'ElementController@lihatBerkas');
+Route::get('element/lihat-berkas/{element}', 'ElementController@lihatBerkas')->name('lihat-berkas');
 
 Route::get('element/syarat-akreditasi/{element}', 'ElementController@akreditas');
 Route::put('element/put-akreditasi/{element}', 'ElementController@putAkreditas');

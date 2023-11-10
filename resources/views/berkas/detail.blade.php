@@ -49,7 +49,7 @@
                     Form Catatan Auditor
                 </button>
                 @endif
-                <a href="{{ url('berkas/cari') }}" class="btn btn-primary btn-sm">Kembali ke Pencarian</a>
+                <a href="{{ route('lihat-berkas',$berkas->element_id) }}" class="btn btn-primary btn-sm">Kembali</a>
             </div>
         </div>
     </div>

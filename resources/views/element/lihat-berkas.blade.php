@@ -46,36 +46,40 @@
             <div class="card-body">
                 <!-- <h4 class="card-title">Rata - Rata</h4>
                 {{ $avg }} -->
-                @if(Auth::user()->role != 'Auditor')
-                <!-- <hr> -->
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#resetNilai">
-                    Reset Nilai
+                <a href="{{ route('element-prodi', $prodi->kode) }}" class=" btn btn-primary btn-sm d-flex justify-content-start align-items-center mb-2 w-100">
+                    <i class="fa fa-arrow-left mr-2"></i> Kembali
+                </a>
+                @if(Auth::user()->role == 'Admin')
+                <button type="button" class="btn btn-warning btn-sm d-flex justify-content-start align-items-center mb-2 w-100" data-toggle="modal" data-target="#resetNilai">
+                    <i class="fa fa-arrow-left mr-2"></i> Reset Nilai
                 </button>
-                <!-- <hr> -->
-                <a href="{{ url('element/unggah-berkas/' . $element->id) }}" class="btn btn-info btn-sm">
-                    Unggah Berkas
+                @endif
+                @if(in_array(Auth::user()->role,['Admin','Prodi']))
+                <a href="{{ url('element/unggah-berkas/' . $element->id) }}" class="btn btn-info btn-sm d-flex justify-content-start align-items-center mb-2 w-100">
+                    <i class="fa fa-upload mr-2"></i> Unggah Berkas
                 </a>
                 @endif
-                <!-- <hr> -->
+                @if(Auth::user()->role == 'Auditor')
+                <button type="button" class="btn btn-primary btn-sm d-flex justify-content-start align-items-center mb-2 w-100" data-toggle="modal" data-target="#form_penilaian">
+                    <i class="fa fa-wpforms  mr-2"></i> Form Auditor
+                </button>
+                @endif
+                <hr>
 
 
-                <h4 class="card-title">Bobot * Score</h4>
+                <h5 class="card-title">Bobot * Score</h5>
                 <p>
                     {{ @$element->bobot }} * {{ @$element->score_auditor }} = {{ @$element->score_hitung }}
                 </p>
                 <hr>
-                <h4 class="card-title">Keterangan Auditor</h4>
+                <h5 class="card-title">Keterangan Auditor</h5>
                 <p>
                     {{ @$element->ket_auditor }}
                 </p>
                 <hr>
 
 
-                @if(Auth::user()->role == 'Auditor')
-                <button type="button" class="btn btn-primary btn-sm mb-2" data-toggle="modal" data-target="#form_penilaian">
-                    Form Keterangan Auditor
-                </button>
-                @endif
+
             </div>
         </div>
     </div>

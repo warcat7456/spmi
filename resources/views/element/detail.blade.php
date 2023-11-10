@@ -112,7 +112,12 @@
                 </tbody>
             </table>
             <a href="{{ route('element-prodi', $prodi->kode) }}" class="btn btn-info btn-sm">
+                <i class="fa fa-arrow-left"></i>
                 Kembali
+            </a>
+            <a href="{{ route('lihat-berkas', $element->id) }}" class="btn btn-info btn-sm">
+                <i class="fa fa-file"></i>
+                Lihat Berkas
             </a>
             @if (Auth::user()->role === 'Admin')
             <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modelEdit">

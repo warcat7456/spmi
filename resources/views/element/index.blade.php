@@ -14,7 +14,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Nos.</th>
+                                <th>No.</th>
                                 <th>Element</th>
                                 <th width="150px">Berkas & Ketentuan</th>
                             </tr>

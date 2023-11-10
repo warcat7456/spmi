@@ -40,26 +40,30 @@
                                 <td> {{ count($indi->berkas) == 0 ? '-' : count($indi->berkas) . ' Berkas' }}</td>
 
                                 <td>
-                                    <a class="btn btn-primary" href="{{ url('element/detail', $indi->id) }}">
-                                        <i class="fa fa-eye"></i> Lihat Detail
+                                    <a class="btn btn-primary w-100" href="{{ url('element/detail', $indi->id) }}">
+                                        Detail
                                     </a>
                                     <hr>
+                                    @if (Auth::user()->role != 'Auditor')
                                     <div class="dropdown open">
                                         <button class="btn btn-primary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Berkas
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="triggerId">
-                                            @if (Auth::user()->role != 'Auditor')
                                             <a class="dropdown-item" href="{{ url('element/unggah-berkas/' . $indi->id) }}">Unggah
                                                 Berkas</a>
-                                            @endif
                                             <a class="dropdown-item" href="{{ url('element/lihat-berkas/' . $indi->id) }}">Lihat
                                                 Berkas</a>
                                         </div>
                                     </div>
+                                    @else
+                                    <a class="btn btn-primary w-100" href="{{ url('element/lihat-berkas/' . $indi->id) }}">
+                                        Berkas
+                                    </a>
+                                    @endif
                                     <hr>
-                                    <div class="dropdown open">
-                                        <button {{ Auth::user()->role == 'Prodi' ? 'hidden' : '' }} class="btn btn-info dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class=" dropdown open">
+                                        <button {{ Auth::user()->role == 'Prodi' ? 'hidden' : '' }} class="btn btn-info dropdown-toggle w-100" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Ketentuan
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="triggerId">

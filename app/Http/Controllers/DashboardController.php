@@ -20,14 +20,13 @@ class DashboardController extends Controller
             ]);
         } else if (Auth::user()->role == 'Admin') {
             $prodi = Prodi::all();
-            return view('dashboard.m2', [
+            return view('dashboard.list_fakultas', [
                 'f' => $fakultas,
                 'p' => $prodi,
                 'edit' => false
             ]);
         } else {
-
-            return view('dashboard.m2', [
+            return view('dashboard.list_fakultas', [
                 'p' => Prodi::get(),
                 'f' => $fakultas,
             ]);
