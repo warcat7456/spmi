@@ -151,7 +151,7 @@ class ElementController extends Controller
                         'bobot' => $i->bobot,
                         // 'deskripsi' => '',
                         // 'score_berkas' => 0,
-                        // 'score_hitung' => 0,
+                        'score_hitung' => \DB::raw('IFNULL((score_auditor * ' . $i->bobot . '), 0)'),
                         // 'count_berkas' => 0
                     ]
                 );
