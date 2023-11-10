@@ -3,8 +3,9 @@ services:
   app:
     build:
       args:
-        user: www
-        uid: 1000
+        user: ${APP_USER:-www}
+        uid: ${APP_UID:-1000}
+        base_image: ${PHP_BASE_IMAGE:-arm64v8/php:8.0-fpm}
       context: ./
       dockerfile: Dockerfile
     image: laravel-image
@@ -18,7 +19,7 @@ services:
       - app-network
 
   db:
-    image: arm64v8/mysql
+    image: ${MYSQL_IMAGE:-arm64v8/mysql}
     container_name: laravel-db
     restart: unless-stopped
     ports:
