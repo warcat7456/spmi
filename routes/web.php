@@ -93,6 +93,7 @@ Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
     Route::delete('users/hapus/{user}', 'AdminController@hapus');
     Route::get('users/edit/{user}', 'AdminController@edit');
     Route::put('users/put/{user}', 'AdminController@put');
+    Route::get('edit-user-prodi', 'UserController@edit')->name('user-prodi.edit');
 
     // DATA TARGET PENCAPAIAN
     Route::get('target', 'TargetController@index')->name('target');

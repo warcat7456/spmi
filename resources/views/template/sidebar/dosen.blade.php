@@ -43,6 +43,7 @@
         @endforeach
 
     </li>
+
     <li class="nav-item">
         @foreach ($data['p'] as $pr)
             @if (Auth::user()->prodi_kode == $pr->kode)
@@ -60,6 +61,13 @@
                     <span>Profil Prodi</span></a>
             @endif
         @endforeach
+    </li>
+    <li class="nav-item">
+
+        <a class="nav-link" href="{{ route('user-prodi.edit') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Edit Profil</span></a>
+
     </li>
     <!-- <li class="nav-item">
         <a class="nav-link" href="{{ route('berkas') }}">

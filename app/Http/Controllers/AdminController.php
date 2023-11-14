@@ -138,6 +138,11 @@ class AdminController extends Controller
         </button>
         <strong>Data Berhasil Dibaharui</strong>
     </div>');
+
+        if (auth()->user()->role == 'Prodi') {
+            return redirect()->back();
+        }
+
         return redirect()->route('users');
     }
 
