@@ -31,9 +31,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('portal/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('portal/css/sb-admin-2.css') }}" rel="stylesheet">
@@ -55,19 +53,19 @@
         <!-- Sidebar -->
         <!-- TODO: memperbaiki sidebar yang ditampilkan sesuai role (prodi-dosen,auditor-admin) -->
         @if (Auth::user()->role == 'Admin')
-            @include('template.sidebar.admin')
+        @include('template.sidebar.admin')
         @elseif(Auth::user()->role == 'Ketua LPM')
-            @include('template.sidebar.ketua-lpm')
+        @include('template.sidebar.ketua-lpm')
         @elseif(Auth::user()->role == 'Ketua Program Studi')
-            @include('template.sidebar.kaprodi')
+        @include('template.sidebar.kaprodi')
         @elseif(Auth::user()->role == 'Prodi')
-            @include('template.sidebar.dosen')
+        @include('template.sidebar.dosen')
         @elseif(Auth::user()->role == 'UPPS')
-            @include('template.sidebar.upps')
+        @include('template.sidebar.upps')
         @elseif(Auth::user()->role == 'Auditor')
-            @include('template.sidebar.auditor')
+        @include('template.sidebar.auditor')
         @else
-            @include('template.sidebar.mhsalm')
+        @include('template.sidebar.mhsalm')
         @endif
 
         <!-- End of Sidebar -->
@@ -92,17 +90,14 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}
                                     {{ Auth::user()->role == 'Prodi' ? ' - ' . Auth::user()->prodi_kode : '' }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('portal/img/undraw_profile.svg') }}">
+                                <img class="img-profile rounded-circle" src="{{ asset('portal/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
 
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -149,8 +144,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <form action="{{ route('logout') }}" method="POST">
             @csrf
             <div class="modal-dialog" role="document">
@@ -171,9 +165,12 @@
         </form>
     </div>
 
+
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('portal/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('portal/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <script src="js/custom.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('portal/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
@@ -186,8 +183,7 @@
     <script src="{{ asset('portal/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
     <!-- ex -->
-    <link href="https://cdn.datatables.net/rowgroup/1.0.2/css/rowGroup.dataTables.min.css" rel="stylesheet"
-        type="text/css" />
+    <link href="https://cdn.datatables.net/rowgroup/1.0.2/css/rowGroup.dataTables.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -199,8 +195,76 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('portal/js/demo/datatables-demo.js') }}"></script>
 
-    @yield('script')
 
+    <!-- Swal -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @yield('script')
+    <script>
+        // $(document).ready(function() {
+
+        function swalLoading() {
+            Swal.fire({
+                title: 'Loading!',
+                allowOutsideClick: false,
+                customClass: {
+                    confirmButton: 'btn btn-primary waves-effect waves-light d-none'
+                },
+                buttonsStyling: false
+            });
+            Swal.showLoading();
+        }
+
+        function swalBerhasil(label = 'Berhasil !!', btn = true) {
+            btnclass = btn ? '' : 'd-none';
+            Swal.fire({
+                title: label,
+                icon: 'success',
+                showClass: {
+                    popup: 'animate__animated animate__flipInX'
+                },
+                allowOutsideClick: false,
+                customClass: {
+                    confirmButton: `btn btn-primary waves-effect waves-light ${btnclass}`
+                },
+                buttonsStyling: false
+            });
+        }
+
+        function swalError(message = '', label = 'Gagal !!', btn = true) {
+            Swal.fire({
+                title: label,
+                icon: 'error',
+                text: message,
+                showClass: {
+                    popup: 'animate__animated animate__flipInX'
+                },
+                allowOutsideClick: true,
+                customClass: {
+                    confirmButton: `btn btn-primary waves-effect waves-light`
+                },
+                buttonsStyling: false
+            });
+        }
+
+        function SwalOpt(title = 'Apakah anda yakin ?', text = 'Data akan disimpan!', icon = 'warning') {
+            return {
+                title: title,
+                icon: icon,
+                text: text,
+                allowOutsideClick: false,
+
+                showCancelButton: true,
+                confirmButtonText: 'Ya !!',
+                showLoaderOnConfirm: true,
+                customClass: {
+                    confirmButton: 'btn btn-primary me-3 waves-effect waves-light',
+                    cancelButton: 'btn btn-outline-danger waves-effect'
+                }
+            };
+        }
+        // });
+    </script>
 </body>
 
 </html>

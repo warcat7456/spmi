@@ -51,7 +51,8 @@ Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
         'prodi.php',
         'l1-4.php',
         'indikator.php',
-        'element.php'
+        'element.php',
+        'periode.php'
     ];
 
     foreach ($filesToRequire as $file) {

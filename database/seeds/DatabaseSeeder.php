@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(L4Seeder::class);
         $this->call(ProdiSeeder::class);
         $this->call(IndikatorSeeder::class);
+        $this->call(PeriodeSeeder::class);
+        $this->call(LembagaSeeder::class);
         // $this->call(ScoreSeeder::class);
         // $this->call(TargetSeeder::class);
         // $this->call(ElementSeeder::class);

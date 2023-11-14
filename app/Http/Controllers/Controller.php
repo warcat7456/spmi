@@ -21,4 +21,30 @@ class Controller extends BaseController
             // 'p2' => Prodi::ByFakultas(''),
         ]);
     }
+
+    public function ResponseError($message = '', $error = true, $status = 400)
+    {
+        $this->Response(null, $message, true, $status);
+    }
+
+    public function Response($data = [], $message = '', $error = false, $status = 200)
+    {
+        echo json_encode(
+            [
+                'error' => $error,
+                'message' => $message,
+                'data' => $data,
+            ],
+            $status
+        );
+        return;
+        // return response()->json(
+        //     [
+        //         'error' => $error,
+        //         'message' => $message,
+        //         'data' => $data,
+        //     ],
+        //     $status
+        // );
+    }
 }

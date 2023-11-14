@@ -30,15 +30,14 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#prodi" aria-expanded="true"
-            aria-controls="prodi">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#prodi" aria-expanded="true" aria-controls="prodi">
             <i class="fa-solid fa-circle-check"></i>
             <span>Penilain & Diagram</span></a>
         </a>
         <div id="prodi" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['p'] as $pr)
-                    <a class="collapse-item" href="{{ route('prodis', $pr->kode) }}">{{ $pr->name }}</a>
+                <a class="collapse-item" href="{{ route('prodis', $pr->kode) }}">{{ $pr->name }}</a>
                 @endforeach
             </div>
         </div>
@@ -46,48 +45,51 @@
 
     <!-- Master Kriteria -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#kriteria" aria-expanded="true"
-            aria-controls="jenjang">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#kriteria" aria-expanded="true" aria-controls="jenjang">
             <i class="fa-solid fa-folder"></i>
             <span>Kriteria & Sub Butir</span>
         </a>
         <div id="kriteria" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['j'] as $jn)
-                    <a class="collapse-item" href="{{ url('kriteria', $jn->kode) }}">{{ $jn->name }}</a>
+                <a class="collapse-item" href="{{ url('kriteria', $jn->kode) }}">{{ $jn->name }}</a>
                 @endforeach
             </div>
         </div>
     </li>
     <!-- Master Indikator -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#indikator"
-            aria-expanded="true" aria-controls="indikator">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#indikator" aria-expanded="true" aria-controls="indikator">
             <i class="fa-solid fa-chart-bar"></i>
             <span>Indikator Penilaian</span></a>
         </a>
         <div id="indikator" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['j'] as $j)
-                    <a class="collapse-item" href="{{ route('indikator-jenjang', $j->kode) }}">{{ $j->name }}</a>
+                <a class="collapse-item" href="{{ route('indikator-jenjang', $j->kode) }}">{{ $j->name }}</a>
                 @endforeach
             </div>
         </div>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#element" aria-expanded="true"
-            aria-controls="element">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#element" aria-expanded="true" aria-controls="element">
             <i class="fa-brands fa-elementor"></i>
             <span>Element & Berkas</span></a>
         </a>
         <div id="element" class="collapse" aria-labelledby="heading1" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 @foreach ($data['p'] as $pr)
-                    <a class="collapse-item" href="{{ route('element-prodi', $pr->kode) }}">{{ $pr->name }}</a>
+                <a class="collapse-item" href="{{ route('element-prodi', $pr->kode) }}">{{ $pr->name }}</a>
                 @endforeach
             </div>
         </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('periode') }}">
+            <i class="fa-solid fa-clock"></i>
+            <span>Periode</span>
+        </a>
     </li>
 
     <li class="nav-item">
@@ -111,8 +113,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pengaturan"
-            aria-expanded="true" aria-controls="pengaturan">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pengaturan" aria-expanded="true" aria-controls="pengaturan">
             <i class="fas fa-fw fa-cog"></i>
             <span>Pengaturan</span>
         </a>
