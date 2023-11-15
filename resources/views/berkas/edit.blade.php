@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label>Berkas</label>
-                            <input type="file" class="form-control" name="file">
+                            <input type="file" accept=".pdf,.docx,.csv,.xls,.xlsx" class="form-control" name="file">
                             <small id="helpId" class="text-muted">Upload Berkas</small>
                         </div>
                         <hr>
