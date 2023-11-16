@@ -1,4 +1,5 @@
 <?php
+Route::get('indikator-lam', 'IndikatorController@index_lam')->name('indikator-lam');
 Route::get('indikator/{jenjang}', 'IndikatorController@index')->name('indikator-jenjang');
 Route::post('indikator/store', 'IndikatorController@store');
 Route::get('indikator/input-score/{indikator}', 'IndikatorController@inputScore');

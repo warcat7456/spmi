@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Indikator;
+use App\IndikatorLam;
 use App\Jenjang;
 use App\Score;
+use App\Lembaga;
 use Illuminate\Http\Request;
 
 class IndikatorController extends Controller
@@ -16,6 +18,28 @@ class IndikatorController extends Controller
         return view('indikator.index', [
             'd' => $indikator,
             'j' => $j,
+        ]);
+    }
+
+    public function index_lam(Request $request)
+    {
+        if (empty($request->input('lembaga'))) $filter['lembaga_id'] = 1;
+        else  $filter['lembaga_id'] = $request->input('lembaga');
+
+        if (empty($request->input('jenjang'))) $filter['jenjang_id'] = 1;
+        else  $filter['jenjang_id'] = $request->input('jenjang');
+
+        $j = Jenjang::where('id', $filter['jenjang_id'])->first();
+        $jenjang = Jenjang::get();
+        $indikator = IndikatorLam::with(['l1', 'l2', 'l3', 'l4'])->where('jenjang_id', $j->id)->orderBy('id', 'ASC')->get();
+        $l = Lembaga::get();
+
+        return view('indikator.index_lam', [
+            'd' => $indikator,
+            'j' => $j,
+            'jenjang' => $jenjang,
+            'lembaga' => $l,
+            'filter' => $filter,
         ]);
     }
 
