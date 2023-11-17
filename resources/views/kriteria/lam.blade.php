@@ -38,7 +38,7 @@
                     <div class="row">
 
                         <div class="col-3">
-                            <select class="form-control" id="level" name="level">
+                            <select class="form-control" id="level" name="level" onchange="this.form.submit()">
                                 <option value="">-- Semua Level --</option>
                                 <option value="1">Level 1</option>
                                 <option value="2">Level 2</option>
@@ -214,11 +214,11 @@
 
 
 <div class="modal fade" id="modalKritNew" tabindex="-1" role="dialog" style="background : rgba(158, 167, 170, 0.6) !important" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <form id="krit_form_new">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Form Kriteria LV 1</h5>
+                    <h5 class="modal-title">Form Tambah Kriteria</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -226,20 +226,30 @@
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
-                        <label for="">Parent</label>
-                        <input type="text" name="parent_name" id="parent_name" class="form-control" placeholder="" readonly aria-describedby="helpId" required>
+                        <label for="">Info Sub Kriteria</label>
+                        <p id="parent_info"></p>
+                        <!-- <textarea type="text" name="parent_name" id="parent_name" class="form-control" placeholder="" readonly aria-describedby="helpId"></textarea> -->
                     </div>
+                    <hr>
+
                     <div class="form-group">
-                        <label for="">Nama</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="*contoh : C.1.2. Profil Unit" aria-describedby="helpId" required>
-                        <input type="text" name="lv" id="lv" class="form-control" value="">
-                        <input type="text" name="id" id="id" class="form-control" value="">
-                        <input type="text" name="parent" id="parent" class="form-control" value="">
-                        <input type="text" name="jenjang" class="form-control" value="">
-                        <small id="helpId" class="text-muted">Nama
-                            kode harus di akhiri dengan tanda titik (.) contoh : C.1.3<strong>.</strong>
-                        </small>
+                        <label for="">Kode - Nama</label>
+                        <div class="input-group">
+                            <div class="input-group-append" id="layout_parent_kode">
+                                <span class="input-group-text" id="val_parent_kode"></span>
+                            </div>
+                            <input type="text" class="form-control" style="max-width: 50px !important" id="kode" name="kode">
+                            <div class="input-group-append">
+                                <span class="input-group-text">. </span>
+                            </div>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
                     </div>
+                    <input type="hidden" name="lv" id="lv" class="form-control" value="">
+                    <input type="hidden" name="id" id="id" class="form-control" value="">
+                    <input type="hidden" name="parent" id="parent" class="form-control" value="">
+                    <input type="hidden" name="jenjang" class="form-control" value="{{$filter['jenjang_id']}}">
+                    <input type="hidden" name="lembaga_id" class="form-control" value="{{$filter['lembaga_id']}}">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -255,7 +265,7 @@
         <form id="krit_form">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Form Kriteria X</h5>
+                    <h5 class="modal-title">Form Edit Kriteria</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -263,32 +273,26 @@
                 <div class="modal-body">
                     @csrf
                     <div class="form-group">
-                        <!-- <label for="parent">Sub level</label> -->
-                        <!-- <select class="form-control" style="width : 100%" name="parent" id="parent" multiple="multiple">
-                        </select> -->
+                        <label for="">Info Sub Kriteria</label>
+                        <p id="parent_info"></p>
                     </div>
+                    <hr>
                     <div class="form-group">
-                        <label for="">Nama</label>
-                        <div class="input-group input-daterange">
-                            <input type="" width="100 px" class="form-control" id="kode" name="kode">
+                        <label for="">Kode - Nama</label>
+                        <div class="input-group">
+                            <div class="input-group-append" id="layout_parent_kode">
+                                <span class="input-group-text" id="val_parent_kode"></span>
+                            </div>
+                            <input type="text" class="form-control" style="max-width: 50px !important" id="kode" name="kode">
                             <div class="input-group-append">
-                                <span class="input-group-text">.</span>
+                                <span class="input-group-text">. </span>
                             </div>
                             <input type="text" class="form-control" id="name" name="name">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="">Nama</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="*contoh : C.1.2. Profil Unit" aria-describedby="helpId" required>
-                        <input type="text" name="lv" id="lv" class="form-control" value="">
-                        <input type="text" name="id" id="id" class="form-control" value="">
-                        <input type="text" name="parent" id="parent" class="form-control" value="">
-                        <input type="text" name="jenjang" class="form-control" value="">
-                        <input type="text" name="url" class="form-control" value="{{ request()->url() }}">
-                        <small id="helpId" class="text-muted">Nama
-                            kode harus di akhiri dengan tanda titik (.) contoh : C.1.3<strong>.</strong>
-                        </small>
-                    </div>
+                    <input type="hidden" name="id" id="id" class="form-control" value="">
+                    <input type="hidden" name="jenjang" class="form-control" value="{{$filter['jenjang_id']}}">
+                    <input type="hidden" name="lembaga_id" class="form-control" value="{{$filter['lembaga_id']}}">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -309,8 +313,10 @@
             'id': $('#modalKrit').find('#id'),
             'name': $('#modalKrit').find('#name'),
             'kode': $('#modalKrit').find('#kode'),
-            'parent': $('#modalKrit').find('#parent'),
-            'lv': $('#modalKrit').find('#lv'),
+            'parent_info': $('#modalKrit').find('#parent_info'),
+            'layout_parent_kode': $('#modalKrit').find('#layout_parent_kode'),
+            'val_parent_kode': $('#modalKrit').find('#val_parent_kode'),
+
         };
 
         var toolbar = {
@@ -328,9 +334,11 @@
             'form': $('#modalKritNew').find('#krit_form_new'),
             'id': $('#modalKritNew').find('#id'),
             'name': $('#modalKritNew').find('#name'),
-            'parent_name': $('#modalKritNew').find('#parent_name'),
             'kode': $('#modalKritNew').find('#kode'),
             'parent': $('#modalKritNew').find('#parent'),
+            'parent_info': $('#modalKritNew').find('#parent_info'),
+            'layout_parent_kode': $('#modalKritNew').find('#layout_parent_kode'),
+            'val_parent_kode': $('#modalKritNew').find('#val_parent_kode'),
             'lv': $('#modalKritNew').find('#lv'),
         };
 
@@ -385,15 +393,20 @@
             ModalKritNew.form.trigger('reset');
             ModalKritNew.lv.val('1');
             ModalKritNew.parent.val('');
+            ModalKritNew.layout_parent_kode.hide();
+            ModalKritNew.parent_info.html('-');
+
         })
         TKriteria.on('click', '.addsub', function() {
             var id = $(this).data('id');
             var lv = $(this).data('lv');
             swalLoading();
             $.ajax({
-                url: `<?= url('search-kriteria-lam') ?>/${lv}/${id}`,
+                url: `<?= url('search-kriteria-lam') ?>`,
                 'type': 'GET',
-                data: {},
+                data: {
+                    id: id
+                },
                 success: function(data) {
                     var json = JSON.parse(data);
                     Swal.close();
@@ -408,13 +421,15 @@
                     ModalKritNew.form.trigger('reset');
                     ModalKritNew.lv.val(lv + 1);
                     ModalKritNew.parent.val(id);
-                    ModalKritNew.parent_name.val(curDat['name']);
+                    ModalKritNew.parent_info.html(curDat['val_parent'].replace(/\n/g, '<br>'));
+                    ModalKritNew.layout_parent_kode.show();
+                    ModalKritNew.val_parent_kode.html(curDat['full_kode']);
                 },
                 error: function(e) {}
             });
+        });
 
 
-        })
         TKriteria.on('click', '.edit', function() {
 
             var id = $(this).data('id');
@@ -423,9 +438,11 @@
 
             swalLoading();
             $.ajax({
-                url: `<?= url('search-kriteria-lam') ?>/${lv}/${id}`,
+                url: `<?= url('search-kriteria-lam') ?>`,
                 'type': 'GET',
-                data: {},
+                data: {
+                    'id': id
+                },
                 success: function(data) {
                     var json = JSON.parse(data);
                     Swal.close();
@@ -437,9 +454,18 @@
                     console.log(curDat)
                     ModalKrit.self.modal('show')
                     ModalKrit.id.val(curDat['id'])
-                    ModalKrit.lv.val(curDat['lv'])
-                    ModalKrit.kode.val(curDat['kode1'])
+                    ModalKrit.kode.val(curDat['kode'])
                     ModalKrit.name.val(curDat['name'])
+                    if (curDat['level'] == 1) {
+                        ModalKrit.parent_info.html('-')
+                        ModalKrit.layout_parent_kode.hide();
+
+                    } else {
+                        ModalKrit.parent_info.html(curDat['val_cur_parent'].replace(/\n/g, '<br>'));
+                        ModalKrit.layout_parent_kode.show();
+                        ModalKrit.val_parent_kode.html(curDat['parent']['full_kode']);
+                    }
+
                 },
                 error: function(e) {}
             });
@@ -454,7 +480,7 @@
                 }
                 swalLoading();
                 $.ajax({
-                    url: `<?= url('kriteria-lam/rubah/') ?>`,
+                    url: `<?= url('kriteria-lam/put/') ?>`,
                     'type': 'PUT',
                     data: ModalKrit.form.serialize(),
                     success: function(data) {
@@ -501,7 +527,6 @@
         });
         TKriteria.on('click', '.delete', function() {
             var id = $(this).data('id');
-            var lv = $(this).data('lv');
 
             Swal.fire(SwalOpt('Apakah anda yakin?', 'data akan dihapus!')).then((result) => {
                 if (!result.isConfirmed) {
@@ -512,7 +537,6 @@
                     url: `<?= url('kriteria-lam/delete/') ?>`,
                     'type': 'DELETE',
                     data: {
-                        lv: lv,
                         id: id,
                         _token: '<?= csrf_token() ?>'
                     },
@@ -533,6 +557,4 @@
         });
     })
 </script>
-
-
 @endsection

@@ -7,17 +7,6 @@
                 <form action="{{url('indikator-lam')}}" id="toolbar" method="GET">
                     <h4 class="card-title">Filter</h4>
                     <div class="row">
-
-                        <div class="col-3">
-                            <select class="form-control" id="level" name="level">
-                                <option value="">-- Semua Level --</option>
-                                <option value="1">Level 1</option>
-                                <option value="2">Level 2</option>
-                                <option value="3">Level 3</option>
-                                <option value="4">Level 4</option>
-
-                            </select>
-                        </div>
                         <div class="col-3">
                             <select class="form-control" id="lembaga" name="lembaga" onchange="this.form.submit()">
                                 <option value="">-- Lembaga --</option>
@@ -36,10 +25,16 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-3">
+                        <div class="col-2">
                             <!-- <h4 class="card-title">Aksi</h4> -->
-                            <button type="button" class="btn btn-primary btn-sm float-right" id="CreateNew">
-                                Tambah LV 1
+                            <button type="button" class="btn btn-primary btn-sm float-right mb-2 d-block w-100" data-toggle="modal" data-target="#syncElement">
+                                Sync Element
+                            </button>
+                        </div>
+                        <div class="col-2">
+                            <!-- <h4 class="card-title">Aksi</h4> -->
+                            <button type="button" class="btn btn-primary btn-sm float-right mb-2 d-block w-100" data-toggle="modal" data-target="#modelTambah">
+                                Tambah Indikator
                             </button>
                         </div>
 
@@ -101,20 +96,6 @@
             </div>
         </div>
     </div>
-    <div class="col-2">
-        <div class="card">
-            <div class="card-body mr-auto">
-                <h4 class="card-title">Aksi</h4>
-                <button type="button" class="btn btn-primary btn-sm float-right mb-2 d-block w-100" data-toggle="modal" data-target="#modelTambah">
-                    Tambah Indikator
-                </button>
-
-                <a href="{{ route('element-sync', 'jenjang=' . $j->id) }}" class="btn btn-primary btn-sm float-right d-block w-100">
-                    Sinkron Element
-                </a>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Modal -->
@@ -169,6 +150,43 @@
         </form>
     </div>
 </div>
+
+<div class="modal fade" id="syncElement" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form action="{{route('element-sync')}}" method="post" id="">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sync Element</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @csrf
+                    <div class="form-group">
+                        <label>Periode</label>
+                        <select class="form-control" name="periode_id" id="periode_id">
+                            @foreach($periode as $p)
+                            <option value="{{ $p->id }}"> {{$p->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label>Deskripsi Indikator</label>
+                        <textarea id="dec" name="dec" id="dec" class="form-control"></textarea>
+                        <input type="text" name="url" hidden class="form-control" value="{{ request()->url() }}" required>
+                    </div> -->
+                    <input type="text" name="jenjang_id" class="form-control" value="<?= $filter['jenjang_id'] ?>" required>
+                    <input type="text" name="lembaga_id" class="form-control" value="{{ $filter['lembaga_id']}}" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
 @section('script')
 <script>
@@ -192,9 +210,12 @@
 
         function start_search() {
             $.ajax({
-                type: 'POST',
-                url: '<?= route('l1') ?>',
-                data: 'jenjang_id=<?= $j->id ?>',
+                type: 'Get',
+                url: '<?= url('search-select-lam') ?>',
+                data: {
+                    'jenjang': <?= $filter['jenjang_id'] ?>,
+                    'lembaga': <?= $filter['lembaga_id'] ?>,
+                },
                 cache: false,
                 success: function(msg) {
                     $("#l1").html(msg);
@@ -205,9 +226,9 @@
         indikator.l1.change(function() {
             var l1_id = $("#l1").val();
             $.ajax({
-                type: 'POST',
-                url: '<?= route('l2') ?>',
-                data: 'l1_id=' + l1_id,
+                type: 'GET',
+                url: '<?= url('search-select-lam') ?>',
+                data: 'parent=' + l1_id,
                 cache: false,
                 success: function(msg) {
                     $("#l2").html(msg);
@@ -218,9 +239,9 @@
         $("#l2").change(function() {
             var l2_id = $("#l2").val();
             $.ajax({
-                type: 'POST',
-                url: '<?= route('l3') ?>',
-                data: 'l2_id=' + l2_id,
+                type: 'GET',
+                url: '<?= url('search-select-lam') ?>',
+                data: 'parent=' + l2_id,
                 cache: false,
                 success: function(msg) {
                     $("#l3").html(msg);
@@ -231,9 +252,9 @@
         $("#l3").change(function() {
             var l3_id = $("#l3").val();
             $.ajax({
-                type: 'POST',
-                url: '<?= route('l4') ?>',
-                data: 'l3_id=' + l3_id,
+                type: 'GET',
+                url: '<?= url('search-select-lam') ?>',
+                data: 'parent=' + l3_id,
                 cache: false,
                 success: function(msg) {
                     $("#l4").html(msg);

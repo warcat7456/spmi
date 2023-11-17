@@ -15,7 +15,7 @@ class CreateIndikatorsLamTable extends Migration
     {
         Schema::create('indikators_lam', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('jenjang_id');
+            // $table->unsignedBigInteger('jenjang_id');
             $table->text('dec');
             $table->decimal('bobot', 3, 2)->default(0.00);
             $table->unsignedBigInteger('l1_id');
@@ -24,7 +24,7 @@ class CreateIndikatorsLamTable extends Migration
             $table->unsignedBigInteger('l4_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('jenjang_id')->references('id')->on('jenjangs')->onDelete('cascade');
+            // $table->foreign('jenjang_id')->references('id')->on('jenjangs')->onDelete('cascade');
             $table->foreign('l1_id')->references('id')->on('kriteria')->onDelete('cascade');
             $table->foreign('l2_id')->references('id')->on('kriteria')->onDelete('cascade');
             $table->foreign('l3_id')->references('id')->on('kriteria')->onDelete('cascade');

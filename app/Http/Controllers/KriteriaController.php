@@ -12,6 +12,7 @@ use App\Lembaga;
 use App\Indikator;
 use App\IndikatorLam;
 use Illuminate\Http\Request;
+use Exception;
 
 class KriteriaController extends Controller
 {
@@ -255,24 +256,14 @@ class KriteriaController extends Controller
             }
         }
     }
+
+
     public function getLam()
     {
         // $this->update_kriteria(1);
         // $this->update_kriteria(4);
         // $this->update_new_indikator();
         Kriteria::GetChild();
-        // $lv1 = Kriteria::get();
-        // foreach ($lv1 as $d) {
-        //     $data[] = $d->getNestedStructure();
-        // }
-        // $dataNes = $data->getChildrenStructure();
-        // dd($data);
-        // $j = Jenjang::where('kode', '<>', 'NULL')->get();
-        // $r = [];
-        // return view('kriteria.lam', [
-        //     'j' => $j,
-        //     'r' => $r,
-        // ]);
     }
 
     // public function index(Request $request)
@@ -397,6 +388,66 @@ class KriteriaController extends Controller
         <strong>Data Berhasil Ditambahkan</strong>
     </div>');
         return redirect()->to($url);
+    }
+
+    public function store_lam(Request $request)
+    {
+        try {
+            if ($request->lv == 1) {
+                $data = Kriteria::create([
+                    'kode' => $request->kode,
+                    'name' => $request->name,
+                    'jenjang_id' => $request->jenjang,
+                    'level' => 1,
+                    'lembaga_id' => $request->lembaga_id,
+                ]);
+            } else {
+                $data = Kriteria::create([
+                    'kode' => $request->kode,
+                    'name' => $request->name,
+                    'level' => $request->lv,
+                    'parent_id' => $request->parent,
+                ]);
+            }
+            return  $this->Response($data);
+        } catch (Exception $ex) {
+            return  $this->ResponseError($ex->getMessage());
+        }
+    }
+
+    public function edit_lam(Request $request)
+    {
+        try {
+            $data = [
+                'kode' => $request->kode,
+                'name' => $request->name,
+            ];
+            $data = Kriteria::where('id', $request->id)->update($data);
+            return  $this->Response($data);
+        } catch (Exception $ex) {
+            return  $this->ResponseError($ex->getMessage());
+        }
+    }
+    public function delete_lam(Request $request)
+    {
+        try {
+            $data = Kriteria::where('id', $request->id)->delete();
+            return  $this->Response($data);
+        } catch (Exception $ex) {
+            return  $this->ResponseError($ex->getMessage());
+        }
+    }
+
+    public function searchLam(Request $request)
+    {
+        try {
+
+            $data = Kriteria::GetWithParent($request->input('id'));
+
+            return  $this->Response($data);
+        } catch (Exception $ex) {
+            return  $this->ResponseError($ex->getMessage());
+        }
     }
 
     public function delete(Request $request)
