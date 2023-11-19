@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Periode;
 
 class CreatePriode extends Migration
 {
@@ -26,6 +27,20 @@ class CreatePriode extends Migration
             $table->date('revisi_end')->nullable();
             $table->timestamps();
         });
+
+        $pages = [
+            'name' => 'Tahun Ajaran 2023 2024',
+            'periode_start' => date('2023-07-01'),
+            'periode_end' => date('2024-02-29'),
+            'prodi_start' => date('2023-07-01'),
+            'prodi_end' => date('2024-02-29'),
+            'auditor_start' => date('2023-07-01'),
+            'auditor_end' => date('2024-02-29'),
+            'revisi_start' => date('2023-07-01'),
+            'revisi_end' => date('2024-02-29'),
+        ];
+
+        Periode::create($pages);
     }
 
     /**

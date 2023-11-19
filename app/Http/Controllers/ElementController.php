@@ -33,8 +33,10 @@ class ElementController extends Controller
     public function prodi(Request $request, $prodi)
     {
         $p = Prodi::where('kode', $prodi)->first();
-        $element = Element::with(['l1', 'l2', 'l3', 'l4', 'indikator', 'berkas'])->where('prodi_id', $p->id)->get();
-
+        $element = Element::with(['l1', 'l2', 'l3', 'l4', 'indikator', 'berkas'])->where('prodi_id', $p->id)
+            // ->where('id', 1152)
+            ->get();
+        // dd($element[0]);
         return view('element.index_prodi', [
             'p' => $p,
             'element' => $element,

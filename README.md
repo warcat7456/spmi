@@ -29,9 +29,8 @@
 
 docker run --name my-phpmyadmin -d --network spmi_app-network -e PMA_HOST=laravel-db -e PMA_USER=spmi -e PMA_PASSWORD=spmi -p 8080:80 phpmyadmin
 
-### Menghilangkan spasi ganda
+### Step Update 18/11/2023
 
-UPDATE l4_s SET name = REPLACE(name, ' ', ' ') WHERE name LIKE '% %';
-UPDATE l3_s SET name = REPLACE(name, ' ', ' ') WHERE name LIKE '% %';
-UPDATE l2_s SET name = REPLACE(name, ' ', ' ') WHERE name LIKE '% %';
-UPDATE l1_s SET name = REPLACE(name, ' ', ' ') WHERE name LIKE '% %';
+php artisan migrate (sampai muncul error)
+masuk url http://127.0.0.1:8000/update-indikator-lam
+php artisan migrate lagi

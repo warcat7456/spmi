@@ -14,37 +14,12 @@ class ChangeForeignKeyToKriteriaInElements extends Migration
     public function up()
     {
         Schema::table('elements', function (Blueprint $table) {
+
             $table->dropForeign(['l1_id']);
             $table->dropForeign(['l2_id']);
             $table->dropForeign(['l3_id']);
             $table->dropForeign(['l4_id']);
             $table->dropForeign(['indikator_id']);
-
-
-            $table->foreign('l1_id')
-                ->references('id')
-                ->on('kriteria')
-                ->onDelete('restrict');
-
-            $table->foreign('l2_id')
-                ->references('id')
-                ->on('kriteria')
-                ->onDelete('restrict');
-
-            $table->foreign('l3_id')
-                ->references('id')
-                ->on('kriteria')
-                ->onDelete('restrict');
-
-            $table->foreign('l4_id')
-                ->references('id')
-                ->on('kriteria')
-                ->onDelete('restrict');
-
-            $table->foreign('indikator_id')
-                ->references('id')
-                ->on('indikators_lam')
-                ->onDelete('restrict');
         });
     }
 
@@ -56,7 +31,6 @@ class ChangeForeignKeyToKriteriaInElements extends Migration
     public function down()
     {
         Schema::table('elements', function (Blueprint $table) {
-            //
         });
     }
 }
