@@ -9,12 +9,8 @@ use App\L3;
 use App\L4;
 use App\Kriteria;
 use App\Lembaga;
-use App\Indikator;
-use App\IndikatorLam;
-use App\Element;
 use Illuminate\Http\Request;
 use Exception;
-use Illuminate\Support\Facades\DB;
 
 class KriteriaController extends Controller
 {
@@ -44,6 +40,28 @@ class KriteriaController extends Controller
             'lembaga' => $l,
             'filter' => $filter,
         ]);
+    }
+    /**
+     * Display a listing of the kriteria with filter.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * Filter:
+     * - flembaga_id: lembaga_id, default to 1
+     * - fjenjang_id: jenjang_id, default to 1
+     * - flevel: level, default to null
+     * @return \Illuminate\Http\Response
+     */
+    public function index2(Request $req)
+    {
+        $filter = ['lembaga_id' => $req->input('flembaga_id') ?? 1, 'jenjang_id' => $req->input('fjenjang_id') ?? 1, 'level' => $req->input('flevel') ?? null];
+        $query = Kriteria::where('parent_id', null)->with('children')->filterJenjang($filter['jenjang_id'])->filterLembaga($filter['lembaga_id']);
+        if (isset($filter['level'])) {
+            $query->filterLevel($filter['level']);
+        }
+        $kriteria = $query->get();
+
+        $lembaga = Lembaga::all();
+        return view('kriteria.index2', compact('kriteria', 'lembaga', 'filter'));
     }
 
 

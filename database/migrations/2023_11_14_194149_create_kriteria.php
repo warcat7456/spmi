@@ -36,7 +36,7 @@ class CreateKriteria extends Migration
                 ->references('id')
                 ->on('jenjangs')
                 ->onDelete('cascade');
-
+            $table->unique(['kode', 'jenjang_id']);
             $table->timestamps();
         });
     }
@@ -48,8 +48,6 @@ class CreateKriteria extends Migration
      */
     public function down()
     {
-        Schema::table('kriteria', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('kriteria');
     }
 }

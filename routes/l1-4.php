@@ -1,5 +1,5 @@
 <?php
-
+Route::get('kriteria2', 'KriteriaController@index2')->name('kriteria2');
 Route::get('kriteria/{jenjang}', 'KriteriaController@detail')->name('jenjang');
 Route::get('kriteria/', 'KriteriaController@index')->name('kriteria');
 Route::delete('kriteria/delete', 'KriteriaController@delete');

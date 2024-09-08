@@ -3,126 +3,111 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Class Kriteria
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $kode
+ * @property int $level
+ * @property int $parent_id
+ * @property int $lembaga_id
+ * @property int $jenjang_id
+ *
+ * @property Kriteria|null $parent
+ * @property Collection|Kriteria[] $children
+ */
 class Kriteria extends Model
 {
-    //
     protected $fillable = ['name', 'kode', 'level', 'parent_id', 'lembaga_id', 'jenjang_id'];
-    public $timestamps = false;
+
+    protected $parentColumn = 'parent_id';
+
     public $table = 'kriteria';
 
-    public function children()
+    public $timestamps = false;
+
+    /**
+     * @return BelongsTo
+     */
+    public function parent(): BelongsTo
     {
-        return $this->hasMany(Kriteria::class, 'parent_id');
+        return $this->belongsTo(static::class);
     }
 
-    public function parent()
+    /**
+     * @return HasMany
+     */
+    public function children(): HasMany
     {
-        return $this->belongsTo(Kriteria::class, 'parent_id');
+        return $this->hasMany(static::class, $this->parentColumn);
     }
 
-
-
-
-    public function getNestedStructure()
+    /**
+     * @return HasMany
+     */
+    public function allChildren(): HasMany
     {
-        $nestedStructure = $this->attributes;
-        $nestedStructure['children'] =  $this->getChildrenStructure($this->kode);
-        return $nestedStructure;
+        return $this->children()->with('allChildren');
     }
 
-    protected function getChildrenStructure($kode)
+    /**
+     * @return Kriteria
+     */
+    public function root(): Kriteria
     {
-        $childrenStructure = [];
-
-        foreach ($this->children as $child) {
-            $childrenStructure[] = [
-                'id' => $child->id,
-                'full_kode' => $kode . '.' . $child->kode,
-                'name' => $child->name,
-                'kode' => $child->kode,
-                'level' => $child->level,
-                'children' => $child->getChildrenStructure($kode . '.' . $child->kode),
-            ];
-        }
-        return $childrenStructure;
+        return $this->parent
+            ? $this->parent->root()
+            : $this;
     }
 
-    protected function getParentStructure()
+    /**
+     * @return BelongsTo
+     */
+    public function lembaga(): BelongsTo
     {
-        if (empty($this->parent))
-            return null;
-        else if ($this->parent->level == 1) {
-            return $this->parent;
-        } else {
-            return [
-                'id' => $this->parent->id,
-                'name' => $this->parent->name,
-                'kode' => $this->parent->kode,
-                'level' => $this->parent->level,
-                'parent_id' => $this->parent->parent_id,
-                'parent' => $this->parent->getParentStructure(),
-            ];
-        };
+        return $this->belongsTo(Lembaga::class);
     }
 
-    public function scopeGetWithParent($query, $id)
+    /**
+     * @return BelongsTo
+     */
+    public function jenjang(): BelongsTo
     {
-        $data = [];
-        $data = $query->where('id', $id)->get()->first();
-        $data['parent'] = $data->getParentStructure();
-        $data = $data->toArray();
-        $data['full_kode'] = $this->susunKodeParent($data);
-        // dd($data);
-        $text_parent = '';
-        if (!empty($data['parent']['parent']['parent'])) {
-            $data['parent']['parent']['parent']['full_kode'] = $this->susunKodeParent($data['parent']['parent']['parent']);
-            $text_parent = $text_parent . $data['parent']['parent']['parent']['full_kode'] . ' ' . $data['parent']['parent']['parent']['name'] . "\n";
-        }
-        if (!empty($data['parent']['parent'])) {
-            $data['parent']['parent']['full_kode'] = $this->susunKodeParent($data['parent']['parent']);
-            $text_parent = $text_parent . $data['parent']['parent']['full_kode'] . ' ' . $data['parent']['parent']['name'] . "\n";
-        }
-        if (!empty($data['parent'])) {
-            $data['parent']['full_kode'] = $this->susunKodeParent($data['parent']);
-            $text_parent = $text_parent . $data['parent']['full_kode'] . ' ' . $data['parent']['name'] . "\n";
-        }
-        $data['val_cur_parent'] = $text_parent;
-
-        $text_parent = $text_parent . $data['full_kode']  . ' ' . $data['name'];
-
-        // echo ($text_parent);
-        // die();
-        $data['val_parent'] = $text_parent;
-
-        return $data;
+        return $this->belongsTo(Jenjang::class);
     }
 
-    function susunKodeParent($data)
+    /**
+     * @param Builder $query
+     * @param int $id
+     * @return Builder
+     */
+    public function scopeFilterJenjang(Builder $query, int $id): Builder
     {
-        return (!empty($data['parent']['parent']['parent']['kode']) ? $data['parent']['parent']['parent']['kode'] . '.' : '') .
-            (!empty($data['parent']['parent']['kode']) ? $data['parent']['parent']['kode'] . '.' : '') .
-            (!empty($data['parent']['kode']) ? $data['parent']['kode'] . '.' : '') .
-            $data['kode'] . '. ';
+        return $query->where('jenjang_id', $id);
     }
 
-    public function scopeGetChild($query, $filter = [])
+    /**
+     * @param Builder $query
+     * @param int $id
+     * @return Builder
+     */
+    public function scopeFilterLembaga(Builder $query, int $id): Builder
     {
-        $data = [];
-        $query->selectRaw('kriteria.*, lembaga.name as nama_lembaga')
-            ->join('lembaga', 'lembaga.id', '=', 'kriteria.lembaga_id')
-            ->where('level', 1);
+        return $query->where('lembaga_id', $id);
+    }
 
-        if (!empty($filter['lembaga_id']))
-            $query->where('lembaga_id', $filter['lembaga_id']);
-        if (!empty($filter['jenjang_id']))
-            $query->where('jenjang_id', $filter['jenjang_id']);
-
-        $lv1 = $query->whereNotNull('lembaga_id')->orderBy('kode', 'ASC')
-            ->get();
-        foreach ($lv1 as $d) {
-            $data[] = $d->getNestedStructure();
-        }
-        return $data;
+    /**
+     * @param Builder $query
+     * @param int $level
+     * @return Builder
+     */
+    public function scopeFilterLevel(Builder $query, int $level): Builder
+    {
+        return $query->where('level', $level);
     }
 }

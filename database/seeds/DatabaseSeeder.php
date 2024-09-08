@@ -1,5 +1,6 @@
 <?php
 
+use App\Kriteria;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(L4Seeder::class);
         $this->call(ProdiSeeder::class);
         $this->call(IndikatorSeeder::class);
+        $this->call(KriteriaSeeder::class);
         // $this->call(ScoreSeeder::class);
         // $this->call(TargetSeeder::class);
         // $this->call(ElementSeeder::class);
