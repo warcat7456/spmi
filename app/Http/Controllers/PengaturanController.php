@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jenjang;
 use App\Prodi;
 use App\Fakultas;
+use App\Lembaga;
 use Illuminate\Http\Request;
 
 class PengaturanController extends Controller
@@ -69,7 +70,8 @@ class PengaturanController extends Controller
         return view('prodi.index', [
             'prodi' => Prodi::NotIn(),
             'jenjang' => Jenjang::NotIn(),
-            'fakultas' => Fakultas::all()
+            'fakultas' => Fakultas::all(),
+            'lembaga' => Lembaga::all()
         ]);
     }
 
@@ -78,6 +80,9 @@ class PengaturanController extends Controller
         $request->validate([
             'name' => 'required',
             'kode' => 'required',
+            'fakultas_id' => 'required',
+            'lembaga_id' => 'required',
+            'jenjang_id' => 'required',
         ]);
 
         $att = $request->all();
@@ -111,6 +116,8 @@ class PengaturanController extends Controller
             'name' => $request->name,
             'kode' => $request->kode,
             'jenjang_id' => $request->jenjang_id,
+            'lembaga_id' => $request->lembaga_id,
+            'fakultas_id' => $request->fakultas_id,
         ]);
 
         session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert">
