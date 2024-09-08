@@ -6,7 +6,6 @@ use App\Berkas;
 use App\Element;
 use App\ElementParent;
 use App\IndikatorLam;
-use App\Indikator;
 use App\Jenjang;
 use App\Prodi;
 use App\Score;
@@ -141,14 +140,15 @@ class ElementController extends Controller
             ->where('kriteria.jenjang_id', $request->jenjang_id)
             ->where('kriteria.lembaga_id', $request->lembaga_id)
             ->orderBy('id', 'ASC')->get();
+        // dd($prodi, $indikator);
         $jenjang = Jenjang::where('id', $request->jenjang)->get()->first();
         // dd($indikator);
         // dd($prodi);
         $row = [];
+        $uses_id = [];
         foreach ($indikator as $i) {
             foreach ($prodi as $p) {
-                // $score_hitung = $i->bobot * Element->score_auditor;
-                Element::updateOrCreate(
+                $el = Element::updateOrCreate(
                     [
                         'prodi_id' => $p->id,
                         'l1_id' => $i->l1_id,
@@ -160,15 +160,19 @@ class ElementController extends Controller
                     ],
                     [
                         'bobot' => $i->bobot,
-                        // 'deskripsi' => '',
-                        // 'score_berkas' => 0,
                         'score_hitung' => \DB::raw('IFNULL((score_auditor * ' . $i->bobot . '), 0)'),
-                        // 'count_berkas' => 0
                     ]
                 );
+                $uses_id[] = $el->id;
+                $row[] = $el;
             }
         }
-
+        $prodis_id = [];
+        foreach ($prodi as $p) {
+            $prodis_id[] = $p->id;
+        }
+        Element::where('periode_id', '=', $request->periode_id)->whereIn('prodi_id', $prodis_id)->get();
+        dd($uses_id, $row, "success");
         session()->flash('pesan', '<div class="alert alert-info alert-dismissible fade show" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -320,7 +324,7 @@ class ElementController extends Controller
         return view('element.unggah-berkas', [
             'element' => $element,
             'score' => Score::where('indikator_id', $element->indikator_id)->get(),
-            'indikator' => Indikator::where('id', $element->indikator_id)->with(['l1', 'l2', 'l3', 'l4'])->first(),
+            'indikator' => IndikatorLam::where('id', $element->indikator_id)->with(['l1', 'l2', 'l3', 'l4'])->first(),
         ]);
     }
 
