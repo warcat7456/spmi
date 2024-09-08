@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class IndikatorLam extends Model
 {
-    public $fillable = ['id', 'dec', 'jenjang_id', 'l1_id', 'l2_id', 'l3_id', 'l4_id', 'bobot'];
+    public $fillable = ['id', 'dec',  'l1_id', 'l2_id', 'l3_id', 'l4_id', 'element_txt', 'bobot'];
     public $timestamps = false;
     public $table = 'indikators_lam';
 

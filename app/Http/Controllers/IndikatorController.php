@@ -62,6 +62,7 @@ class IndikatorController extends Controller
 
         IndikatorLam::create([
             'dec' => $request->dec,
+            'element_txt' => $request->element_txt,
             'jenjang_id' => $request->jenjang,
             'l1_id' => $request->l1_id,
             'l2_id' => $request->l2_id,
@@ -129,6 +130,7 @@ class IndikatorController extends Controller
         // $jenjang = Jenjang::where('id', $indikator->jenjang_id)->first();
         $indikator->update([
             'dec' => $request->dec,
+            'element_txt' => $request->element_txt,
             'l1_id' => $request->l1_id,
             'l2_id' => $request->l2_id,
             'l3_id' => $request->l3_id,
