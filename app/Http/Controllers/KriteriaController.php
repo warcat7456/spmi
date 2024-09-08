@@ -54,7 +54,7 @@ class KriteriaController extends Controller
     public function index2(Request $req)
     {
         $filter = ['lembaga_id' => $req->input('flembaga_id') ?? 1, 'jenjang_id' => $req->input('fjenjang_id') ?? 1, 'level' => $req->input('flevel') ?? null];
-        $query = Kriteria::where('parent_id', null)->with('children')->filterJenjang($filter['jenjang_id'])->filterLembaga($filter['lembaga_id']);
+        $query = Kriteria::query()->with('children')->filterJenjang($filter['jenjang_id'])->filterLembaga($filter['lembaga_id']);
         if (isset($filter['level'])) {
             $query->filterLevel($filter['level']);
         }
