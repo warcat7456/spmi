@@ -106,11 +106,7 @@ Berikut beberapa perintah Docker yang berguna untuk mengelola lingkungan Anda:
 
 ## PhpMyAdmin
 
-Untuk menjalankan PhpMyAdmin, gunakan perintah berikut:
-
-```
-docker run --name my-phpmyadmin -d --network spmi_app-network -e PMA_HOST=laravel-db -e PMA_USER=spmi -e PMA_PASSWORD=spmi -p 8080:80 phpmyadmin
-```
+Jika docker anda sudah berjalan, anda dapat mengakses phpmyadmin pada alamat: localhost:8080
 
 ## Langkah Update 18/11/2023
 
