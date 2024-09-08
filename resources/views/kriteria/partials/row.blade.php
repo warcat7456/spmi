@@ -11,7 +11,7 @@
             <button class="btn btn-sm btn-danger mx-1">Delete</button>
         </td>
     </tr>
-    @if (!empty($item['children']))
+    @if (!empty($item['children']) && $item->level <= request('level'))
         @include('kriteria.partials.row', ['kriteria' => $item['children']])
     @endif
 @endforeach
