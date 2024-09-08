@@ -43,14 +43,6 @@
             border-top: none !important;
         }
 
-        /* .codeLevel-1 {
-                                                        padding-left: 20px;
-                                                    } */
-        /* .codeLevel-1::before {
-                                    content: "\25B2";
-                                    padding-right: 10px;
-                                } */
-
         .codeLevel-2 {
             padding-left: 10px;
         }
@@ -86,22 +78,21 @@
                         <h4 class="card-title">Filter</h4>
                         <div class="row">
                             <div class="col-md-3">
-                                <select class="form-control" name="level" id="level">
+                                <select class="form-control" name="flevel" id="level">
                                     <option value="">-- Semua Level --</option>
                                     @foreach (range(1, 4) as $lv)
-                                        <option value="{{ $lv }}"
-                                            {{ (request('level') || $filter['level']) == $lv ? 'selected' : '' }}>
+                                        <option value="{{ $lv }}" {{ $filter['level'] == $lv ? 'selected' : '' }}>
                                             Level {{ $lv }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <select class="form-control" name="lembaga_id" id="lembagaFilter">
+                                <select class="form-control" name="flembaga_id" id="lembagaFilter">
                                     <option value="">-- Lembaga --</option>
                                     @foreach ($lembaga as $lembagaItem)
                                         <option value="{{ $lembagaItem->id }}"
-                                            {{ (request('lembaga_id') || $filter['lembaga_id']) == $lembagaItem->id ? 'selected' : '' }}>
+                                            {{ $filter['lembaga_id'] == $lembagaItem->id ? 'selected' : '' }}>
                                             {{ $lembagaItem->name }}
                                         </option>
                                     @endforeach
