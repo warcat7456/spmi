@@ -22,7 +22,9 @@ class CreateIndikatorsLamTable extends Migration
             $table->unsignedBigInteger('l2_id')->nullable();
             $table->unsignedBigInteger('l3_id')->nullable();
             $table->unsignedBigInteger('l4_id')->nullable();
+            $table->string("element_txt")->nullable();
             $table->timestamps();
+
 
             // $table->foreign('jenjang_id')->references('id')->on('jenjangs')->onDelete('cascade');
             $table->foreign('l1_id')->references('id')->on('kriteria')->onDelete('cascade');

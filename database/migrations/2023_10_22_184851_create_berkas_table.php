@@ -28,22 +28,22 @@ class CreateBerkasTable extends Migration
             $table->unsignedBigInteger('l1_id');
             $table->foreign('l1_id')
                 ->references('id')
-                ->on('l1_s')
+                ->on('kriteria')
                 ->onDelete('cascade');
             $table->unsignedBigInteger('l2_id')->nullable();
             $table->foreign('l2_id')
                 ->references('id')
-                ->on('l2_s')
+                ->on('kriteria')
                 ->onDelete('cascade');
             $table->unsignedBigInteger('l3_id')->nullable();
             $table->foreign('l3_id')
                 ->references('id')
-                ->on('l3_s')
+                ->on('kriteria')
                 ->onDelete('cascade');
             $table->unsignedBigInteger('l4_id')->nullable();
             $table->foreign('l4_id')
                 ->references('id')
-                ->on('l4_s')
+                ->on('kriteria')
                 ->onDelete('cascade');
             $table->string('file_name');
             $table->string('file');

@@ -22,6 +22,16 @@ class Prodi extends Migration
                 ->references('id')
                 ->on('jenjangs')
                 ->onDelete('cascade');
+            $table->unsignedBigInteger('lembaga_id')->default('1');
+            $table->foreign('lembaga_id')
+                ->references('id')
+                ->on('lembaga')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('fakultas_id');
+            $table->foreign('fakultas_id')
+                ->references('id')
+                ->on('fakultas')
+                ->onDelete('cascade');
         });
     }
 

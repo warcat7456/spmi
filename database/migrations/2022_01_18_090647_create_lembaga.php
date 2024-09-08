@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Lembaga;
 
-class AddUniqueIndexToElementsTable extends Migration
+class CreateLembaga extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +14,11 @@ class AddUniqueIndexToElementsTable extends Migration
      */
     public function up()
     {
-        Schema::table('elements', function (Blueprint $table) {
-            $table->unique(['prodi_id', 'l1_id', 'l2_id', 'l3_id', 'l4_id', 'indikator_id'], 'unique_index_elements');
+        Schema::create('lembaga', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('name_long');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddUniqueIndexToElementsTable extends Migration
      */
     public function down()
     {
-        Schema::table('elements', function (Blueprint $table) {
-            $table->dropUnique('unique_index_elements');
-        });
+        Schema::dropIfExists('lembaga');
     }
 }

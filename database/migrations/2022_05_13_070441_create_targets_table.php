@@ -18,7 +18,7 @@ class CreateTargetsTable extends Migration
             $table->unsignedBigInteger('l1_id');
             $table->foreign('l1_id')
                 ->references('id')
-                ->on('l1_s')
+                ->on('kriteria')
                 ->onDelete('cascade');
             $table->unsignedBigInteger('prodi_id');
             $table->foreign('prodi_id')
