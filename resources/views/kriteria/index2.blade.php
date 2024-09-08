@@ -99,20 +99,29 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                {{-- Uncommented jenjang filter
-                                <select class="form-control" name="jenjang" id="jenjang">
+
+                                <select class="form-control" name="fjenjang_id" id="jenjang">
                                     <option value="">-- Jenjang --</option>
                                     @foreach ($jenjang as $jen)
-                                        <option value="{{ $jen->id }}" {{ request('jenjang') == $jen->id ? 'selected' : '' }}>
+                                        <option value="{{ $jen->id }}"
+                                            {{ $filter['jenjang_id'] == $jen->id ? 'selected' : '' }}>
                                             {{ $jen->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                --}}
+
                             </div>
                             <div class="col-md-3">
-                                <button type="button" class="btn btn-primary btn-sm float-right" id="CreateNew">
-                                    Tambah LV 1
+                                <button type="button"
+                                    class="btn btn-success float-right d-flex justify-content-between align-items-center"
+                                    id="CreateNew">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                        style="fill:currentColor;" viewBox="0 0 256 256">
+                                        <path
+                                            d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z">
+                                        </path>
+                                    </svg>
+                                    <span class="ml-1">Data Kriteria</span>
                                 </button>
                             </div>
                         </div>

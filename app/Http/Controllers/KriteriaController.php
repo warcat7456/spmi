@@ -61,7 +61,8 @@ class KriteriaController extends Controller
         $kriteria = $query->get();
 
         $lembaga = Lembaga::all();
-        return view('kriteria.index2', compact('kriteria', 'lembaga', 'filter'));
+        $jenjang = Jenjang::all();
+        return view('kriteria.index2', compact('kriteria', 'lembaga', 'filter', 'jenjang'));
     }
 
 
