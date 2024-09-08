@@ -36,7 +36,7 @@ class CreateKriteria extends Migration
                 ->references('id')
                 ->on('jenjangs')
                 ->onDelete('cascade');
-            $table->unique(['kode', 'jenjang_id']);
+            $table->unique(['kode', 'jenjang_id', 'lembaga_id']);
             $table->timestamps();
         });
     }
