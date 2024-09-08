@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prodi extends Model
 {
-    protected $fillable = ['name', 'kode', 'jenjang_id', 'deskripsi', 'visi', 'misi', 'foto'];
+    protected $fillable = ['name', 'kode', 'jenjang_id', 'lembaga_id', 'fakultas_id', 'deskripsi', 'visi', 'misi', 'foto'];
     public $timestamps = false;
 
     public function jenjang()
@@ -44,5 +44,10 @@ class Prodi extends Model
     public function fakultas()
     {
         return $this->belongsTo(Fakultas::class);
+    }
+
+    public function lembaga()
+    {
+        return $this->belongsTo(Lembaga::class, 'lembaga_id');
     }
 }

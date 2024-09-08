@@ -18,6 +18,7 @@
                                     <th>Kode</th>
                                     <th>Jenjang</th>
                                     <th>Fakultas</th>
+                                    <th>Lembaga</th>
                                     <th width="150px">Aksi</th>
                                 </tr>
                             </thead>
@@ -27,6 +28,7 @@
                                     <th>Kode</th>
                                     <th>Jenjang</th>
                                     <th>Fakultas</th>
+                                    <th>Lembaga</th>
                                     <th width="150px">Aksi</th>
                                 </tr>
                             </tfoot>
@@ -37,6 +39,7 @@
                                         <td>{{ $i->kode }}</td>
                                         <td>{{ $i->jenjang->kode }}</td>
                                         <td>{{ $i->fakultas->nama }}</td>
+                                        <td>{{ $i->lembaga->name }}</td>
                                         <td width="150px">
                                             <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                                 data-target="#modelEdit{{ $i->id }}">
@@ -103,7 +106,18 @@
                                                                 @endforeach
                                                             </select>
                                                         </div>
-
+                                                        <div class="form-group">
+                                                            <label for="">Lembaga</label>
+                                                            <select class="form-control" name="lembaga_id">
+                                                                @foreach ($lembaga as $lemb)
+                                                                    <option
+                                                                        {{ $i->lembaga->id == $lemb->id ? 'selected' : '' }}
+                                                                        value="{{ $lemb->id }}">
+                                                                        {{ $lemb->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
@@ -201,7 +215,24 @@
                                 @endforeach
                             </select>
                         </div>
-
+                        <div class="form-group">
+                            <label for="">Fakultas</label>
+                            <select class="form-control" name="fakultas_id">
+                                @foreach ($fakultas as $i)
+                                    <option value="{{ $i->id }}">{{ $i->nama }} - {{ $i->kode }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Lembaga</label>
+                            <select class="form-control" name="lembaga_id">
+                                @foreach ($lembaga as $i)
+                                    <option value="{{ $i->id }}">{{ $i->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
