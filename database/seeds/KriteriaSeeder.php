@@ -7,6 +7,15 @@ class KriteriaSeeder extends Seeder
 {
     public function run()
     {
+        $lembagaIds = DB::table('lembaga')->pluck('id')->toArray();
+
+        foreach ($lembagaIds as $lembagaId) {
+            $this->seedForLembaga($lembagaId);
+        }
+    }
+
+    private function seedForLembaga($lembagaId)
+    {
         $l1Data = [
             [1, 'A. Kondisi Eksternal', 1],
             [2, 'B. Profil Unit Pengelola Program Studi', 1],
@@ -132,12 +141,11 @@ class KriteriaSeeder extends Seeder
             [54, 'C.9.4.b. Luaran Dharma Penelitian dan PkM', 23, 4],
         ];
 
-        $kriteria = [];
         $idMap = [];
 
         // Insert L1 data
         foreach ($l1Data as $l1) {
-            $newId = $this->insertKriteria($l1[1], substr($l1[1], 0, 1), 1, null, 1, $l1[2]);
+            $newId = $this->insertKriteria($l1[1], substr($l1[1], 0, 1), 1, null, $lembagaId, $l1[2]);
             $idMap['L1_' . $l1[0]] = $newId;
         }
 
@@ -145,7 +153,7 @@ class KriteriaSeeder extends Seeder
         foreach ($l2Data as $l2) {
             $parentId = $idMap['L1_' . $l2[2]];
             $kode = $this->extractCode($l2[1]);
-            $newId = $this->insertKriteria($l2[1], $kode, 2, $parentId, 1, $l2[3]);
+            $newId = $this->insertKriteria($l2[1], $kode, 2, $parentId, $lembagaId, $l2[3]);
             $idMap['L2_' . $l2[0]] = $newId;
         }
 
@@ -153,7 +161,7 @@ class KriteriaSeeder extends Seeder
         foreach ($l3Data as $l3) {
             $parentId = $idMap['L2_' . $l3[2]];
             $kode = $this->extractCode($l3[1]);
-            $newId = $this->insertKriteria($l3[1], $kode, 3, $parentId, 1, $l3[3]);
+            $newId = $this->insertKriteria($l3[1], $kode, 3, $parentId, $lembagaId, $l3[3]);
             $idMap['L3_' . $l3[0]] = $newId;
         }
 
@@ -161,7 +169,7 @@ class KriteriaSeeder extends Seeder
         foreach ($l4Data as $l4) {
             $parentId = $idMap['L3_' . $l4[2]];
             $kode = $this->extractCode($l4[1]);
-            $this->insertKriteria($l4[1], $kode, 4, $parentId, 1, $l4[3]);
+            $this->insertKriteria($l4[1], $kode, 4, $parentId, $lembagaId, $l4[3]);
         }
     }
 
