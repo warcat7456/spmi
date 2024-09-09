@@ -78,7 +78,7 @@
                         <h4 class="card-title">Filter</h4>
                         <div class="row">
                             <div class="col-md-3">
-                                <select class="form-control" name="flevel" id="level">
+                                <select class="form-control" name="flevel" id="flevel">
                                     <option value="">-- Semua Level --</option>
                                     @foreach (range(1, 4) as $lv)
                                         <option value="{{ $lv }}" {{ $filter['level'] == $lv ? 'selected' : '' }}>
@@ -99,7 +99,6 @@
                                 </select>
                             </div>
                             <div class="col-md-3">
-
                                 <select class="form-control" name="fjenjang_id" id="jenjang">
                                     <option value="">-- Jenjang --</option>
                                     @foreach ($jenjang as $jen)
@@ -109,19 +108,18 @@
                                         </option>
                                     @endforeach
                                 </select>
-
                             </div>
                             <div class="col-md-3">
                                 <button type="button"
                                     class="btn btn-success float-right d-flex justify-content-between align-items-center"
-                                    id="CreateNew">
+                                    data-toggle="modal" data-target="#createModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                         style="fill:currentColor;" viewBox="0 0 256 256">
                                         <path
                                             d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z">
                                         </path>
                                     </svg>
-                                    <span class="ml-1">Data Kriteria</span>
+                                    <span class="ml-1">Tambah Kriteria</span>
                                 </button>
                             </div>
                         </div>
@@ -161,6 +159,9 @@
             </div>
         </div>
     </div>
+
+    <!-- Create Modal -->
+    @include('kriteria.partials.create-modal')
 
     @push('scripts')
         <script>
