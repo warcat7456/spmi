@@ -110,4 +110,39 @@ class Kriteria extends Model
     {
         return $query->where('level', $level);
     }
+
+    /**
+     * Apply filters to the query.
+     *
+     * @param Builder $query
+     * @param array $filters
+     * @return Builder
+     */
+    public function scopeApplyFilters(Builder $query, array $filters): Builder
+    {
+        return $query
+            ->when(isset($filters['jenjang_id']), function ($q) use ($filters) {
+                return $q->filterJenjang($filters['jenjang_id']);
+            })
+            ->when(isset($filters['lembaga_id']), function ($q) use ($filters) {
+                return $q->filterLembaga($filters['lembaga_id']);
+            })
+            ->when(isset($filters['level']), function ($q) use ($filters) {
+                return $q->filterLevel($filters['level']);
+            });
+    }
+
+    /**
+     * Get filtered kriteria with children.
+     *
+     * @param array $filters
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function getFilteredWithChildren(array $filters): \Illuminate\Database\Eloquent\Collection
+    {
+        return static::query()
+            ->with('children')
+            ->applyFilters($filters)
+            ->get();
+    }
 }
