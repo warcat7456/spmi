@@ -34,7 +34,7 @@
                                     <tr>
                                         <td>{{ $i->name }}</td>
                                         <td>{{ $i->role }}</td>
-                                        <td>{{ $i->prodi?->name }}</td>
+                                        <td>{{ $i->prodi->name ?? '-' }}</td>
                                         <td width="150px">
                                             <a href="{{ url('users/edit/' . $i->id) }}"
                                                 class="btn btn-warning btn-sm">Edit</a>
