@@ -49,7 +49,6 @@ Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
     $filesToRequire = [
         'auth_static-page.php',
         'prodi.php',
-        'l1-4.php',
         'indikator.php',
         'element.php',
         'periode.php',
@@ -59,6 +58,11 @@ Route::middleware(['auth', 'cekRole:Admin,Prodi,Auditor'])->group(function () {
     foreach ($filesToRequire as $file) {
         require __DIR__ . '/' . $file;
     }
+
+    // Kriteria Routes
+    Route::resource('kriteria', 'KriteriaController');
+    // Kriteria Ajax Routes
+    Route::post('kriteria-parent', 'KriteriaController@parent')->name('kriteria.parent');
 
     //DATA BERKAS
     Route::get('berkas/cari', 'BerkasController@cari')->name('berkas');
